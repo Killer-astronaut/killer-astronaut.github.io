@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy — Lokei</title>
-    <meta name="description" content="Lokei Privacy Policy. Lokei collects no data. Everything stays on your Mac.">
+    <meta name="description" content="Lokei Privacy Policy. Lokei collects no data. On-device and local by default, with optional providers only when you configure them.">
     <meta property="og:title" content="Privacy Policy — Lokei">
-    <meta property="og:description" content="Lokei collects absolutely nothing. Your conversations never leave your Mac.">
+    <meta property="og:description" content="Lokei collects no data. On-device and local by default, with optional providers only when you configure them.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://getlokei.com/privacy.html">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Privacy Policy — Lokei">
-    <meta name="twitter:description" content="Lokei collects absolutely nothing. Your conversations never leave your Mac.">
+    <meta name="twitter:description" content="Lokei collects no data. On-device and local by default, with optional providers only when you configure them.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300FFCC'/%3E%3Cstop offset='100%25' stop-color='%230066FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z' fill='url(%23g)'/%3E%3C/svg%3E">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -74,7 +74,7 @@
         <li><a href="index.html#how">How It Works</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="privacy.html">Privacy</a></li>
-        <li><a href="index.html#download" class="nav-download">Download — $4.99</a></li>
+        <li><a href="index.html#download" class="nav-download">Launch Pending</a></li>
     </ul>
     <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -86,7 +86,7 @@
     <a href="index.html#how">How It Works</a>
     <a href="faq.html">FAQ</a>
     <a href="privacy.html">Privacy</a>
-    <a href="index.html#download" class="nav-download">Download — $4.99</a>
+    <a href="index.html#download" class="nav-download">Launch Pending</a>
 </div>
 
 <script>
@@ -99,26 +99,26 @@
     <p>Last updated April 2026</p>
     <div class="badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>Zero data collected.</span> This is the shortest privacy policy you'll ever read.
+        <span>Zero data collected by Lokei.</span> Plain privacy, no account required.
     </div>
 </section>
 
 <div class="content">
 
     <div class="highlight-box">
-        <p><strong>The short version:</strong> Lokei collects absolutely nothing. Your conversations, your files, your data — none of it ever leaves your Mac. There are no servers receiving your data, no analytics tracking your usage, no accounts holding your information. Lokei is private by architecture, not by policy.</p>
+        <p><strong>The short version:</strong> Lokei collects absolutely nothing. With Apple Intelligence or local Ollama, your conversations and files stay on your Mac. If you choose to configure a remote provider, the messages you send to that provider leave your Mac and are governed by that provider's policy. Lokei still does not collect them.</p>
     </div>
 
     <div class="zero-grid">
         <div class="zero-card"><div class="zero-num">0</div><div class="zero-label">Bytes collected</div></div>
-        <div class="zero-card"><div class="zero-num">0</div><div class="zero-label">External servers</div></div>
+        <div class="zero-card"><div class="zero-num">0</div><div class="zero-label">Lokei servers</div></div>
         <div class="zero-card"><div class="zero-num">0</div><div class="zero-label">Analytics</div></div>
         <div class="zero-card"><div class="zero-num">0</div><div class="zero-label">Accounts required</div></div>
     </div>
 
     <div class="section">
         <h2><span>1.</span> What We Collect</h2>
-        <p>Nothing. Lokei does not collect, transmit, store, or process any personal data on external servers. Period.</p>
+        <p>Nothing. Lokei does not collect, transmit, store, or process any personal data on Lokei servers. Period.</p>
         <p>Specifically, Lokei does not collect:</p>
         <ul>
             <li>Your conversations or messages</li>
@@ -134,30 +134,30 @@
 
     <div class="section">
         <h2><span>2.</span> How Lokei Works</h2>
-        <p>Lokei is a local AI assistant. All AI processing happens entirely on your Mac using Ollama, a free and open-source local AI runtime. Your conversations go from your keyboard → to your Mac's processor → back to your screen. Nothing passes through the internet or any external service.</p>
-        <p>The only network requests Lokei makes are to your local Ollama server running on your own machine (typically at <code style="background:#0d1117; border:1px solid #222; border-radius:4px; padding:2px 6px; font-family:monospace; font-size:13px; color:#00CCFF;">localhost:11434</code>). These requests never leave your device.</p>
+        <p>Lokei is a Mac AI assistant with private local-first backends. On supported Macs, Apple Intelligence can process requests on device. With Ollama, Lokei talks to your local Ollama server running on your own machine, typically at <code style="background:#0d1117; border:1px solid #222; border-radius:4px; padding:2px 6px; font-family:monospace; font-size:13px; color:#00CCFF;">localhost:11434</code>.</p>
+        <p>You can also add OpenAI-compatible or other remote providers yourself. When you choose a remote provider, prompts and attachments sent to that provider leave your Mac and are governed by that provider's terms. Lokei does not operate a relay server and does not receive a copy.</p>
     </div>
 
     <div class="section">
         <h2><span>3.</span> Data Storage</h2>
         <p>Lokei stores your chat history and preferences locally on your Mac using macOS standard storage (UserDefaults and local files). This data:</p>
         <ul>
-            <li>Never leaves your Mac</li>
+            <li>Stays on your Mac by default</li>
             <li>Is only accessible by you</li>
             <li>Can be deleted at any time by uninstalling the app or clearing app data</li>
-            <li>Is not backed up to iCloud or any cloud service by Lokei</li>
+            <li>Can sync through your Apple iCloud account only if you enable iCloud sync</li>
         </ul>
     </div>
 
     <div class="section">
         <h2><span>4.</span> Third Party Services</h2>
         <p>Lokei does not integrate with any third-party analytics, advertising, or data collection services. There are no SDKs, trackers, or beacons embedded in the app.</p>
-        <p>The only third-party software Lokei relies on is Ollama, which you install separately and which also runs entirely locally on your machine.</p>
+        <p>Lokei can use Apple Intelligence on supported Macs, local Ollama models, or providers you configure yourself. Apple, Ollama, and any remote provider you add have their own terms and privacy policies.</p>
     </div>
 
     <div class="section">
-        <h2><span>5.</span> App Store Purchase</h2>
-        <p>Lokei is distributed through the Apple Mac App Store. Apple handles all payment processing and purchase records. Lokei never receives your payment information. Apple's privacy policy governs their handling of your purchase data.</p>
+        <h2><span>5.</span> App Store Distribution</h2>
+        <p>Lokei is being prepared for the Apple Mac App Store. Once listed there, Apple will handle payment processing and purchase records. Lokei will not receive your payment information. Apple's privacy policy governs Apple's handling of purchase data.</p>
     </div>
 
     <div class="section">
@@ -172,7 +172,7 @@
 
     <div class="section">
         <h2><span>8.</span> Contact</h2>
-        <p>Questions about this privacy policy? We're happy to answer them — though the answer to most questions will be "we don't collect that."</p>
+        <p>Questions about this privacy policy? We're happy to answer them — though the answer to most data collection questions will be "we don't collect that."</p>
     </div>
 
     <div class="contact-box">
