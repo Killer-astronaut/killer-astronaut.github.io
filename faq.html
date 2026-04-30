@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ — Lokei</title>
-    <meta name="description" content="Frequently asked questions about Lokei — private local AI for Mac.">
+    <meta name="description" content="Frequently asked questions about Lokei, private AI for Mac with Apple Intelligence, local Ollama models, and optional configured providers.">
     <meta property="og:title" content="FAQ — Lokei">
-    <meta property="og:description" content="Frequently asked questions about Lokei — private local AI for Mac.">
+    <meta property="og:description" content="Frequently asked questions about Lokei, private AI for Mac with on-device and local backend options.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://getlokei.com/faq.html">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="FAQ — Lokei">
-    <meta name="twitter:description" content="Frequently asked questions about Lokei — private local AI for Mac.">
+    <meta name="twitter:description" content="Frequently asked questions about Lokei, private AI for Mac with on-device and local backend options.">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300FFCC'/%3E%3Cstop offset='100%25' stop-color='%230066FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z' fill='url(%23g)'/%3E%3C/svg%3E">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -79,7 +79,7 @@
         <li><a href="index.html#how">How It Works</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="privacy.html">Privacy</a></li>
-        <li><a href="index.html#download" class="nav-download">Download — $4.99</a></li>
+        <li><a href="index.html#download" class="nav-download">Launch Pending</a></li>
     </ul>
 
     <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -92,7 +92,7 @@
     <a href="index.html#how">How It Works</a>
     <a href="faq.html">FAQ</a>
     <a href="privacy.html">Privacy</a>
-    <a href="index.html#download" class="nav-download">Download — $4.99</a>
+    <a href="index.html#download" class="nav-download">Launch Pending</a>
 </div>
 
 <script>
@@ -115,7 +115,7 @@
                 <span class="faq-q-text">What is Lokei?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">Lokei is a private AI assistant that lives in your Mac's menu bar. It connects to Ollama — a free, open-source local AI runtime — to run AI models entirely on your own hardware. No internet required, no subscription, no data leaving your Mac.</div>
+            <div class="faq-a">Lokei is a private AI assistant that lives in your Mac's menu bar. On supported Macs it can use Apple Intelligence for on-device responses, and it also supports local Ollama models plus optional OpenAI-compatible providers you configure.</div>
         </div>
 
         <div class="faq-item">
@@ -123,7 +123,7 @@
                 <span class="faq-q-text">What do I need to use Lokei?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">You need two things: (1) A Mac running macOS 13 Ventura or later, on either Intel or Apple Silicon. (2) <a href="https://ollama.com" target="_blank" rel="noopener noreferrer">Ollama</a> installed and running — it's free and takes about two minutes to set up. Lokei handles the rest.</div>
+            <div class="faq-a">You need a Mac running macOS 13 Ventura or later. Apple Intelligence support depends on your Mac model, macOS version, and Apple Intelligence availability. If you choose the Ollama backend, you also need <a href="https://ollama.com" target="_blank" rel="noopener noreferrer">Ollama</a> installed and running.</div>
         </div>
 
         <div class="faq-item">
@@ -131,7 +131,15 @@
                 <span class="faq-q-text">Does Lokei work on my Mac?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">Lokei works on any Mac running macOS 13 Ventura or later, including both Intel and Apple Silicon (M1/M2/M3/M4) Macs. If you're on macOS 12 or earlier, you'll need to update your operating system first.</div>
+            <div class="faq-a">Lokei works on any Mac running macOS 13 Ventura or later, including both Intel and Apple Silicon Macs. Apple Intelligence is only offered on Macs that support it; other Macs keep the Ollama-first setup flow.</div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
+                <span class="faq-q-text">Does Lokei work with iPhone or iOS?</span>
+                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            </button>
+            <div class="faq-a">Lokei is Mac-first. The website is built to read well on iPhone, and the Mac app includes Remote Prompts settings for a future iPhone companion that can send prompts to your Mac. That iPhone companion is not on the App Store yet.</div>
         </div>
 
         <div class="faq-item">
@@ -140,7 +148,7 @@
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
             <div class="faq-a">
-                Four steps: (1) Download and install <a href="https://ollama.com" target="_blank" rel="noopener noreferrer">Ollama</a> from ollama.com. (2) Purchase and install Lokei from the Mac App Store. (3) Open Lokei, go to Settings → Models, and download an AI model — no Terminal needed. (4) Click the leaf icon in your menu bar and start chatting. Lokei walks you through all of this on first launch.
+                When Lokei launches on the Mac App Store, install it and follow onboarding. Supported Macs can start with Apple Intelligence. If you choose Ollama, Lokei shows the Ollama download link and model setup steps inline, then lets you manage models from Settings &rarr; AI &amp; Models.
             </div>
         </div>
     </div>
@@ -153,7 +161,7 @@
                 <span class="faq-q-text">Is Lokei really private?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">Yes, completely. Lokei is private by architecture, not just by policy. All AI processing happens on your Mac — your conversations go from your keyboard to your Mac's processor and back to your screen. Nothing passes through the internet or any external server. We have no servers receiving your data because there's nothing to receive.</div>
+            <div class="faq-a">Lokei is private by architecture. With Apple Intelligence or local Ollama, processing stays on your Mac. If you configure a remote provider, prompts sent to that provider leave your Mac and are governed by that provider's terms, but Lokei still does not collect them.</div>
         </div>
 
         <div class="faq-item">
@@ -161,7 +169,7 @@
                 <span class="faq-q-text">Does Lokei collect any data?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">No. Lokei collects zero data — no conversations, no usage stats, no crash reports sent to us, no analytics, nothing. Your chat history is stored locally on your Mac only. See our <a href="privacy.html">Privacy Policy</a> for the full details (it's a short read).</div>
+            <div class="faq-a">No. Lokei collects zero data: no conversations, no usage stats, no crash reports sent to us, no analytics, nothing. Your chat history is stored locally by default. If you enable iCloud sync, it syncs through your Apple iCloud account, not through Lokei servers.</div>
         </div>
 
         <div class="faq-item">
@@ -169,7 +177,7 @@
                 <span class="faq-q-text">Does Lokei require an account?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">No account required, ever. You purchase Lokei once through the Mac App Store (Apple handles that transaction), then use it freely forever with no login, no email, no sign-up.</div>
+            <div class="faq-a">No Lokei account is required. App Store distribution will be handled by Apple when Lokei launches. A separate provider account is only relevant if you choose to configure a remote provider yourself.</div>
         </div>
 
         <div class="faq-item">
@@ -177,7 +185,7 @@
                 <span class="faq-q-text">Can I use Lokei without an internet connection?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">Yes. Once you've downloaded Ollama and your AI models, Lokei works completely offline. No internet connection needed to chat. You only need internet to initially download Ollama and AI models.</div>
+            <div class="faq-a">Yes, with local or on-device backends. Apple Intelligence availability is handled by macOS, and Ollama works offline after Ollama and your models are installed. Remote providers require internet access.</div>
         </div>
     </div>
 
@@ -189,7 +197,7 @@
                 <span class="faq-q-text">Which AI model should I use?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">It depends on your Mac's RAM. For 8GB RAM Macs, we recommend Qwen 2.5 Coder (3B) for coding or Llama 3.2 (3B) for general use — both are fast and run well. For 16GB+ RAM, you can run larger models like DeepSeek R1 (7B) or Mistral (7B) for more capable responses. Lokei's Model Library shows RAM requirements for every model.</div>
+            <div class="faq-a">If you use Apple Intelligence, macOS manages the model. If you use Ollama, it depends on your Mac's RAM: smaller 1-3B models are best for 8GB Macs, while 16GB+ Macs can usually run larger 7B models. Lokei's Model Library shows RAM requirements for every Ollama model.</div>
         </div>
 
         <div class="faq-item">
@@ -197,7 +205,7 @@
                 <span class="faq-q-text">Do I need to use Terminal to install models?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">No. Lokei includes a built-in Model Library where you can browse and download models with a single click — no Terminal required. Models are rated by RAM requirement so you know exactly what will run well on your Mac.</div>
+            <div class="faq-a">No. Apple Intelligence needs no model download inside Lokei. For Ollama, Lokei includes a built-in Model Library where you can browse and download models with a single click. Models are rated by RAM requirement so you know what should run well on your Mac.</div>
         </div>
 
         <div class="faq-item">
@@ -249,7 +257,7 @@
                 <span class="faq-q-text">Can I share files with Lokei?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">Yes. You can drag and drop files onto Lokei's chat window, click the file icon in the input bar, or paste clipboard content. Lokei supports code files, text files, PDFs, and more. Large files are automatically truncated to keep responses fast.</div>
+            <div class="faq-a">Yes. You can drag and drop files onto Lokei's chat window, click the file icon in the input bar, attach images, or paste clipboard content. Lokei supports code files, text files, PDFs, images, and more. Large files are automatically truncated to keep responses fast.</div>
         </div>
 
         <div class="faq-item">
@@ -257,19 +265,19 @@
                 <span class="faq-q-text">Can I export my conversations?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">Yes. Click the export icon in the header to save your current conversation as a Markdown file. This works in both the menu bar popover and the expanded full window.</div>
+            <div class="faq-a">Yes. Click the export icon in the header to save your current conversation as Markdown, HTML, or JSON. This works in both the menu bar popover and the expanded full window.</div>
         </div>
     </div>
 
     <div class="faq-group">
-        <div class="faq-group-title">Pricing & Purchase</div>
+        <div class="faq-group-title">Availability & Pricing</div>
 
         <div class="faq-item">
             <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
                 <span class="faq-q-text">Is it really a one-time purchase?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">Yes. $4.99 once, yours forever. No monthly fees, no API costs, no usage limits, no subscription that gets canceled if you stop paying. We believe software should be owned, not rented.</div>
+            <div class="faq-a">The plan is a one-time Mac App Store purchase with no Lokei subscription. Final pricing will be shown on the App Store when Lokei launches.</div>
         </div>
 
         <div class="faq-item">
@@ -277,7 +285,7 @@
                 <span class="faq-q-text">Do updates cost extra?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">No. All updates are free. Once you purchase Lokei, every future update is included at no additional cost — delivered automatically through the Mac App Store.</div>
+            <div class="faq-a">Updates will be delivered through the Mac App Store after launch. Any final purchase and update terms will be shown in the App Store listing.</div>
         </div>
 
         <div class="faq-item">
@@ -285,7 +293,7 @@
                 <span class="faq-q-text">Are there any ongoing costs?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">None. Lokei is $4.99 once. Ollama is free. The AI models are free. There are no API costs, usage fees, or hidden charges of any kind. You're running everything locally on hardware you already own.</div>
+            <div class="faq-a">Lokei itself is planned without a subscription. Apple Intelligence and Ollama do not add per-message API fees. If you configure a remote provider, that provider may have its own pricing or usage limits.</div>
         </div>
 
         <div class="faq-item">
@@ -293,7 +301,7 @@
                 <span class="faq-q-text">Can I use Lokei on multiple Macs?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">Yes. Your one-time purchase covers all Macs associated with your Apple ID, as per Apple's standard App Store family sharing and personal device policies.</div>
+            <div class="faq-a">After the Mac App Store launch, Apple's App Store policies determine use across Macs associated with your Apple ID, including any applicable Family Sharing support.</div>
         </div>
     </div>
 
@@ -305,7 +313,7 @@
                 <span class="faq-q-text">Lokei says Ollama isn't running. What do I do?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">Open your Applications folder and launch the Ollama app, or run <code>ollama serve</code> in Terminal. Once Ollama is running, click "Try Again" in Lokei. If you haven't installed Ollama yet, download it from <a href="https://ollama.com" target="_blank" rel="noopener noreferrer">ollama.com</a>.</div>
+            <div class="faq-a">This only applies if you choose the Ollama backend. Open your Applications folder and launch the Ollama app, or run <code>ollama serve</code> in Terminal. Once Ollama is running, click "Try Again" in Lokei. If you haven't installed Ollama yet, download it from <a href="https://ollama.com" target="_blank" rel="noopener noreferrer">ollama.com</a>.</div>
         </div>
 
         <div class="faq-item">
@@ -313,7 +321,7 @@
                 <span class="faq-q-text">Responses are slow. How do I speed things up?</span>
                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
             </button>
-            <div class="faq-a">Switch to a smaller model — 3B parameter models are significantly faster than 7B models, especially on 8GB RAM Macs. Also, long conversations slow down over time because the model processes all previous messages. Use "Summarize & Compress" in the chat (appears after 20 messages) or start a new chat to speed things back up.</div>
+            <div class="faq-a">For Ollama, switch to a smaller model; 3B parameter models are significantly faster than 7B models, especially on 8GB RAM Macs. Long conversations can slow down over time, so use "Summarize &amp; Compress" in the chat or start another chat to speed things back up. Remote provider speed depends on the provider and your connection.</div>
         </div>
 
 
