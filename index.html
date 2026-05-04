@@ -36,17 +36,6 @@
         .nav-mobile a { color: #888; text-decoration: none; font-size: 16px; transition: color 0.2s; }
         .nav-mobile a:hover { color: white; }
         .nav-mobile .nav-download { text-align: center; padding: 12px 20px; font-size: 15px !important; }
-        @media (max-width: 700px) {
-            nav { padding: 16px 20px; } .nav-links { display: none; } .nav-hamburger { display: flex; }
-            .hero { padding: 100px 20px 60px; } .hero h1 { letter-spacing: 6px; }
-            .features { padding: 60px 20px; } .ios-companion { padding: 60px 20px; } .ios-panel { grid-template-columns: 1fr; padding: 28px; } .ios-phone { order: -1; }
-            .ios-actions { flex-direction: column; align-items: stretch; } .ios-pill-grid { grid-template-columns: 1fr; }
-            .how { padding: 60px 20px; }
-            .privacy-banner { padding: 60px 20px; } .download { padding: 60px 20px; }
-            .pricing-banner { padding: 28px 20px; } .preview { padding: 40px 20px; }
-            .hero-meta { gap: 16px; font-size: 12px; } .privacy-stats { gap: 28px; }
-            footer { padding: 40px 20px 28px; }
-        }
         .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 40px 80px; position: relative; overflow: hidden; }
         .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,204,255,0.08) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
         .hero-leaf { width: 100px; height: 100px; margin-bottom: 32px; filter: drop-shadow(0 0 30px rgba(0,204,255,0.4)); }
@@ -165,6 +154,35 @@
         .badge-apple-lg { padding: 14px 28px; border-radius: 14px; gap: 16px; }
         .badge-apple-lg .badge-small { font-size: 12px; }
         .badge-apple-lg .badge-large { font-size: 22px; }
+        @media (max-width: 700px) {
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .hero { padding: 100px 20px 60px; }
+            .hero h1 { letter-spacing: 6px; }
+            .hero-meta { gap: 16px; font-size: 12px; }
+            .preview { padding: 40px 20px; }
+            .features { padding: 60px 20px; }
+            .ios-companion { padding: 40px 16px; }
+            .ios-panel { grid-template-columns: 1fr; padding: 24px 20px; gap: 28px; }
+            .ios-phone { display: none; }
+            .ios-copy .section-label { font-size: 11px; }
+            .ios-copy .section-title { font-size: 26px; margin-bottom: 14px; }
+            .ios-copy .section-subtitle { font-size: 14px; margin-bottom: 20px; }
+            .status-pill { font-size: 11px; padding: 6px 12px; }
+            .ios-pill-grid { grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+            .ios-pill { padding: 12px; }
+            .ios-pill strong { font-size: 12px; }
+            .ios-pill span { font-size: 11px; }
+            .ios-actions { flex-direction: column; align-items: stretch; }
+            .ios-note { font-size: 11px; margin-top: 14px; }
+            .how { padding: 60px 20px; }
+            .privacy-banner { padding: 60px 20px; }
+            .privacy-stats { gap: 28px; }
+            .download { padding: 60px 20px; }
+            .pricing-banner { padding: 28px 20px; }
+            footer { padding: 40px 20px 28px; }
+        }
     </style>
 </head>
 <body>
