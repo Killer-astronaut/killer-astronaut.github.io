@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Birds — A Lokei Watch app</title>
+    <meta name="description" content="Love Birds is a private Apple Watch app from Lokei. Tap a complication to send an instant heart to someone you're thinking about. End-to-end encrypted via iCloud, no account, no tracking. $2.99 one-time on the App Store.">
+    <meta property="og:title" content="Love Birds — A Lokei Watch app">
+    <meta property="og:description" content="Tap your watch. Send a heart. Two birds, one tap. Private by design, $2.99 one-time on the App Store.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://getlokei.com/lovebirds.html">
+    <meta property="og:image" content="https://getlokei.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://getlokei.com/og-image.png">
+    <meta name="twitter:title" content="Love Birds — A Lokei Watch app">
+    <meta name="twitter:description" content="Tap your watch. Send a heart. Private by design.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23FF8FA3'/%3E%3Cstop offset='100%25' stop-color='%2300CCFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 86 C20 64 10 46 10 32 C10 20 20 12 30 12 C40 12 46 18 50 26 C54 18 60 12 70 12 C80 12 90 20 90 32 C90 46 80 64 50 86 Z' fill='url(%23g)'/%3E%3C/svg%3E">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --teal: #00FFCC;
+            --blue: #00CCFF;
+            --rose: #FF6B9D;
+            --coral: #FF8FA3;
+            --dark: #0d1117;
+            --darker: #000000;
+        }
+        html { scroll-behavior: smooth; }
+        body { background: var(--darker); color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; line-height: 1.7; overflow-x: hidden; }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid #111; }
+        .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .nav-logo-text { font-size: 18px; font-weight: 200; letter-spacing: 8px; color: white; }
+        .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+        .nav-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .nav-links a:hover { color: white; }
+        .nav-download { background: linear-gradient(135deg, var(--coral), var(--rose)); color: black !important; padding: 8px 20px; border-radius: 20px; font-weight: 600 !important; font-size: 13px !important; }
+        .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+        .nav-hamburger span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s; }
+        .nav-mobile { display: none; position: fixed; top: 65px; left: 0; right: 0; background: rgba(0,0,0,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid #222; padding: 20px 40px 28px; z-index: 99; flex-direction: column; gap: 20px; }
+        .nav-mobile.open { display: flex; }
+        .nav-mobile a { color: #888; text-decoration: none; font-size: 16px; }
+        .nav-mobile a:hover { color: white; }
+        .nav-mobile .nav-download { text-align: center; padding: 12px 20px; font-size: 15px !important; }
+
+        .hero { min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 40px 80px; position: relative; overflow: hidden; }
+        .hero-glow { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(255,107,157,0.10) 0%, rgba(0,204,255,0.04) 40%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+        .hero-heart { width: 96px; height: 96px; margin-bottom: 28px; filter: drop-shadow(0 0 30px rgba(255,107,157,0.45)); animation: beat 2.4s ease-in-out infinite; }
+        @keyframes beat { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.10); } 24% { transform: scale(0.98); } 38% { transform: scale(1.06); } 50% { transform: scale(1); } }
+        .hero h1 { font-size: clamp(46px, 8vw, 88px); font-weight: 100; letter-spacing: 14px; margin-bottom: 6px; background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-tagline { font-size: clamp(18px, 3vw, 24px); font-weight: 300; color: #666; letter-spacing: 3px; margin-bottom: 12px; }
+        .hero-tagline span { background: linear-gradient(135deg, var(--coral), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .lokei-stamp { font-size: 11px; letter-spacing: 5px; color: #555; text-transform: uppercase; margin-bottom: 40px; }
+        .lokei-stamp a { color: #888; text-decoration: none; }
+        .lokei-stamp a:hover { color: white; }
+        .hero-buttons { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; margin-bottom: 36px; }
+        .btn-primary { background: linear-gradient(135deg, var(--coral), var(--rose)); color: black; padding: 16px 36px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 16px; transition: opacity 0.2s, transform 0.2s; display: flex; align-items: center; gap: 10px; }
+        .btn-primary:hover { opacity: 0.92; transform: translateY(-2px); }
+        .btn-secondary { color: #888; padding: 16px 32px; border-radius: 30px; text-decoration: none; font-size: 15px; border: 1px solid #222; transition: border-color 0.2s, color 0.2s; }
+        .btn-secondary:hover { border-color: #444; color: white; }
+        .badge-apple { background: black; border: 1px solid #2a2a2a; padding: 10px 22px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; transition: border-color 0.2s; }
+        .badge-apple:hover { border-color: #555; }
+        .badge-apple-text { display: flex; flex-direction: column; line-height: 1.1; text-align: left; }
+        .badge-small { font-size: 10px; color: #ccc; letter-spacing: 0.5px; }
+        .badge-large { font-size: 18px; color: white; font-weight: 500; letter-spacing: 0.5px; }
+        .price-tag { font-size: 13px; color: #555; letter-spacing: 1px; margin-bottom: 32px; }
+        .price-tag span { background: linear-gradient(135deg, var(--coral), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600; }
+        .hero-meta { display: flex; gap: 32px; color: #444; font-size: 13px; letter-spacing: 1px; flex-wrap: wrap; justify-content: center; }
+        .hero-meta span { display: flex; align-items: center; gap: 6px; }
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); opacity: 0.8; }
+
+        .watch-section { padding: 60px 40px 100px; display: flex; justify-content: center; }
+        .watch-stage { position: relative; width: 100%; max-width: 520px; aspect-ratio: 1.1; display: flex; align-items: center; justify-content: center; }
+        .watch-stage::before { content: ''; position: absolute; inset: 8% 14%; border-radius: 50%; background: radial-gradient(circle, rgba(255,107,157,0.18), transparent 65%); filter: blur(30px); }
+        .watch { position: relative; width: 78%; max-width: 360px; aspect-ratio: 0.82; }
+        .watch-body { position: absolute; inset: 0; background: linear-gradient(160deg, #2a2a2e, #050505); border-radius: 22%/18%; box-shadow: 0 30px 80px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(255,255,255,0.06); }
+        .watch-crown { position: absolute; right: -8px; top: 28%; width: 14px; height: 38px; background: linear-gradient(90deg, #1c1c1c, #444); border-radius: 4px 2px 2px 4px; }
+        .watch-side { position: absolute; right: -6px; top: 52%; width: 10px; height: 30px; background: #1a1a1a; border-radius: 3px; }
+        .watch-screen { position: absolute; inset: 6% 7%; background: #000; border-radius: 18%/14%; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; padding: 14px 14px 16px; }
+        .watch-screen::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 12px rgba(255,255,255,0.04); pointer-events: none; }
+        .watch-time { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--coral); font-weight: 600; letter-spacing: 0.5px; }
+        .watch-time .battery { color: #4a4a4a; font-size: 10px; }
+        .watch-face-center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+        .watch-big-heart { width: 96px; height: 96px; filter: drop-shadow(0 0 24px rgba(255,107,157,0.55)); animation: beat 2.4s ease-in-out infinite; }
+        .watch-status { font-size: 10px; letter-spacing: 1.6px; color: #777; text-transform: uppercase; }
+        .watch-status strong { color: #fff; font-weight: 500; }
+        .watch-complications { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+        .complication { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,107,157,0.18); border-radius: 10px; padding: 6px 4px; text-align: center; }
+        .complication-icon { font-size: 14px; line-height: 1; margin-bottom: 2px; }
+        .complication-label { font-size: 7px; letter-spacing: 1px; color: #777; text-transform: uppercase; }
+        .complication.primary { background: linear-gradient(135deg, rgba(255,143,163,0.18), rgba(255,107,157,0.08)); border-color: rgba(255,107,157,0.55); }
+        .complication.primary .complication-label { color: var(--coral); }
+
+        .ripple { position: absolute; top: 50%; left: 50%; width: 60px; height: 60px; border-radius: 50%; border: 1.5px solid rgba(255,107,157,0.5); transform: translate(-50%, -50%); animation: ripple 2.4s ease-out infinite; pointer-events: none; }
+        .ripple.delay { animation-delay: 1.2s; }
+        @keyframes ripple { 0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0.9; } 100% { transform: translate(-50%, -50%) scale(3.2); opacity: 0; } }
+
+        .partner-card { position: absolute; bottom: 6%; right: -8%; background: rgba(13,13,18,0.92); border: 1px solid rgba(255,107,157,0.25); border-radius: 14px; padding: 12px 14px; display: flex; align-items: center; gap: 10px; box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
+        .partner-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--coral), var(--rose)); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .partner-card-body { display: flex; flex-direction: column; line-height: 1.2; }
+        .partner-card-name { color: white; font-size: 12px; font-weight: 500; }
+        .partner-card-text { color: #888; font-size: 10px; letter-spacing: 0.5px; }
+        .partner-card-time { color: var(--coral); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px; }
+
+        .stack-card { position: absolute; top: 12%; left: -2%; background: rgba(13,13,18,0.92); border: 1px solid rgba(255,107,157,0.18); border-radius: 14px; padding: 10px 14px; box-shadow: 0 12px 30px rgba(0,0,0,0.5); transform: rotate(-3deg); }
+        .stack-card-label { color: #777; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; }
+        .stack-card-streak { color: white; font-size: 18px; font-weight: 300; letter-spacing: 1px; }
+        .stack-card-streak span { background: linear-gradient(135deg, var(--coral), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600; }
+
+        .section-label { text-align: center; font-size: 12px; letter-spacing: 4px; color: var(--coral); margin-bottom: 16px; text-transform: uppercase; }
+        .section-title { text-align: center; font-size: clamp(28px, 4vw, 42px); font-weight: 200; letter-spacing: 2px; margin-bottom: 16px; color: white; }
+        .section-subtitle { text-align: center; color: #555; font-size: 16px; margin-bottom: 64px; max-width: 640px; margin-left: auto; margin-right: auto; }
+
+        .features { padding: 100px 40px; max-width: 1180px; margin: 0 auto; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; }
+        .feature-card { background: #0d1117; border: 1px solid #1a1a1a; border-radius: 16px; padding: 28px; transition: border-color 0.3s, transform 0.3s; }
+        .feature-card:hover { border-color: rgba(255,107,157,0.32); transform: translateY(-4px); }
+        .feature-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; background: linear-gradient(135deg, rgba(255,143,163,0.10), rgba(255,107,157,0.10)); border: 1px solid rgba(255,107,157,0.18); }
+        .feature-card h3 { font-size: 17px; font-weight: 500; margin-bottom: 8px; color: white; }
+        .feature-card p { color: #666; font-size: 13.5px; line-height: 1.7; }
+
+        .compare { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
+        .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #0d1117; border: 1px solid #1a1a1a; border-radius: 16px; overflow: hidden; }
+        .compare-table th, .compare-table td { padding: 14px 12px; text-align: center; font-size: 13.5px; border-bottom: 1px solid #161616; }
+        .compare-table th { background: rgba(255,107,157,0.05); color: #888; font-weight: 500; letter-spacing: 0.5px; }
+        .compare-table th:first-child, .compare-table td:first-child { text-align: left; color: #c5c5c5; padding-left: 20px; }
+        .compare-table th.us, .compare-table td.us { background: rgba(255,107,157,0.07); }
+        .compare-table th.us { color: var(--coral); font-weight: 700; letter-spacing: 1px; }
+        .compare-table .yes { color: var(--coral); font-weight: 600; }
+        .compare-table .no { color: #444; }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-note { text-align: center; color: #444; font-size: 12px; margin-top: 18px; }
+
+        .stack { padding: 100px 40px; background: #050508; }
+        .stack-inner { max-width: 1100px; margin: 0 auto; }
+        .stack-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 48px; }
+        .stack-pill { border: 1px solid #1d2430; background: rgba(13,17,23,0.6); border-radius: 14px; padding: 22px; }
+        .stack-pill strong { display: block; color: white; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+        .stack-pill span { color: #666; font-size: 13px; line-height: 1.65; }
+        .stack-pill .tag { display: inline-block; background: rgba(255,107,157,0.12); color: var(--coral); font-size: 10px; padding: 3px 8px; border-radius: 8px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+
+        .privacy-banner { padding: 100px 40px; max-width: 1100px; margin: 0 auto; text-align: center; }
+        .privacy-icon { display: flex; justify-content: center; margin-bottom: 24px; }
+        .privacy-banner h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 200; letter-spacing: 2px; margin-bottom: 16px; color: white; }
+        .privacy-banner > p { color: #666; font-size: 16px; margin: 0 auto 48px; max-width: 600px; }
+        .privacy-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+        .privacy-stat { text-align: center; }
+        .privacy-stat .number { font-size: 48px; font-weight: 100; background: linear-gradient(135deg, var(--coral), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; margin-bottom: 8px; }
+        .privacy-stat .label { color: #666; font-size: 13px; letter-spacing: 1px; }
+
+        .nutrition { padding: 80px 40px 40px; max-width: 920px; margin: 0 auto; }
+        .nutrition-card { background: #0d1117; border: 1px solid #1a1a2a; border-radius: 18px; padding: 36px; }
+        .nutrition-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+        .nutrition-head h3 { font-size: 18px; font-weight: 500; color: white; letter-spacing: 1px; }
+        .nutrition-rows { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 24px; }
+        .nutrition-row { background: #06070b; border: 1px solid #1a1a1a; border-radius: 12px; padding: 16px; }
+        .nutrition-row strong { display: block; color: white; font-size: 13px; margin-bottom: 4px; font-weight: 500; }
+        .nutrition-row span { color: #666; font-size: 12.5px; line-height: 1.6; }
+
+        .pricing { padding: 100px 40px; max-width: 760px; margin: 0 auto; text-align: center; }
+        .pricing-card { background: linear-gradient(155deg, rgba(13,17,23,0.96), rgba(20,8,18,0.96)); border: 1px solid rgba(255,107,157,0.25); border-radius: 22px; padding: 48px 36px; box-shadow: 0 40px 120px rgba(0,0,0,0.55), 0 0 80px rgba(255,107,157,0.06); }
+        .pricing-tier { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,107,157,0.28); background: rgba(255,107,157,0.08); color: var(--coral); border-radius: 24px; padding: 6px 14px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+        .pricing-price { font-size: 72px; font-weight: 100; letter-spacing: 2px; background: linear-gradient(135deg, var(--coral), var(--rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+        .pricing-price-note { font-size: 13px; color: #666; letter-spacing: 1px; margin-top: 6px; margin-bottom: 28px; }
+        .pricing-bullets { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; text-align: left; max-width: 520px; margin: 0 auto 32px; }
+        .pricing-bullets li { color: #999; font-size: 13.5px; list-style: none; padding-left: 24px; position: relative; }
+        .pricing-bullets li::before { content: ''; position: absolute; left: 0; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: linear-gradient(135deg, var(--coral), var(--rose)); }
+        .pricing-fine { font-size: 12px; color: #555; line-height: 1.7; margin-top: 16px; }
+
+        .tipjar { padding: 0 40px 100px; max-width: 760px; margin: 0 auto; text-align: center; }
+        .tipjar-card { border: 1px solid #1a1a1a; border-radius: 16px; padding: 28px; background: #0d1117; }
+        .tipjar-card h3 { font-size: 16px; font-weight: 400; color: white; margin-bottom: 8px; }
+        .tipjar-card p { color: #666; font-size: 13.5px; margin-bottom: 18px; }
+        .tipjar-options { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .tipjar-option { padding: 10px 22px; border-radius: 20px; border: 1px solid #2a2a2a; color: #999; font-size: 14px; }
+        .tipjar-option:hover { border-color: rgba(255,107,157,0.4); color: white; }
+
+        .lokei-link { padding: 80px 40px; max-width: 1000px; margin: 0 auto; }
+        .lokei-link-card { display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center; background: #0d1117; border: 1px solid #1a1a2a; border-radius: 18px; padding: 28px 32px; }
+        .lokei-link-card svg { flex-shrink: 0; }
+        .lokei-link-card h4 { font-size: 16px; font-weight: 500; color: white; margin-bottom: 4px; letter-spacing: 1px; }
+        .lokei-link-card p { color: #666; font-size: 13.5px; line-height: 1.6; }
+
+        .faq { padding: 100px 40px; max-width: 820px; margin: 0 auto; }
+        .faq-item { border: 1px solid #111; border-radius: 12px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s; }
+        .faq-item:hover { border-color: #1e1e1e; }
+        .faq-item.open { border-color: rgba(255,107,157,0.25); }
+        .faq-q { padding: 18px 22px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; width: 100%; background: none; border: none; text-align: left; font-family: inherit; }
+        .faq-q-text { font-size: 15px; color: white; }
+        .faq-icon { width: 20px; height: 20px; border-radius: 50%; border: 1px solid #333; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+        .faq-item.open .faq-icon { background: linear-gradient(135deg, var(--coral), var(--rose)); border-color: transparent; }
+        .faq-icon svg { transition: transform 0.2s; }
+        .faq-item.open .faq-icon svg { transform: rotate(45deg); }
+        .faq-a { display: none; padding: 0 22px 18px; color: #666; font-size: 14px; line-height: 1.8; }
+        .faq-a a { color: var(--coral); text-decoration: none; }
+        .faq-item.open .faq-a { display: block; }
+
+        footer { padding: 60px 40px 32px; border-top: 1px solid #111; }
+        .footer-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+        .footer-brand p { color: #555; font-size: 13px; margin-top: 12px; max-width: 280px; line-height: 1.7; }
+        .footer-links h4 { color: #888; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+        .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-links a { color: #555; text-decoration: none; font-size: 13px; }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; padding-top: 24px; border-top: 1px solid #111; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer-bottom p { color: #333; font-size: 12px; }
+        .footer-bottom a { color: #333; text-decoration: none; }
+        .footer-bottom a:hover { color: #888; }
+
+        @media (max-width: 760px) {
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .nav-hamburger { display: flex; }
+            .hero { padding: 110px 20px 60px; min-height: auto; }
+            .hero h1 { letter-spacing: 6px; }
+            .hero-meta { gap: 14px; font-size: 12px; }
+            .watch-section { padding: 24px 20px 60px; }
+            .partner-card { right: -2%; }
+            .stack-card { left: -4%; }
+            .features { padding: 60px 20px; }
+            .compare { padding: 60px 20px; }
+            .compare-table th, .compare-table td { padding: 10px 6px; font-size: 11.5px; }
+            .stack { padding: 60px 20px; }
+            .privacy-banner { padding: 60px 20px; }
+            .privacy-stats { gap: 28px; }
+            .nutrition { padding: 40px 20px; }
+            .nutrition-card { padding: 24px; }
+            .nutrition-rows { grid-template-columns: 1fr; }
+            .pricing { padding: 60px 20px; }
+            .pricing-card { padding: 32px 22px; }
+            .pricing-bullets { grid-template-columns: 1fr; }
+            .tipjar { padding: 0 20px 60px; }
+            .lokei-link { padding: 40px 20px; }
+            .lokei-link-card { grid-template-columns: 1fr; text-align: center; }
+            .faq { padding: 60px 20px; }
+            footer { padding: 40px 20px 24px; }
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">
+        <svg width="28" height="28" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="nlg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z" fill="url(#nlg)"/><line x1="50" y1="12" x2="50" y2="88" stroke="white" stroke-width="2" opacity="0.2"/></svg>
+        <span class="nav-logo-text">LOKEI</span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="index.html#features">Lokei</a></li>
+        <li><a href="lovebirds.html" style="color:white;">Love Birds</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+        <li><a href="#download" class="nav-download">Coming Soon</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<div class="nav-mobile" id="mobileMenu">
+    <a href="index.html#features" onclick="closeMenu()">Lokei</a>
+    <a href="lovebirds.html" onclick="closeMenu()" style="color:white;">Love Birds</a>
+    <a href="faq.html" onclick="closeMenu()">FAQ</a>
+    <a href="privacy.html" onclick="closeMenu()">Privacy</a>
+    <a href="#download" onclick="closeMenu()" class="nav-download">Coming Soon</a>
+</div>
+
+<section class="hero">
+    <div class="hero-glow"></div>
+    <svg class="hero-heart" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+            <linearGradient id="heart-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#FF8FA3"/>
+                <stop offset="60%" style="stop-color:#FF6B9D"/>
+                <stop offset="100%" style="stop-color:#00CCFF"/>
+            </linearGradient>
+        </defs>
+        <path d="M50 86 C20 64 10 46 10 32 C10 20 20 12 30 12 C40 12 46 18 50 26 C54 18 60 12 70 12 C80 12 90 20 90 32 C90 46 80 64 50 86 Z" fill="url(#heart-grad)"/>
+    </svg>
+    <h1>LOVE BIRDS</h1>
+    <p class="hero-tagline">Two birds. <span>One tap.</span></p>
+    <p class="lokei-stamp">A watch app by <a href="index.html">Lokei</a></p>
+    <div class="hero-buttons">
+        <a href="#download" class="badge-apple">
+            <svg width="26" height="32" viewBox="0 0 25 30" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M22.1 16.4c-.1-3.5 2.8-5.2 2.9-5.3-1.6-2.3-4.1-2.6-5-2.7-2.1-.2-4.2 1.3-5.3 1.3-1.1 0-2.7-1.3-4.5-1.2-2.3.1-4.4 1.4-5.6 3.5-2.4 4.2-.6 10.3 1.7 13.7 1.1 1.6 2.5 3.4 4.2 3.3 1.7-.1 2.3-1.1 4.4-1.1 2.1 0 2.6 1.1 4.4 1 1.8 0 3-1.7 4.1-3.3 1.3-1.9 1.9-3.8 1.9-3.9 0 0-3.2-1.3-3.2-5.3zm-3.4-10.6c.9-1.1 1.5-2.7 1.4-4.2-1.3.1-2.9.9-3.9 2-.9 1-1.6 2.5-1.4 4 1.5.1 3-.7 3.9-1.8z"/></svg>
+            <div class="badge-apple-text">
+                <span class="badge-small">Coming soon to</span>
+                <span class="badge-large">App Store</span>
+            </div>
+        </a>
+        <a href="#features" class="btn-secondary">See features</a>
+    </div>
+    <p class="price-tag"><span>$2.99 one-time</span> · No subscription · No account</p>
+    <div class="hero-meta">
+        <span><span class="dot"></span>Apple Watch &amp; iPhone</span>
+        <span><span class="dot"></span>End-to-end encrypted</span>
+        <span><span class="dot"></span>No tracking</span>
+        <span><span class="dot"></span>No Love Birds account</span>
+    </div>
+</section>
+
+<section class="watch-section">
+    <div class="watch-stage" aria-label="Apple Watch face showing the Love Birds complication">
+        <div class="watch">
+            <div class="watch-body"></div>
+            <div class="watch-crown"></div>
+            <div class="watch-side"></div>
+            <div class="watch-screen">
+                <div class="watch-time">
+                    <span>10:08</span>
+                    <span class="battery">100%</span>
+                </div>
+                <div class="watch-face-center">
+                    <span class="ripple"></span>
+                    <span class="ripple delay"></span>
+                    <svg class="watch-big-heart" viewBox="0 0 100 100" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="watch-heart" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FF8FA3"/>
+                                <stop offset="100%" style="stop-color:#FF6B9D"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M50 86 C20 64 10 46 10 32 C10 20 20 12 30 12 C40 12 46 18 50 26 C54 18 60 12 70 12 C80 12 90 20 90 32 C90 46 80 64 50 86 Z" fill="url(#watch-heart)"/>
+                    </svg>
+                    <div class="watch-status"><strong>Tap to send</strong> &nbsp;·&nbsp; Sam</div>
+                </div>
+                <div class="watch-complications">
+                    <div class="complication primary">
+                        <div class="complication-icon">♥</div>
+                        <div class="complication-label">Sam</div>
+                    </div>
+                    <div class="complication">
+                        <div class="complication-icon">☕</div>
+                        <div class="complication-label">Hug</div>
+                    </div>
+                    <div class="complication">
+                        <div class="complication-icon">🌙</div>
+                        <div class="complication-label">Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stack-card">
+            <div class="stack-card-label">Streak</div>
+            <div class="stack-card-streak"><span>147</span> days</div>
+        </div>
+        <div class="partner-card">
+            <div class="partner-avatar">♥</div>
+            <div class="partner-card-body">
+                <span class="partner-card-name">Sam</span>
+                <span class="partner-card-text">Sent a heart back</span>
+                <span class="partner-card-time">Just now</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features" id="features">
+    <p class="section-label">What it does</p>
+    <h2 class="section-title">A heartbeat away.</h2>
+    <p class="section-subtitle">Everything in the well-loved apps people swear by — distilled, refined, and built native for Apple Watch with the Lokei privacy posture.</p>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+            <h3>One-tap heart</h3>
+            <p>Touch the complication on your watch face and your person feels a soft haptic on their wrist. No menus, no typing, no app launches.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <h3>Every complication style</h3>
+            <p>Modular, Infograph, Corner, Circular, X-Large. Ships with all WidgetKit families so you can place Love Birds on any watch face.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
+            <h3>Custom haptic patterns</h3>
+            <p>Compose a signature buzz only the two of you know — three quick taps, a long pulse, a heartbeat rhythm. Inspired by Bond Touch.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <h3>Live pulse share</h3>
+            <p>Press and hold to send your real heart rate as a haptic rhythm on their wrist. Watch-to-watch, never stored, never uploaded.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <h3>Heart vocabulary</h3>
+            <p>Hearts, hugs, kisses, coffee breaks, goodnight, thinking of you, on my way home — 16 thoughtful "vibes" plus your own SF Symbols.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+            <h3>Streaks &amp; memories</h3>
+            <p>Days-in-a-row counter, a private timeline of every tap, and an "on this day a year ago" surface — borrowed from the best mood-tracking apps.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <h3>End-to-end encrypted</h3>
+            <p>Routed through Apple's CloudKit private database with encrypted shared zones. Lokei never sees your hearts. There is no Lokei server.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <h3>StandBy &amp; Lock Screen</h3>
+            <p>Tap from your bedside StandBy view, the Lock Screen, or the Action Button. Live Activity shows incoming hearts on the Dynamic Island.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 6 12 13 2 6"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg></div>
+            <h3>iMessage extension</h3>
+            <p>Send the same animated hearts inside Messages so the love still works even when their watch is charging.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18v3l3-1 3 1 3-1 3 1 3-1 3 1 3-1v-3"/><path d="M5 14V8a5 5 0 0 1 10 0v6"/><path d="M10 14V8a5 5 0 0 1 10 0v6"/></svg></div>
+            <h3>Family mode</h3>
+            <p>Pair with multiple people — partner, kids, parents, best friend. Each one gets their own color, sound, and haptic signature.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <h3>Quiet hours &amp; Focus</h3>
+            <p>Honors Sleep, Work, Do Not Disturb, and custom Focus filters automatically. Set your own quiet hours per recipient.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <h3>Voice pings</h3>
+            <p>Hold the Action Button to record a 5-second voice burst. Auto-deletes after they listen. Mic stays off until you press.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <h3>Important dates</h3>
+            <p>Anniversaries, birthdays, the date you met. A subtle ring on the complication when the day arrives, with a private message ready to send.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <h3>Long-distance map (opt-in)</h3>
+            <p>One private dot per person on a tiny world map. Coarse "home zone" only — never live tracking, never a route. Off by default.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+            <h3>Shared lists &amp; photos</h3>
+            <p>A little pinboard for "places to go," "movies to watch," and a rotating photo widget pulled from a shared iCloud album you both choose.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 8 6 8 6s-4 0-4 4 4 4 4 4-2 4 0 6 6 0 6 0 4 2 6 0 0-6 0-6 4 0 4-4-4-4-4-4 0-4-4-4z"/></svg></div>
+            <h3>Apple Intelligence nudges</h3>
+            <p>Optional gentle reminders on supported devices — "you haven't tapped in 3 days, want to say hi?" — generated on-device, never sent anywhere.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></div>
+            <h3>Accessible by default</h3>
+            <p>Full VoiceOver, Dynamic Type, Reduce Motion, color-blind palette, and an option to convert hearts to descriptive haptics only.</p>
+        </div>
+    </div>
+</section>
+
+<section class="compare" id="compare">
+    <p class="section-label">vs. The Competition</p>
+    <h2 class="section-title">Everything they do. Plus the things they don't.</h2>
+    <p class="section-subtitle">An honest look at how Love Birds compares to the well-known apps people already use to stay close.</p>
+    <table class="compare-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="us">Love Birds</th>
+                <th>Couple</th>
+                <th>Pair</th>
+                <th>Bond Touch</th>
+                <th>Lovebox</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>One-tap watch heart</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td></tr>
+            <tr><td>Custom haptic patterns</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="no">—</td></tr>
+            <tr><td>Live heart-rate share</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+            <tr><td>Native Apple Watch complications</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+            <tr><td>Lock Screen &amp; StandBy widgets</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+            <tr><td>Dynamic Island Live Activity</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+            <tr><td>Streaks &amp; memories timeline</td><td class="us yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td></tr>
+            <tr><td>iMessage extension</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+            <tr><td>Family / group mode</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+            <tr><td>End-to-end encrypted (CloudKit)</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td>No account required</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td></tr>
+            <tr><td>No subscription</td><td class="us yes">✓</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td>No physical device required</td><td class="us yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">—</td><td class="no">—</td></tr>
+            <tr><td>Price</td><td class="us yes">$2.99 once</td><td>Free + IAP</td><td>$3/mo</td><td>$199 device</td><td>$99+ device</td></tr>
+        </tbody>
+    </table>
+    <p class="compare-note">Product comparisons reflect publicly known features and pricing at time of writing. Trademarks are property of their respective owners.</p>
+</section>
+
+<section class="stack">
+    <div class="stack-inner">
+        <p class="section-label">Apple-Native Stack</p>
+        <h2 class="section-title">Built right on top of the platform.</h2>
+        <p class="section-subtitle">No third-party SDKs, no analytics libraries, no JavaScript runtime in your pocket. Every brick is from Apple.</p>
+        <div class="stack-grid">
+            <div class="stack-pill">
+                <div class="tag">UI</div>
+                <strong>SwiftUI on watchOS</strong>
+                <span>One codebase across watchOS, iOS, iPadOS, visionOS. ClockKit complications for legacy faces, WidgetKit timelines for modern ones.</span>
+            </div>
+            <div class="stack-pill">
+                <div class="tag">Sync</div>
+                <strong>CloudKit private &amp; shared</strong>
+                <span>End-to-end encrypted shared CKDatabase zones between paired devices. Apple holds the keys path; Lokei never touches your messages.</span>
+            </div>
+            <div class="stack-pill">
+                <div class="tag">Touch</div>
+                <strong>Core Haptics</strong>
+                <span>Custom AHAP patterns let you sculpt the exact rhythm of a touch. Falls back gracefully on older Apple Watches.</span>
+            </div>
+            <div class="stack-pill">
+                <div class="tag">Live</div>
+                <strong>ActivityKit &amp; App Intents</strong>
+                <span>Dynamic Island, Lock Screen Live Activities, Siri Shortcuts, and Action Button targets — all standard system surfaces.</span>
+            </div>
+            <div class="stack-pill">
+                <div class="tag">Health</div>
+                <strong>HealthKit (opt-in)</strong>
+                <span>Heart-rate pulse share reads a single live BPM during the press and forgets it. Nothing is written, stored, or correlated.</span>
+            </div>
+            <div class="stack-pill">
+                <div class="tag">AI</div>
+                <strong>Apple Intelligence (when available)</strong>
+                <span>On-device nudges and suggested vibes use Foundation Models locally. No prompts ever leave the device.</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="privacy-banner">
+    <div class="privacy-icon">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <h2>Private by design. App Store-ready.</h2>
+    <p>Love Birds inherits Lokei's privacy posture: zero data collection, zero servers, zero account. Sweet on the outside, locked down on the inside.</p>
+    <div class="privacy-stats">
+        <div class="privacy-stat"><div class="number">0</div><div class="label">Bytes collected</div></div>
+        <div class="privacy-stat"><div class="number">0</div><div class="label">Third-party SDKs</div></div>
+        <div class="privacy-stat"><div class="number">0</div><div class="label">Subscriptions</div></div>
+        <div class="privacy-stat"><div class="number">E2EE</div><div class="label">Every heart</div></div>
+    </div>
+</section>
+
+<section class="nutrition">
+    <div class="nutrition-card">
+        <div class="nutrition-head">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+            <h3>App Store Privacy Label</h3>
+        </div>
+        <p style="color:#666; font-size: 14px;">Mapped to Apple's nutrition-label categories so what you'll see on the App Store matches what's in the app.</p>
+        <div class="nutrition-rows">
+            <div class="nutrition-row"><strong>Data Used to Track You</strong><span>None.</span></div>
+            <div class="nutrition-row"><strong>Data Linked to You</strong><span>None.</span></div>
+            <div class="nutrition-row"><strong>Data Not Linked to You</strong><span>None. Crash diagnostics only with explicit opt-in, via Apple's anonymized pipeline.</span></div>
+            <div class="nutrition-row"><strong>Sign-in Required</strong><span>No. Pairing uses iCloud Sharing — your Apple Account stays with Apple.</span></div>
+            <div class="nutrition-row"><strong>In-App Purchases</strong><span>One consumable "tip jar" tier, clearly optional, no feature gating.</span></div>
+            <div class="nutrition-row"><strong>Ads</strong><span>No ads. No ad networks. No ATT prompts.</span></div>
+            <div class="nutrition-row"><strong>Age Rating</strong><span>4+. No user-generated public content, no chat, no moderation surface.</span></div>
+            <div class="nutrition-row"><strong>Family Sharing</strong><span>Yes. One purchase covers everyone in your family group.</span></div>
+        </div>
+    </div>
+</section>
+
+<section class="pricing" id="download">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Buy it once. Keep it forever.</h2>
+    <p class="section-subtitle">The same one-time stance we take with Lokei for Mac. No subscription, no upsell, no upgrade tax.</p>
+    <div class="pricing-card">
+        <div class="pricing-tier">One-time · App Store</div>
+        <div class="pricing-price">$2.99</div>
+        <div class="pricing-price-note">USD · localized worldwide · Family Sharing included</div>
+        <ul class="pricing-bullets">
+            <li>Every feature, unlocked</li>
+            <li>Unlimited paired people</li>
+            <li>Custom haptic composer</li>
+            <li>Heart-rate pulse share</li>
+            <li>Apple Watch + iPhone + iPad</li>
+            <li>iMessage extension included</li>
+            <li>Free updates for the life of the app</li>
+            <li>No subscription. Ever.</li>
+        </ul>
+        <a href="#" class="btn-primary" style="display:inline-flex; margin: 0 auto;">
+            <svg width="20" height="24" viewBox="0 0 25 30" fill="black" xmlns="http://www.w3.org/2000/svg"><path d="M22.1 16.4c-.1-3.5 2.8-5.2 2.9-5.3-1.6-2.3-4.1-2.6-5-2.7-2.1-.2-4.2 1.3-5.3 1.3-1.1 0-2.7-1.3-4.5-1.2-2.3.1-4.4 1.4-5.6 3.5-2.4 4.2-.6 10.3 1.7 13.7 1.1 1.6 2.5 3.4 4.2 3.3 1.7-.1 2.3-1.1 4.4-1.1 2.1 0 2.6 1.1 4.4 1 1.8 0 3-1.7 4.1-3.3 1.3-1.9 1.9-3.8 1.9-3.9 0 0-3.2-1.3-3.2-5.3zm-3.4-10.6c.9-1.1 1.5-2.7 1.4-4.2-1.3.1-2.9.9-3.9 2-.9 1-1.6 2.5-1.4 4 1.5.1 3-.7 3.9-1.8z"/></svg>
+            Notify me on launch
+        </a>
+        <p class="pricing-fine">Why $2.99? It's the App Store impulse-buy sweet spot for a single-purpose utility — premium enough to signal craft, low enough to gift to a friend. It outperforms free-with-IAP for couples-app retention because there's no nag screen between you and the moment.</p>
+    </div>
+</section>
+
+<section class="tipjar">
+    <div class="tipjar-card">
+        <h3>An optional tip jar.</h3>
+        <p>If you want to throw something extra in for development, an in-app "Buy them a coffee" consumable is available. Nothing is gated behind it. Ever.</p>
+        <div class="tipjar-options">
+            <span class="tipjar-option">$0.99</span>
+            <span class="tipjar-option">$2.99</span>
+            <span class="tipjar-option">$4.99</span>
+            <span class="tipjar-option">$9.99</span>
+        </div>
+    </div>
+</section>
+
+<section class="lokei-link">
+    <div class="lokei-link-card">
+        <svg width="44" height="44" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="llg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z" fill="url(#llg)"/><line x1="50" y1="12" x2="50" y2="88" stroke="white" stroke-width="2" opacity="0.25"/></svg>
+        <div>
+            <h4>From the makers of Lokei</h4>
+            <p>Lokei is a private AI for your Mac — Apple Intelligence, local Ollama models, no cloud middleman. Love Birds is built with the same philosophy and the same hands.</p>
+        </div>
+        <a href="index.html" class="btn-secondary">Visit Lokei →</a>
+    </div>
+</section>
+
+<section class="faq" id="faq">
+    <p class="section-label">Questions</p>
+    <h2 class="section-title">The short version.</h2>
+    <p class="section-subtitle">If something isn't here, ask: <a href="mailto:hello@getlokei.com" style="color:var(--coral); text-decoration: none;">hello@getlokei.com</a></p>
+
+    <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)" aria-expanded="false">
+            <span class="faq-q-text">Does my partner need an Apple Watch?</span>
+            <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </button>
+        <div class="faq-a">No. An iPhone is enough on the receiving end — taps arrive as a haptic on iPhone, on the Lock Screen, in a Live Activity, or via the iMessage extension. A Watch makes the experience even sweeter.</div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)" aria-expanded="false">
+            <span class="faq-q-text">How does pairing work without an account?</span>
+            <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </button>
+        <div class="faq-a">Open Love Birds, choose Invite, and share a one-time link through any app — Messages, AirDrop, even handwritten. They tap the link and accept on their device. Behind the scenes it's CloudKit Sharing, the same mechanism that powers Shared Albums and Notes.</div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)" aria-expanded="false">
+            <span class="faq-q-text">Where do my hearts actually go?</span>
+            <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </button>
+        <div class="faq-a">Through an end-to-end encrypted CloudKit shared zone owned jointly by your Apple Accounts. Hearts hop device-to-device through Apple's infrastructure. Lokei has no server in the path, no key escrow, no way to read them.</div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)" aria-expanded="false">
+            <span class="faq-q-text">Is there a subscription?</span>
+            <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </button>
+        <div class="faq-a">No. One $2.99 purchase unlocks everything, on every device tied to your Apple Account, with Family Sharing included. The only IAP is an optional tip jar that doesn't gate any feature.</div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)" aria-expanded="false">
+            <span class="faq-q-text">What happens if my partner doesn't have an iPhone?</span>
+            <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </button>
+        <div class="faq-a">Love Birds is Apple-only by design — that's how we keep it private without standing up a server. We'd rather do one platform really well than spread thin across three.</div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)" aria-expanded="false">
+            <span class="faq-q-text">Will Love Birds share data with Lokei or anyone else?</span>
+            <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </button>
+        <div class="faq-a">No. No analytics, no crash reporters with payload, no ad SDKs, no telemetry pipelines. The privacy policy is short on purpose.</div>
+    </div>
+
+    <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)" aria-expanded="false">
+            <span class="faq-q-text">When is it launching?</span>
+            <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+        </button>
+        <div class="faq-a">In development. Availability, features, and requirements may change before release. Leave your email at <a href="mailto:hello@getlokei.com">hello@getlokei.com</a> and we'll let you know when the App Store page goes live.</div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="index.html" class="nav-logo">
+                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="flg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z" fill="url(#flg)"/></svg>
+                <span class="nav-logo-text" style="font-size: 15px;">LOKEI</span>
+            </a>
+            <p>Love Birds is a Lokei watch app. Private by design, like everything we make.</p>
+        </div>
+        <div class="footer-links">
+            <h4>Love Birds</h4>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#compare">Comparison</a></li>
+                <li><a href="#download">Pricing</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h4>Lokei</h4>
+            <ul>
+                <li><a href="index.html">Lokei for Mac</a></li>
+                <li><a href="index.html#ios">iOS Companion</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="privacy.html">Privacy</a></li>
+            </ul>
+        </div>
+        <div class="footer-links">
+            <h4>Connect</h4>
+            <ul>
+                <li><a href="https://x.com/getlokei" target="_blank" rel="noopener noreferrer">X / Twitter</a></li>
+                <li><a href="mailto:hello@getlokei.com">hello@getlokei.com</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Lokei. All rights reserved. Love Birds is a Lokei product.</p>
+        <p><a href="privacy.html">Privacy Policy</a> · <a href="faq.html">FAQ</a> · <a href="index.html">Home</a></p>
+    </div>
+</footer>
+
+<script>
+    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+    function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+    function toggleFAQ(el) {
+        const item = el.parentElement;
+        const isOpen = item.classList.toggle('open');
+        el.setAttribute('aria-expanded', isOpen);
+    }
+</script>
+
+</body>
+</html>
