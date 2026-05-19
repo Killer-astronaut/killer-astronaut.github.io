@@ -1,0 +1,22 @@
+# Xcode
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+.build/
+
+# Swift Package Manager
+Package.resolved
+.swiftpm/
+
+# CocoaPods (not used, but just in case)
+Pods/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

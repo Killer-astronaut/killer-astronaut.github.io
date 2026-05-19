@@ -1,0 +1,214 @@
+name: LoveBirds
+options:
+  bundleIdPrefix: com.lokei.lovebirds
+  deploymentTarget:
+    iOS: "17.0"
+    watchOS: "10.0"
+  developmentLanguage: en
+  createIntermediateGroups: true
+  generateEmptyDirectories: false
+  groupSortPosition: top
+  xcodeVersion: "15.4"
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    CURRENT_PROJECT_VERSION: 1
+    MARKETING_VERSION: "1.0"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+
+packages:
+  LoveBirdsKit:
+    path: Packages/LoveBirdsKit
+
+targets:
+
+  LoveBirds:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources/iOS
+        excludes:
+          - "**/Info.plist"
+          - "**/*.entitlements"
+      - path: Resources/Products.storekit
+        buildPhase: resources
+    info:
+      path: Sources/iOS/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Love Birds
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UIApplicationSupportsIndirectInputEvents: true
+        UIRequiresFullScreen: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIBackgroundModes:
+          - remote-notification
+          - processing
+        NSHealthShareUsageDescription: "Love Birds reads your live heart rate only while you press \"Share Pulse\" so your partner can feel it on their wrist. Nothing is stored."
+        NSHealthUpdateUsageDescription: "Love Birds does not write health data. This permission is requested only so heart-rate reading is available."
+        NSMicrophoneUsageDescription: "Hold to record a short voice ping to send to your partner. Voice pings are end-to-end encrypted and auto-delete after they play."
+        NSLocationWhenInUseUsageDescription: "Used only for the optional \"home zone\" dot on the partner map. Coarse-rounded — never a live location or a route."
+        NSUserActivityTypes:
+          - com.lokei.lovebirds.send-heart
+        NSSupportsLiveActivities: true
+        BGTaskSchedulerPermittedIdentifiers:
+          - com.lokei.lovebirds.refresh
+    entitlements:
+      path: Sources/iOS/Resources/LoveBirds.entitlements
+      properties:
+        com.apple.developer.icloud-services:
+          - CloudKit
+        com.apple.developer.icloud-container-identifiers:
+          - iCloud.com.lokei.lovebirds
+        com.apple.developer.ubiquity-kvstore-identifier: $(TeamIdentifierPrefix)com.lokei.lovebirds
+        com.apple.security.application-groups:
+          - group.com.lokei.lovebirds
+        aps-environment: development
+        com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.access:
+          - health-records
+        com.apple.developer.applesignin:
+          - Default
+    dependencies:
+      - package: LoveBirdsKit
+      - target: LoveBirdsWatch
+      - target: LoveBirdsWidget
+      - target: LoveBirdsMessages
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lokei.lovebirds
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        TARGETED_DEVICE_FAMILY: "1,2"
+        SUPPORTS_MACCATALYST: NO
+
+  LoveBirdsWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - path: Sources/Watch
+        excludes:
+          - "**/Info.plist"
+          - "**/*.entitlements"
+    info:
+      path: Sources/Watch/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Love Birds
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        WKApplication: true
+        WKAppCategory: "social-networking"
+        WKWatchOnly: false
+        WKBackgroundModes:
+          - remote-notification
+        WKSupportsLocationTracking: false
+        NSHealthShareUsageDescription: "Love Birds reads your live heart rate only while you press \"Share Pulse\" so your partner can feel it on their wrist. Nothing is stored."
+        NSMicrophoneUsageDescription: "Hold to record a short voice ping. Auto-deletes after it plays."
+    entitlements:
+      path: Sources/Watch/Resources/LoveBirdsWatch.entitlements
+      properties:
+        com.apple.developer.icloud-services:
+          - CloudKit
+        com.apple.developer.icloud-container-identifiers:
+          - iCloud.com.lokei.lovebirds
+        com.apple.security.application-groups:
+          - group.com.lokei.lovebirds
+        aps-environment: development
+        com.apple.developer.healthkit: true
+    dependencies:
+      - package: LoveBirdsKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lokei.lovebirds.watchkitapp
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        TARGETED_DEVICE_FAMILY: "4"
+
+  LoveBirdsWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Sources/Widget
+        excludes:
+          - "**/Info.plist"
+          - "**/*.entitlements"
+    info:
+      path: Sources/Widget/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Love Birds
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: Sources/Widget/Resources/LoveBirdsWidget.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.lokei.lovebirds
+        com.apple.developer.icloud-services:
+          - CloudKit
+        com.apple.developer.icloud-container-identifiers:
+          - iCloud.com.lokei.lovebirds
+    dependencies:
+      - package: LoveBirdsKit
+      - sdk: WidgetKit.framework
+      - sdk: SwiftUI.framework
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lokei.lovebirds.widget
+        SKIP_INSTALL: YES
+
+  LoveBirdsMessages:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: Sources/iMessage
+        excludes:
+          - "**/Info.plist"
+          - "**/*.entitlements"
+    info:
+      path: Sources/iMessage/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: Love Birds
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.message-payload-provider
+          NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).MessagesViewController
+    entitlements:
+      path: Sources/iMessage/Resources/LoveBirdsMessages.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.lokei.lovebirds
+    dependencies:
+      - package: LoveBirdsKit
+      - sdk: Messages.framework
+      - sdk: SwiftUI.framework
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lokei.lovebirds.messages
+        SKIP_INSTALL: YES
+
+schemes:
+  LoveBirds:
+    build:
+      targets:
+        LoveBirds: all
+        LoveBirdsWatch: all
+        LoveBirdsWidget: all
+        LoveBirdsMessages: all
+    run:
+      config: Debug
+      storeKitConfiguration: Resources/Products.storekit
+    test:
+      config: Debug
+    archive:
+      config: Release
+  LoveBirdsWatch:
+    build:
+      targets:
+        LoveBirdsWatch: all
+    run:
+      config: Debug

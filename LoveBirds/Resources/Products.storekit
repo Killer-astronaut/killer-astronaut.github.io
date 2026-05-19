@@ -1,0 +1,79 @@
+{
+  "identifier" : "lovebirds-storekit",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "tip-small",
+      "localizations" : [
+        {
+          "description" : "Buy us a coffee. Everything is unlocked already; this is just a thank-you.",
+          "displayName" : "Coffee",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.lokei.lovebirds.tip.small",
+      "referenceName" : "Tip - Coffee",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "tip-medium",
+      "localizations" : [
+        {
+          "description" : "Buy us lunch. The kind of tip that makes our week.",
+          "displayName" : "Lunch",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.lokei.lovebirds.tip.medium",
+      "referenceName" : "Tip - Lunch",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "tip-large",
+      "localizations" : [
+        {
+          "description" : "Help fund a date night. This is exceptionally generous.",
+          "displayName" : "Date night",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.lokei.lovebirds.tip.large",
+      "referenceName" : "Tip - Date night",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "tip-generous",
+      "localizations" : [
+        {
+          "description" : "Outrageously kind. Thank you. Really.",
+          "displayName" : "Generous tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.lokei.lovebirds.tip.generous",
+      "referenceName" : "Tip - Generous",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "0",
+    "_developerTeamID" : "",
+    "_failTransactionsEnabled" : false,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : []
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
