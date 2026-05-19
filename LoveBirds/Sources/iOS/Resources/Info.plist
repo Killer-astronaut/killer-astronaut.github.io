@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleDisplayName</key>
+    <string>Love Birds</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>$(PRODUCT_NAME)</string>
+    <key>CFBundlePackageType</key>
+    <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(MARKETING_VERSION)</string>
+    <key>CFBundleVersion</key>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <false/>
+    </dict>
+    <key>UILaunchScreen</key>
+    <dict>
+        <key>UIColorName</key>
+        <string>LaunchBackground</string>
+    </dict>
+    <key>UIRequiredDeviceCapabilities</key>
+    <array>
+        <string>armv7</string>
+    </array>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+        <string>processing</string>
+    </array>
+    <key>NSSupportsLiveActivities</key>
+    <true/>
+    <key>NSHealthShareUsageDescription</key>
+    <string>Love Birds reads your live heart rate only while you press "Share Pulse" so your partner can feel it on their wrist. Nothing is stored.</string>
+    <key>NSHealthUpdateUsageDescription</key>
+    <string>Love Birds does not write health data. This permission is requested only so heart-rate reading is available.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Hold to record a short voice ping to send to your partner. Voice pings are end-to-end encrypted and auto-delete after they play.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Used only for the optional "home zone" dot on the partner map. Coarse-rounded — never a live location or a route.</string>
+    <key>NSUserActivityTypes</key>
+    <array>
+        <string>com.lokei.lovebirds.send-heart</string>
+    </array>
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>com.lokei.lovebirds.refresh</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>com.lokei.lovebirds</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>lovebirds</string>
+            </array>
+        </dict>
+    </array>
+</dict>
+</plist>

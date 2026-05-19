@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+    <key>CFBundleDisplayName</key>
+    <string>Love Birds</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>$(PRODUCT_NAME)</string>
+    <key>CFBundlePackageType</key>
+    <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(MARKETING_VERSION)</string>
+    <key>CFBundleVersion</key>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
+    <key>WKApplication</key>
+    <true/>
+    <key>WKAppCategory</key>
+    <string>social-networking</string>
+    <key>WKWatchOnly</key>
+    <false/>
+    <key>WKCompanionAppBundleIdentifier</key>
+    <string>com.lokei.lovebirds</string>
+    <key>WKBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+    </array>
+    <key>WKSupportsLocationTracking</key>
+    <false/>
+    <key>NSHealthShareUsageDescription</key>
+    <string>Love Birds reads your live heart rate only while you press "Share Pulse" so your partner can feel it on their wrist. Nothing is stored.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Hold to record a short voice ping. Auto-deletes after it plays.</string>
+</dict>
+</plist>

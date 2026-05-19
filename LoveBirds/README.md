@@ -18,14 +18,13 @@ This folder contains the Xcode project source. Built around an XcodeGen project 
 
 You need: macOS, Xcode 15.4+, an Apple Developer team for signing.
 
-```bash
-# Once
-brew install xcodegen
+The `LoveBirds.xcodeproj` is committed, so the fast path is:
 
-# In this directory
-xcodegen generate
+```bash
 open LoveBirds.xcodeproj
 ```
+
+(If you ever want to regenerate the project from scratch — say after editing `project.yml` or `generate_xcodeproj.rb` — you can either run `xcodegen generate` if you have it installed (`brew install xcodegen`), or run `ruby generate_xcodeproj.rb` which uses the `xcodeproj` Ruby gem.)
 
 Then in Xcode:
 
