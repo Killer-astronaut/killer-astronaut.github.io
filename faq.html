@@ -12,63 +12,78 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="FAQ — Lokei">
     <meta name="twitter:description" content="Frequently asked questions about Lokei, private AI for Mac with on-device and local backend options.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300FFCC'/%3E%3Cstop offset='100%25' stop-color='%230066FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z' fill='url(%23g)'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --teal: #00FFCC; --blue: #00CCFF; --dark: #0d1117; --darker: #000000; }
         html { scroll-behavior: smooth; }
         body { background: var(--darker); color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; line-height: 1.7; overflow-x: hidden; }
+
+        /* NAV */
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid #111; }
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo-text { font-size: 18px; font-weight: 200; letter-spacing: 8px; color: white; }
         .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-        .nav-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .nav-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .nav-links a:hover { color: white; }
-        .nav-download { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black !important; padding: 8px 20px; border-radius: 20px; font-weight: 600 !important; font-size: 13px !important; }
-        .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-        .nav-hamburger span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s; }
-        .nav-mobile { display: none; position: fixed; top: 65px; left: 0; right: 0; background: rgba(0,0,0,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid #222; padding: 20px 40px 28px; z-index: 99; flex-direction: column; gap: 20px; }
-        .nav-mobile.open { display: flex; }
-        .nav-mobile a { color: #888; text-decoration: none; font-size: 16px; transition: color 0.2s; }
-        .nav-mobile a:hover { color: white; }
-        .nav-mobile .nav-download { text-align: center; padding: 12px 20px; font-size: 15px !important; }
-        @media (max-width: 700px) { nav { padding: 16px 20px; } .nav-links { display: none; } .nav-hamburger { display: flex; } .page-hero { padding: 120px 20px 60px; } .content { padding: 0 20px 80px; } .faq-categories { gap: 12px; } }
-        .page-hero { padding: 160px 40px 80px; text-align: center; position: relative; overflow: hidden; }
-        .hero-glow { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(0,204,255,0.06) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-        .page-hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 100; letter-spacing: 8px; margin-bottom: 16px; background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .page-hero p { color: #555; font-size: 16px; letter-spacing: 1px; }
-        .content { max-width: 780px; margin: 0 auto; padding: 0 40px 100px; }
-        .faq-categories { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px; }
-        .faq-cat { background: transparent; border: 1px solid #222; border-radius: 20px; padding: 8px 20px; font-size: 13px; color: #666; cursor: pointer; transition: all 0.2s; font-family: inherit; }
-        .faq-cat.active, .faq-cat:hover { border-color: rgba(0,204,255,0.4); color: white; background: rgba(0,204,255,0.06); }
-        .faq-group { margin-bottom: 48px; }
-        .faq-group-title { font-size: 11px; letter-spacing: 4px; color: var(--teal); text-transform: uppercase; margin-bottom: 20px; }
-        .faq-item { border: 1px solid #111; border-radius: 12px; margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s; }
-        .faq-item:hover { border-color: #1e1e1e; }
-        .faq-item.open { border-color: rgba(0,204,255,0.2); }
-        .faq-q { padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; width: 100%; background: none; border: none; text-align: left; font-family: inherit; }
-        .faq-q-text { font-size: 15px; font-weight: 400; color: white; }
-        .faq-icon { width: 20px; height: 20px; border-radius: 50%; border: 1px solid #333; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
-        .faq-item.open .faq-icon { background: linear-gradient(135deg, var(--teal), var(--blue)); border-color: transparent; }
-        .faq-icon svg { transition: transform 0.2s; }
-        .faq-item.open .faq-icon svg { transform: rotate(45deg); }
-        .faq-a { display: none; padding: 0 24px 20px; color: #666; font-size: 14px; line-height: 1.8; }
-        .faq-a a { color: var(--blue); text-decoration: none; }
-        .faq-a a:hover { text-decoration: underline; }
-        .faq-item.open .faq-a { display: block; }
-        .faq-a code { background: #0d1117; border: 1px solid #222; border-radius: 4px; padding: 2px 6px; font-family: 'SF Mono', Menlo, monospace; font-size: 12px; color: var(--teal); }
-        .still-stuck { background: #0d1117; border: 1px solid #1a1a2a; border-radius: 16px; padding: 40px; text-align: center; margin-top: 56px; }
-        .still-stuck h3 { font-size: 20px; font-weight: 300; margin-bottom: 12px; color: white; }
-        .still-stuck p { color: #666; font-size: 15px; margin-bottom: 20px; }
-        .still-stuck a { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; font-weight: 600; font-size: 15px; }
-        footer { padding: 40px; border-top: 1px solid #111; }
+        .nav-links a.active { color: white; }
+        .nav-cta { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black !important; padding: 8px 20px; border-radius: 20px; font-weight: 600; font-size: 13px; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+        .hamburger span { width: 22px; height: 2px; background: white; }
+        .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.97); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { color: white; text-decoration: none; font-size: 24px; font-weight: 300; letter-spacing: 2px; }
+        .mobile-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: white; font-size: 32px; cursor: pointer; }
+
+        /* HERO */
+        .faq-hero { padding: 160px 40px 80px; text-align: center; }
+        .faq-hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 200; letter-spacing: clamp(6px, 1.5vw, 14px); margin-bottom: 20px; }
+        .faq-hero p { font-size: 18px; color: #888; font-weight: 300; }
+
+        /* FAQ CONTENT */
+        .faq-content { max-width: 740px; margin: 0 auto; padding: 0 40px 100px; }
+        .faq-category { margin-bottom: 56px; }
+        .faq-category-title { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--teal); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid #1a1a2a; }
+        .faq-item { border-bottom: 1px solid #0d1117; }
+        .faq-question { width: 100%; background: none; border: none; color: white; text-align: left; padding: 20px 0; font-size: 16px; font-weight: 500; font-family: inherit; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; transition: color 0.2s; }
+        .faq-question:hover { color: var(--teal); }
+        .faq-question .arrow { font-size: 18px; color: #333; transition: transform 0.3s, color 0.3s; flex-shrink: 0; }
+        .faq-item.open .faq-question .arrow { transform: rotate(45deg); color: var(--teal); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+        .faq-item.open .faq-answer { max-height: 600px; padding-bottom: 24px; }
+        .faq-answer p { color: #888; font-size: 15px; line-height: 1.9; }
+        .faq-answer a { color: var(--teal); text-decoration: none; }
+        .faq-answer a:hover { text-decoration: underline; }
+        .dev-tag { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(135deg, var(--teal), var(--blue)); color: black; padding: 2px 8px; border-radius: 8px; font-weight: 700; margin-left: 8px; vertical-align: middle; }
+
+        /* CONTACT */
+        .contact-box { text-align: center; padding: 48px 32px; background: #0d1117; border: 1px solid #1a1a2a; border-radius: 16px; max-width: 500px; margin: 0 auto; }
+        .contact-box h3 { font-size: 20px; font-weight: 300; margin-bottom: 12px; }
+        .contact-box p { color: #888; font-size: 15px; margin-bottom: 16px; }
+        .contact-box a { color: var(--teal); text-decoration: none; font-size: 16px; font-weight: 500; }
+        .contact-box a:hover { text-decoration: underline; }
+
+        /* FOOTER */
+        footer { padding: 60px 40px 40px; border-top: 1px solid #111; }
         .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .footer-bottom p { color: #333; font-size: 12px; }
-        .footer-bottom a { color: #333; text-decoration: none; }
+        .footer-bottom p { color: #333; font-size: 13px; }
+        .footer-bottom a { color: #444; text-decoration: none; font-size: 13px; }
+        .footer-bottom a:hover { color: white; }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .faq-hero { padding: 120px 24px 60px; }
+            .faq-content { padding: 0 24px 60px; }
+            footer { padding: 40px 24px 30px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
     <a href="index.html" class="nav-logo">
         <svg width="28" height="28" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="nlg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z" fill="url(#nlg)"/><line x1="50" y1="12" x2="50" y2="88" stroke="white" stroke-width="2" opacity="0.2"/></svg>
@@ -77,285 +92,285 @@
     <ul class="nav-links">
         <li><a href="index.html#features">Features</a></li>
         <li><a href="index.html#how">How It Works</a></li>
-        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="faq.html" class="active">FAQ</a></li>
         <li><a href="privacy.html">Privacy</a></li>
-        <li><a href="index.html#download" class="nav-download">Launch Pending</a></li>
+        <li><a href="https://apps.apple.com/app/id6762427782" class="nav-cta">Mac App Store</a></li>
     </ul>
-
-    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
-
-<div class="nav-mobile" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('active')" aria-label="Close menu">&times;</button>
     <a href="index.html#features">Features</a>
     <a href="index.html#how">How It Works</a>
     <a href="faq.html">FAQ</a>
     <a href="privacy.html">Privacy</a>
-    <a href="index.html#download" class="nav-download">Launch Pending</a>
+    <a href="https://apps.apple.com/app/id6762427782">Mac App Store</a>
 </div>
 
-<script>
-    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
-</script>
-
-<section class="page-hero">
-    <div class="hero-glow"></div>
+<!-- HERO -->
+<section class="faq-hero">
     <h1>FAQ</h1>
     <p>Everything you need to know about Lokei.</p>
 </section>
 
-<div class="content">
+<!-- FAQ CONTENT -->
+<div class="faq-content">
 
-    <div class="faq-group">
-        <div class="faq-group-title">Getting Started</div>
+    <!-- GETTING STARTED -->
+    <div class="faq-category">
+        <div class="faq-category-title">Getting Started</div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">What is Lokei?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                What is Lokei? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">Lokei is a private AI assistant that lives in your Mac's menu bar. On supported Macs it can use Apple Intelligence for on-device responses, and it also supports local Ollama models plus optional OpenAI-compatible providers you configure.</div>
+            <div class="faq-answer">
+                <p>Lokei is a private AI assistant that lives in your Mac's menu bar. On supported Macs it can use Apple Intelligence for on-device responses, and it also supports local Ollama models plus optional OpenAI-compatible providers you configure.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">What do I need to use Lokei?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                What do I need to use Lokei? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">You need a Mac running macOS 13 Ventura or later. Apple Intelligence support depends on your Mac model, macOS version, and Apple Intelligence availability. If you choose the Ollama backend, you also need <a href="https://ollama.com" target="_blank" rel="noopener noreferrer">Ollama</a> installed and running.</div>
+            <div class="faq-answer">
+                <p>You need a Mac running macOS 13 Ventura or later. Apple Intelligence support depends on your Mac model, macOS version, and Apple Intelligence availability. If you choose the Ollama backend, you also need <a href="https://ollama.com">Ollama</a> installed and running.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Does Lokei work on my Mac?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Does Lokei work on my Mac? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">Lokei works on any Mac running macOS 13 Ventura or later, including both Intel and Apple Silicon Macs. Apple Intelligence is only offered on Macs that support it; other Macs keep the Ollama-first setup flow.</div>
+            <div class="faq-answer">
+                <p>Lokei works on any Mac running macOS 13 Ventura or later, including both Intel and Apple Silicon Macs. Apple Intelligence is only offered on Macs that support it; other Macs keep the Ollama-first setup flow.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Does Lokei work with iPhone or iOS?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                How do I get started? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">Lokei is Mac-first today, and an iOS companion is in development. The iPhone app is being built around the same privacy posture: Apple Intelligence on eligible devices, local-network AI when you use your Mac as the server, and no Lokei cloud in the middle. It is not on the App Store yet.</div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">How do I get started?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            </button>
-            <div class="faq-a">
-                When Lokei launches on the Mac App Store, install it and follow onboarding. Supported Macs can start with Apple Intelligence. If you choose Ollama, Lokei shows the Ollama download link and model setup steps inline, then lets you manage models from Settings &rarr; AI &amp; Models.
+            <div class="faq-answer">
+                <p>Install Lokei from the <a href="https://apps.apple.com/app/id6762427782">Mac App Store</a> and follow onboarding. Supported Macs can start with Apple Intelligence. If you choose Ollama, Lokei shows the Ollama download link and model setup steps inline, then lets you manage models from Settings → AI &amp; Models.</p>
             </div>
         </div>
     </div>
 
-    <div class="faq-group">
-        <div class="faq-group-title">Privacy & Data</div>
+    <!-- PRIVACY & DATA -->
+    <div class="faq-category">
+        <div class="faq-category-title">Privacy &amp; Data</div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Is Lokei really private?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Is Lokei really private? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">Lokei is private by architecture. With Apple Intelligence or local Ollama, processing stays on your Mac. If you configure a remote provider, prompts sent to that provider leave your Mac and are governed by that provider's terms, but Lokei still does not collect them.</div>
+            <div class="faq-answer">
+                <p>Lokei is built around local-first privacy. With Apple Intelligence or local Ollama, processing stays on your Mac. If you configure a remote provider, prompts sent to that provider leave your Mac and are governed by that provider's terms — but Lokei itself still does not collect them. Lokei does not operate chat servers, does not require an account, and does not include analytics or tracking.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Does Lokei collect any data?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Does Lokei collect any data? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">No. Lokei collects zero data: no conversations, no usage stats, no crash reports sent to us, no analytics, nothing. Your chat history is stored locally by default. If you enable iCloud sync, it syncs through your Apple iCloud account, not through Lokei servers.</div>
+            <div class="faq-answer">
+                <p>Lokei collects zero data on Lokei servers: no conversations, no usage stats, no analytics, nothing. Your chat history, settings, and project context are stored locally on your device. If you enable iCloud sync, that data syncs through your Apple iCloud account — not through Lokei servers.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Does Lokei require an account?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Does Lokei require an account? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">No Lokei account is required. App Store distribution will be handled by Apple when Lokei launches. A separate provider account is only relevant if you choose to configure a remote provider yourself.</div>
+            <div class="faq-answer">
+                <p>No Lokei account is required. App Store distribution is handled by Apple. A separate provider account is only relevant if you choose to configure a remote provider yourself.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Can I use Lokei without an internet connection?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Can I use Lokei without an internet connection? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">Yes, with local or on-device backends. Apple Intelligence availability is handled by macOS, and Ollama works offline after Ollama and your models are installed. Remote providers require internet access.</div>
-        </div>
-    </div>
-
-    <div class="faq-group">
-        <div class="faq-group-title">AI Models</div>
-
-        <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Which AI model should I use?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            </button>
-            <div class="faq-a">If you use Apple Intelligence, macOS manages the model. If you use Ollama, it depends on your Mac's RAM: smaller 1-3B models are best for 8GB Macs, while 16GB+ Macs can usually run larger 7B models. Lokei's Model Library shows RAM requirements for every Ollama model.</div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Do I need to use Terminal to install models?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            </button>
-            <div class="faq-a">No. Apple Intelligence needs no model download inside Lokei. For Ollama, Lokei includes a built-in Model Library where you can browse and download models with a single click. Models are rated by RAM requirement so you know what should run well on your Mac.</div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">How much storage do models take?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            </button>
-            <div class="faq-a">Small models (1-3B parameters) are typically 1–2 GB. Medium models (7B) are around 4–5 GB. Lokei's Model Library shows the exact download size for each model before you download it. Models are stored in Ollama's directory, not inside the Lokei app itself.</div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Can I use models I've already downloaded in Ollama?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            </button>
-            <div class="faq-a">Yes. Lokei automatically detects all models installed through Ollama and shows them in the model picker. If you've been using Ollama before Lokei, all your existing models are immediately available.</div>
+            <div class="faq-answer">
+                <p>Yes, with local or on-device backends. Apple Intelligence availability is handled by macOS, and Ollama works offline after Ollama and your models are installed. Remote providers require internet access.</p>
+            </div>
         </div>
     </div>
 
-    <div class="faq-group">
-        <div class="faq-group-title">Features & Usage</div>
+    <!-- AI MODELS -->
+    <div class="faq-category">
+        <div class="faq-category-title">AI Models</div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">How do I open Lokei quickly?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Which AI model should I use? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">Click the Lokei leaf icon in your menu bar — it's always there, ready in one click. For longer sessions, expand Lokei into a full resizable window with a sidebar for managing multiple conversations.</div>
+            <div class="faq-answer">
+                <p>If you use Apple Intelligence, macOS manages the model. If you use Ollama, it depends on your Mac's RAM: smaller 1–3B models are best for 8 GB Macs, while 16 GB+ Macs can usually run larger 7B models. Lokei's Model Library shows RAM requirements for every Ollama model.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">What are Specialist Modes?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Do I need to use Terminal to install models? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">Specialist Modes (called Presets in the app) are different system prompts that tune Lokei's personality and behavior for specific tasks. Built-in modes include General, Code Helper, Debug Mode, Explain It, Writing, and Brainstorm. You can also create unlimited custom modes in Settings → Presets.</div>
+            <div class="faq-answer">
+                <p>No. Apple Intelligence needs no model download inside Lokei. For Ollama, Lokei includes a built-in Model Library where you can browse and download models with a single click. Models are rated by RAM requirement so you know what should run well on your Mac.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">What is Project Context?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                How much storage do models take? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">Project Context lets you tell Lokei about your project once — your tech stack, coding style, architecture decisions — and Lokei quietly includes that knowledge with every message you send. No more repeating yourself every conversation. Set it up in Settings → Context.</div>
+            <div class="faq-answer">
+                <p>Small models (1–3B parameters) are typically 1–2 GB. Medium models (7B) are around 4–5 GB. Lokei's Model Library shows the exact download size for each model before you download it. Models are stored in Ollama's directory, not inside the Lokei app itself.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Can I share files with Lokei?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Can I use models I've already downloaded in Ollama? <span class="arrow">+</span>
             </button>
-            <div class="faq-a">Yes. You can drag and drop files onto Lokei's chat window, click the file icon in the input bar, attach images, or paste clipboard content. Lokei supports code files, text files, PDFs, images, and more. Large files are automatically truncated to keep responses fast.</div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Can I export my conversations?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            </button>
-            <div class="faq-a">Yes. Click the export icon in the header to save your current conversation as Markdown, HTML, or JSON. This works in both the menu bar popover and the expanded full window.</div>
+            <div class="faq-answer">
+                <p>Yes. Lokei automatically detects all models installed through Ollama and shows them in the model picker. If you've been using Ollama before Lokei, all your existing models are immediately available.</p>
+            </div>
         </div>
     </div>
 
-    <div class="faq-group">
-        <div class="faq-group-title">Availability & Pricing</div>
+    <!-- ADVISOR MODE & ADAPTIVE RESPONSE -->
+    <div class="faq-category">
+        <div class="faq-category-title">Advisor Mode &amp; Adaptive Response</div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Is it really a one-time purchase?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                What is Advisor Mode? <span class="dev-tag">In development</span> <span class="arrow">+</span>
             </button>
-            <div class="faq-a">The plan is a one-time Mac App Store purchase with no Lokei subscription. Final pricing will be shown on the App Store when Lokei launches.</div>
+            <div class="faq-answer">
+                <p>Advisor Mode lets Lokei escalate from a fast model to a stronger model only when needed — for deeper reasoning, confidence checks, complex coding decisions, or high-stakes tradeoffs. Use a fast model for everyday work and escalate when the moment calls for it. This feature is in development.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Do updates cost extra?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                What is Adaptive Response Mode? <span class="dev-tag">In development</span> <span class="arrow">+</span>
             </button>
-            <div class="faq-a">Updates will be delivered through the Mac App Store after launch. Any final purchase and update terms will be shown in the App Store listing.</div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Are there any ongoing costs?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            </button>
-            <div class="faq-a">Lokei itself is planned without a subscription. Apple Intelligence and Ollama do not add per-message API fees. If you configure a remote provider, that provider may have its own pricing or usage limits.</div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Can I use Lokei on multiple Macs?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            </button>
-            <div class="faq-a">After the Mac App Store launch, Apple's App Store policies determine use across Macs associated with your Apple ID, including any applicable Family Sharing support.</div>
+            <div class="faq-answer">
+                <p>Adaptive Response Mode is a planned feature where Lokei privately detects the kind of help you seem to need and adjusts the response style — whether that's a quick fix, a calm explanation, deep analysis, or a focused next step. All detection happens on your device with no profile built in the cloud. This feature is in development.</p>
+            </div>
         </div>
     </div>
 
-    <div class="faq-group">
-        <div class="faq-group-title">Troubleshooting</div>
+    <!-- iOS COMPANION -->
+    <div class="faq-category">
+        <div class="faq-category-title">iOS Companion</div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Lokei says Ollama isn't running. What do I do?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Does Lokei work on iPhone? <span class="dev-tag">In development</span> <span class="arrow">+</span>
             </button>
-            <div class="faq-a">This only applies if you choose the Ollama backend. Open your Applications folder and launch the Ollama app, or run <code>ollama serve</code> in Terminal. Once Ollama is running, click "Try Again" in Lokei. If you haven't installed Ollama yet, download it from <a href="https://ollama.com" target="_blank" rel="noopener noreferrer">ollama.com</a>.</div>
+            <div class="faq-answer">
+                <p>An iOS companion app is in development. It's being built around the same privacy posture: Apple Intelligence on eligible devices, local-network AI when you use your Mac as the server, and no Lokei cloud in the middle. It is not on the App Store yet. Availability, features, and requirements may change before release.</p>
+            </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">Responses are slow. How do I speed things up?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                How will iPhone connect to my Mac? <span class="dev-tag">In development</span> <span class="arrow">+</span>
             </button>
-            <div class="faq-a">For Ollama, switch to a smaller model; 3B parameter models are significantly faster than 7B models, especially on 8GB RAM Macs. Long conversations can slow down over time, so use "Summarize &amp; Compress" in the chat or start another chat to speed things back up. Remote provider speed depends on the provider and your connection.</div>
-        </div>
-
-
-        <div class="faq-item">
-            <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-                <span class="faq-q-text">How do I contact support?</span>
-                <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
-            </button>
-            <div class="faq-a">Email us at <a href="mailto:hello@getlokei.com">hello@getlokei.com</a>. We're a small team and we read every message.</div>
+            <div class="faq-answer">
+                <p>The planned approach is for your iPhone to connect to Ollama or LM Studio running on your Mac over your local Wi-Fi network. This keeps your AI processing on hardware you control without routing through external servers. Details may change before release.</p>
+            </div>
         </div>
     </div>
 
-    <div class="still-stuck">
+    <!-- PRICING & OWNERSHIP -->
+    <div class="faq-category">
+        <div class="faq-category-title">Pricing &amp; Ownership</div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Is Lokei a one-time purchase? <span class="arrow">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>Lokei is planned around ownership, not subscriptions. Final pricing is shown on the App Store. There is no Lokei subscription planned.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Are there any ongoing costs? <span class="arrow">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>Lokei itself has no subscription. Apple Intelligence and Ollama do not add per-message API fees. If you configure a remote provider, that provider may have its own pricing or usage limits. Optional remote providers may have their own pricing.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Can I use Lokei on multiple Macs? <span class="arrow">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>Apple's App Store policies determine use across Macs associated with your Apple ID, including any applicable Family Sharing support.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TROUBLESHOOTING -->
+    <div class="faq-category">
+        <div class="faq-category-title">Troubleshooting</div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Lokei says Ollama isn't running. What do I do? <span class="arrow">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>This only applies if you choose the Ollama backend. Open your Applications folder and launch the Ollama app, or run <code style="color:var(--teal); background:#0d1117; padding:2px 6px; border-radius:4px;">ollama serve</code> in Terminal. Once Ollama is running, click "Try Again" in Lokei. If you haven't installed Ollama yet, download it from <a href="https://ollama.com">ollama.com</a>.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Responses are slow. How do I speed things up? <span class="arrow">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>For Ollama, switch to a smaller model — 3B parameter models are significantly faster than 7B models, especially on 8 GB RAM Macs. Long conversations can slow down over time, so use "Summarize &amp; Compress" in the chat or start a new chat to speed things back up. Remote provider speed depends on the provider and your connection.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="faq-category">
+        <div class="faq-category-title">Support</div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                How do I contact support? <span class="arrow">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>Email us at <a href="mailto:hello@getlokei.com">hello@getlokei.com</a>. We're a small team and we read every message.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT BOX -->
+    <div class="contact-box">
         <h3>Still have a question?</h3>
         <p>We're happy to help. Reach out and we'll get back to you quickly.</p>
         <a href="mailto:hello@getlokei.com">hello@getlokei.com</a>
     </div>
-
 </div>
 
+<!-- FOOTER -->
 <footer>
     <div class="footer-bottom">
-        <p>© 2026 Lokei. All rights reserved.</p>
-        <p><a href="privacy.html">Privacy Policy</a> · <a href="faq.html">FAQ</a> · <a href="index.html">Home</a></p>
+        <p>&copy; 2026 Lokei. All rights reserved.</p>
+        <div>
+            <a href="privacy.html">Privacy Policy</a> · <a href="faq.html">FAQ</a> · <a href="index.html">Home</a>
+        </div>
     </div>
 </footer>
-
-<script>
-    function toggle(el) {
-        const item = el.parentElement;
-        const isOpen = item.classList.toggle('open');
-        el.setAttribute('aria-expanded', isOpen);
-    }
-</script>
 
 </body>
 </html>

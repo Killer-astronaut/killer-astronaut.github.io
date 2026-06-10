@@ -4,66 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy — Lokei</title>
-    <meta name="description" content="Lokei Privacy Policy. Lokei collects no data. Mac and iPhone data stays on device or on the local-network server you configure.">
+    <meta name="description" content="Lokei Privacy Policy. Plain privacy for a local-first AI app. Lokei does not collect conversations, analytics, or tracking data.">
     <meta property="og:title" content="Privacy Policy — Lokei">
-    <meta property="og:description" content="Lokei collects no data. Mac and iPhone data stays on device or on the local-network server you configure.">
+    <meta property="og:description" content="Plain privacy for a local-first AI app. Lokei does not collect conversations, analytics, or tracking data.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://getlokei.com/privacy.html">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Privacy Policy — Lokei">
-    <meta name="twitter:description" content="Lokei collects no data. Mac and iPhone data stays on device or on the local-network server you configure.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300FFCC'/%3E%3Cstop offset='100%25' stop-color='%230066FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z' fill='url(%23g)'/%3E%3C/svg%3E">
+    <meta name="twitter:description" content="Plain privacy for a local-first AI app. Lokei does not collect conversations, analytics, or tracking data.">
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --teal: #00FFCC; --blue: #00CCFF; --dark: #0d1117; --darker: #000000; }
         html { scroll-behavior: smooth; }
         body { background: var(--darker); color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; line-height: 1.7; overflow-x: hidden; }
+
+        /* NAV */
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid #111; }
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo-text { font-size: 18px; font-weight: 200; letter-spacing: 8px; color: white; }
         .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-        .nav-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .nav-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .nav-links a:hover { color: white; }
-        .nav-download { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black !important; padding: 8px 20px; border-radius: 20px; font-weight: 600 !important; font-size: 13px !important; }
-        .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-        .nav-hamburger span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s; }
-        .nav-mobile { display: none; position: fixed; top: 65px; left: 0; right: 0; background: rgba(0,0,0,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid #222; padding: 20px 40px 28px; z-index: 99; flex-direction: column; gap: 20px; }
-        .nav-mobile.open { display: flex; }
-        .nav-mobile a { color: #888; text-decoration: none; font-size: 16px; transition: color 0.2s; }
-        .nav-mobile a:hover { color: white; }
-        .nav-mobile .nav-download { text-align: center; padding: 12px 20px; font-size: 15px !important; }
-        @media (max-width: 700px) { nav { padding: 16px 20px; } .nav-links { display: none; } .nav-hamburger { display: flex; } .page-hero { padding: 120px 20px 60px; } .content { padding: 0 20px 80px; } }
-        .page-hero { padding: 160px 40px 80px; text-align: center; position: relative; overflow: hidden; }
-        .hero-glow { position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(0,204,255,0.06) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-        .page-hero h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 100; letter-spacing: 8px; margin-bottom: 16px; background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .page-hero p { color: #555; font-size: 16px; letter-spacing: 1px; }
-        .page-hero .badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; background: rgba(0,255,204,0.06); border: 1px solid rgba(0,204,255,0.2); border-radius: 30px; padding: 10px 24px; font-size: 13px; color: #888; }
-        .page-hero .badge span { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600; }
-        .content { max-width: 760px; margin: 0 auto; padding: 0 40px 100px; }
-        .section { margin-bottom: 56px; }
-        .section h2 { font-size: 22px; font-weight: 400; color: white; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #111; }
-        .section h2 span { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .section p { color: #666; font-size: 15px; line-height: 1.9; margin-bottom: 16px; }
-        .section ul { color: #666; font-size: 15px; line-height: 1.9; margin-left: 20px; margin-bottom: 16px; }
-        .section ul li { margin-bottom: 8px; }
-        .highlight-box { background: rgba(0,255,204,0.04); border: 1px solid rgba(0,204,255,0.15); border-radius: 16px; padding: 28px 32px; margin-bottom: 48px; }
-        .highlight-box p { color: #888; font-size: 16px; line-height: 1.8; margin: 0; }
-        .highlight-box p strong { color: white; background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .zero-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin: 32px 0; }
-        .zero-card { background: #0d1117; border: 1px solid #1a1a1a; border-radius: 12px; padding: 24px 20px; text-align: center; }
-        .zero-card .zero-num { font-size: 32px; font-weight: 200; background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 2px; margin-bottom: 6px; }
-        .zero-card .zero-label { font-size: 11px; color: #444; letter-spacing: 2px; text-transform: uppercase; }
-        .contact-box { background: #0d1117; border: 1px solid #1a1a2a; border-radius: 16px; padding: 32px; text-align: center; margin-top: 48px; }
-        .contact-box p { color: #666; font-size: 15px; margin-bottom: 16px; }
-        .contact-box a { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; font-weight: 600; font-size: 15px; }
-        footer { padding: 40px; border-top: 1px solid #111; }
+        .nav-links a.active { color: white; }
+        .nav-cta { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black !important; padding: 8px 20px; border-radius: 20px; font-weight: 600; font-size: 13px; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+        .hamburger span { width: 22px; height: 2px; background: white; }
+        .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.97); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { color: white; text-decoration: none; font-size: 24px; font-weight: 300; letter-spacing: 2px; }
+        .mobile-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: white; font-size: 32px; cursor: pointer; }
+
+        /* HERO */
+        .policy-hero { padding: 160px 40px 80px; text-align: center; }
+        .policy-hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 200; letter-spacing: clamp(6px, 1.5vw, 14px); margin-bottom: 16px; }
+        .policy-hero .last-updated { font-size: 13px; color: #555; margin-bottom: 20px; }
+        .policy-hero .subtitle { font-size: 18px; color: #888; font-weight: 300; max-width: 480px; margin: 0 auto 40px; }
+        .policy-hero .short-version { background: #0d1117; border: 1px solid #1a1a2a; border-radius: 16px; padding: 28px 32px; max-width: 700px; margin: 0 auto; text-align: left; color: #999; font-size: 15px; line-height: 1.9; }
+
+        /* STATS */
+        .stats-strip { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; padding: 40px; }
+        .stat { text-align: center; }
+        .stat .number { font-size: 48px; font-weight: 200; background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .stat .label { color: #555; font-size: 13px; margin-top: 8px; letter-spacing: 1px; }
+
+        /* CONTENT */
+        .policy-content { max-width: 740px; margin: 0 auto; padding: 40px 40px 100px; }
+        .policy-section { margin-bottom: 56px; }
+        .policy-section h2 { font-size: 24px; font-weight: 300; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #1a1a2a; }
+        .policy-section p { color: #999; font-size: 15px; line-height: 1.9; margin-bottom: 16px; }
+        .policy-section ul { list-style: none; margin: 16px 0; }
+        .policy-section ul li { color: #888; font-size: 14px; line-height: 1.8; padding: 6px 0 6px 20px; position: relative; }
+        .policy-section ul li::before { content: '—'; position: absolute; left: 0; color: #333; }
+        .policy-section strong { color: #ccc; font-weight: 500; }
+        .policy-section a { color: var(--teal); text-decoration: none; }
+        .policy-section a:hover { text-decoration: underline; }
+
+        /* CONTACT BOX */
+        .contact-box { text-align: center; padding: 48px 32px; background: #0d1117; border: 1px solid #1a1a2a; border-radius: 16px; max-width: 500px; margin: 0 auto; }
+        .contact-box p { color: #888; font-size: 15px; margin-bottom: 16px; }
+        .contact-box a { color: var(--teal); text-decoration: none; font-size: 16px; font-weight: 500; }
+        .contact-box a:hover { text-decoration: underline; }
+
+        /* FOOTER */
+        footer { padding: 60px 40px 40px; border-top: 1px solid #111; }
         .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .footer-bottom p { color: #333; font-size: 12px; }
-        .footer-bottom a { color: #333; text-decoration: none; }
+        .footer-bottom p { color: #333; font-size: 13px; }
+        .footer-bottom a { color: #444; text-decoration: none; font-size: 13px; }
+        .footer-bottom a:hover { color: white; }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .policy-hero { padding: 120px 24px 60px; }
+            .policy-hero .short-version { padding: 20px 24px; }
+            .stats-strip { gap: 32px; padding: 24px; }
+            .policy-content { padding: 24px 24px 60px; }
+            footer { padding: 40px 24px 30px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
     <a href="index.html" class="nav-logo">
         <svg width="28" height="28" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="nlg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z" fill="url(#nlg)"/><line x1="50" y1="12" x2="50" y2="88" stroke="white" stroke-width="2" opacity="0.2"/></svg>
@@ -73,118 +98,143 @@
         <li><a href="index.html#features">Features</a></li>
         <li><a href="index.html#how">How It Works</a></li>
         <li><a href="faq.html">FAQ</a></li>
-        <li><a href="privacy.html">Privacy</a></li>
-        <li><a href="index.html#download" class="nav-download">Launch Pending</a></li>
+        <li><a href="privacy.html" class="active">Privacy</a></li>
+        <li><a href="https://apps.apple.com/app/id6762427782" class="nav-cta">Mac App Store</a></li>
     </ul>
-    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
-    </button>
+    <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
-
-<div class="nav-mobile" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('active')" aria-label="Close menu">&times;</button>
     <a href="index.html#features">Features</a>
     <a href="index.html#how">How It Works</a>
     <a href="faq.html">FAQ</a>
     <a href="privacy.html">Privacy</a>
-    <a href="index.html#download" class="nav-download">Launch Pending</a>
+    <a href="https://apps.apple.com/app/id6762427782">Mac App Store</a>
 </div>
 
-<script>
-    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
-</script>
-
-<section class="page-hero">
-    <div class="hero-glow"></div>
+<!-- HERO -->
+<section class="policy-hero">
     <h1>PRIVACY POLICY</h1>
-    <p>Last updated May 2026</p>
-    <div class="badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span>Zero data collected by Lokei.</span> Plain privacy, no account required.
+    <p class="last-updated">Last updated June 2026</p>
+    <p class="subtitle">Plain privacy for a local-first AI app.</p>
+    <div class="short-version">
+        <strong>The short version:</strong> Lokei does not collect conversations, files, prompts, attachments, analytics, advertising identifiers, or tracking data. Your chat history, settings, presets, project context, and memory are stored locally on your device. When you send a message, it goes only to the AI backend you have selected — Apple Intelligence on-device, a local model server you run, or a remote provider you configure. Lokei does not operate a relay server and does not receive a copy of your data.
     </div>
 </section>
 
-<div class="content">
+<!-- STATS -->
+<div class="stats-strip">
+    <div class="stat"><div class="number">0</div><div class="label">Bytes collected</div></div>
+    <div class="stat"><div class="number">0</div><div class="label">Lokei servers</div></div>
+    <div class="stat"><div class="number">0</div><div class="label">Analytics</div></div>
+    <div class="stat"><div class="number">0</div><div class="label">Accounts required</div></div>
+</div>
 
-    <div class="highlight-box">
-        <p><strong>The short version:</strong> Lokei collects absolutely nothing. The Mac app and iPhone app do not use Lokei servers, accounts, analytics, ads, or trackers. With Apple Intelligence, requests are processed on device. With local server mode, prompts and attachments are sent only to the local/private network server you configure, such as Ollama or LM Studio on your Mac.</p>
+<!-- POLICY CONTENT -->
+<div class="policy-content">
+
+    <div class="policy-section">
+        <h2>1. Overview</h2>
+        <p>Lokei is a private AI assistant for Mac (with an iOS companion in development) that lives in the menu bar. It supports private, on-device, or local-first AI workflows through Apple Intelligence on supported devices, local model servers such as Ollama or LM Studio, and optional user-configured compatible providers. Lokei itself does not operate chat servers, does not require a Lokei account, does not sell data, does not run ads, and does not use tracking.</p>
     </div>
 
-    <div class="zero-grid">
-        <div class="zero-card"><div class="zero-num">0</div><div class="zero-label">Bytes collected</div></div>
-        <div class="zero-card"><div class="zero-num">0</div><div class="zero-label">Lokei servers</div></div>
-        <div class="zero-card"><div class="zero-num">0</div><div class="zero-label">Analytics</div></div>
-        <div class="zero-card"><div class="zero-num">0</div><div class="zero-label">Accounts required</div></div>
-    </div>
-
-    <div class="section">
-        <h2><span>1.</span> What We Collect</h2>
-        <p>Nothing. Lokei does not collect, transmit, store, or process any personal data on Lokei servers. Period.</p>
-        <p>Specifically, Lokei does not collect:</p>
+    <div class="policy-section">
+        <h2>2. What Lokei Collects</h2>
+        <p>Lokei does not collect, transmit, store, or process any personal data on Lokei-operated servers. Specifically, Lokei does not collect:</p>
         <ul>
-            <li>Your conversations or messages</li>
-            <li>Files or documents you share with Lokei</li>
+            <li>Your conversations, messages, or prompts</li>
+            <li>Files, documents, images, or attachments you share with Lokei</li>
             <li>Your name, email, or any account information</li>
-            <li>Usage statistics or analytics</li>
-            <li>Device information or identifiers</li>
-            <li>Crash reports sent to us</li>
+            <li>Usage statistics, analytics, or telemetry</li>
+            <li>Device identifiers or advertising IDs</li>
+            <li>Crash reports sent to Lokei</li>
             <li>Location data</li>
-            <li>Any other personal information</li>
         </ul>
     </div>
 
-    <div class="section">
-        <h2><span>2.</span> How Lokei Works</h2>
-        <p>Lokei is a private local-first AI assistant for Mac and iPhone. On supported devices, Apple Intelligence can process requests on device. In local server mode, Lokei talks to an OpenAI-compatible server running on your own Mac or local network, typically at <code style="background:#0d1117; border:1px solid #222; border-radius:4px; padding:2px 6px; font-family:monospace; font-size:13px; color:#00CCFF;">localhost:11434</code> on Mac or a private Wi-Fi address from iPhone.</p>
-        <p>The iPhone app accepts local/private server addresses only, such as localhost, .local hosts, 192.168.x.x, 10.x.x.x, 172.16-31.x.x, and local/private IPv6 addresses. Lokei does not operate a relay server and does not receive a copy of prompts, attachments, responses, recordings, or files.</p>
-    </div>
-
-    <div class="section">
-        <h2><span>3.</span> Data Storage</h2>
-        <p>Lokei stores your chat history, preferences, memory/project context, and app settings locally using the operating system's standard app storage. On Mac, that means the app's local macOS storage. On iPhone, that means the app's local iOS sandbox. This data:</p>
+    <div class="policy-section">
+        <h2>3. Local Data Stored on Your Device</h2>
+        <p>Lokei stores certain data locally on your device to provide its features. This data stays on your device unless you explicitly send a message to an AI backend:</p>
         <ul>
-            <li>Stays on your device unless you send a message to your configured local-network server</li>
-            <li>Is only accessible by you</li>
-            <li>Can be deleted at any time by uninstalling the app or clearing app data</li>
-            <li>Is not synced by Lokei to any cloud service</li>
+            <li><strong>Chat history</strong> — conversations are saved locally with smart titles for easy browsing</li>
+            <li><strong>Settings and preferences</strong> — your backend choice, theme, and app configuration</li>
+            <li><strong>Presets / Specialist Modes</strong> — built-in and custom system prompts</li>
+            <li><strong>Project Context / Memory</strong> — information you save about your projects for tailored responses</li>
         </ul>
-        <p>Attachments, imported files, images from Photos or Camera, custom backgrounds, microphone input, speech recognition results, and generated chat content are handled inside the app or sent to the selected on-device/local-network AI backend as part of the conversation you start.</p>
+        <p>If you enable iCloud sync, this local data syncs through your personal Apple iCloud account — not through Lokei servers. You can manage or delete synced data through your iCloud settings on your device.</p>
     </div>
 
-    <div class="section">
-        <h2><span>4.</span> Third Party Services</h2>
-        <p>Lokei does not integrate with any third-party analytics, advertising, or data collection services. There are no SDKs, trackers, or beacons embedded in the app.</p>
-        <p>Lokei can use Apple Intelligence on supported devices and local-network model servers you configure yourself, such as Ollama or LM Studio. Apple, Ollama, LM Studio, and any local server tools you run have their own terms and privacy policies. Lokei does not receive data from those services.</p>
-    </div>
-
-    <div class="section">
-        <h2><span>5.</span> Permissions</h2>
-        <p>The iPhone app may request permissions only when a feature needs them:</p>
+    <div class="policy-section">
+        <h2>4. When Data Leaves Your Device</h2>
+        <p>Data only leaves your device when you send a message, and only to the AI backend you have selected:</p>
         <ul>
-            <li><strong>Local Network:</strong> used to find or connect to your Mac or local AI server.</li>
-            <li><strong>Microphone and Speech Recognition:</strong> used for voice input and dictation.</li>
-            <li><strong>Photos, Camera, and Files:</strong> used when you choose images, documents, attachments, or custom backgrounds.</li>
+            <li><strong>Apple Intelligence</strong> — requests are processed on-device or through Apple's Private Cloud Compute infrastructure. Apple's system-level privacy behavior applies; see <a href="https://www.apple.com/privacy/">Apple's privacy policy</a> for details.</li>
+            <li><strong>Ollama, LM Studio, or local server</strong> — prompts and any attachments are sent to the server address you configure, typically running on your own Mac or local network.</li>
+            <li><strong>Remote / OpenAI-compatible provider</strong> — if you choose to configure a remote provider, prompts and attachments are sent to that provider's servers and are governed by that provider's terms and privacy policy.</li>
         </ul>
-        <p>Lokei does not use these permissions for tracking, analytics, advertising, or background data collection.</p>
+        <p>Lokei does not operate a relay server. Lokei does not receive, intercept, or store a copy of the data you send to any backend.</p>
     </div>
 
-    <div class="section">
-        <h2><span>6.</span> App Store Distribution</h2>
-        <p>Lokei is being prepared for Apple distribution on Mac and iPhone. When downloaded through Apple platforms, Apple handles download, purchase, and subscription records. Lokei does not receive your payment information. Apple's privacy policy governs Apple's handling of Apple account and purchase data.</p>
+    <div class="policy-section">
+        <h2>5. AI Backends and User-Configured Providers</h2>
+        <p>Lokei lets you choose where your AI runs. Each backend has its own privacy characteristics:</p>
+        <ul>
+            <li><strong>Apple Intelligence</strong> — managed by Apple on supported devices. Lokei does not control Apple's on-device or Private Cloud Compute processing.</li>
+            <li><strong>Local model servers</strong> — Ollama, LM Studio, and similar tools run on hardware you control. Lokei connects to the address you provide (typically localhost or a local network IP).</li>
+            <li><strong>Remote providers</strong> — optional. If you enter an API key and endpoint for a remote OpenAI-compatible provider, your prompts and attachments will be sent to that provider. The provider's terms govern how they handle your data. Lokei does not share your API keys with anyone.</li>
+        </ul>
     </div>
 
-    <div class="section">
-        <h2><span>7.</span> Children's Privacy</h2>
-        <p>Lokei does not collect any personal information from anyone, including children under the age of 13. Since we collect no data at all, there is nothing to protect.</p>
+    <div class="policy-section">
+        <h2>6. Permissions</h2>
+        <p>Lokei may request the following system permissions on Mac or iPhone, only when a feature requires them:</p>
+        <ul>
+            <li><strong>Local Network</strong> — to discover and connect to your Mac or a local AI server on your network</li>
+            <li><strong>Files</strong> — to import documents and files you choose to share with the chat</li>
+            <li><strong>Photos</strong> — to attach images you select from your photo library</li>
+            <li><strong>Camera</strong> — to capture images for use in the chat, if you choose</li>
+            <li><strong>Microphone</strong> — for voice input and dictation features</li>
+            <li><strong>Speech Recognition</strong> — to process voice input into text on-device</li>
+            <li><strong>Notifications</strong> — to alert you when background tasks complete</li>
+        </ul>
+        <p>Lokei does not use any of these permissions for tracking, analytics, advertising, or background data collection. Permissions are requested only when you use the related feature.</p>
     </div>
 
-    <div class="section">
-        <h2><span>8.</span> Changes to This Policy</h2>
-        <p>If we ever update this privacy policy, the updated version will be posted at this URL with a revised date. Given that our policy is "we collect nothing," we don't anticipate meaningful changes.</p>
+    <div class="policy-section">
+        <h2>7. Purchases and App Store Distribution</h2>
+        <p>Lokei is distributed through the Apple App Store. Apple handles all download, purchase, and payment processing. Lokei does not receive your payment information, Apple ID, or billing details. Apple's privacy policy governs Apple's handling of your App Store account and purchase data.</p>
     </div>
 
-    <div class="section">
-        <h2><span>9.</span> Contact</h2>
-        <p>Questions about this privacy policy? We're happy to answer them — though the answer to most data collection questions will be "we don't collect that."</p>
+    <div class="policy-section">
+        <h2>8. Third-Party Services and SDKs</h2>
+        <p>Lokei does not include third-party analytics SDKs, advertising frameworks, tracking pixels, or data-collection services of any kind.</p>
+        <p><strong>Crash reports:</strong> Lokei does not include third-party crash analytics. Apple may provide developers with crash and diagnostic information based on your Apple diagnostics sharing settings (Settings → Privacy &amp; Security → Analytics &amp; Improvements). This is managed by Apple, not by Lokei.</p>
+    </div>
+
+    <div class="policy-section">
+        <h2>9. Data Retention and Deletion</h2>
+        <p>Because Lokei does not collect data on Lokei servers, there is no server-side data to retain or delete.</p>
+        <p>For local data stored on your device:</p>
+        <ul>
+            <li>You can delete individual conversations, project context, and presets from within the app at any time</li>
+            <li>Uninstalling Lokei removes all local app data from your device</li>
+            <li>If you have enabled iCloud sync, you can remove synced Lokei data through your device's iCloud storage settings (Settings → [Your Name] → iCloud → Manage Storage)</li>
+        </ul>
+    </div>
+
+    <div class="policy-section">
+        <h2>10. Children's Privacy</h2>
+        <p>Lokei does not collect personal information from anyone, including children under the age of 13. Since Lokei collects no data, there is no children's data to protect. The app is not directed at children and does not knowingly provide services to children under 13.</p>
+    </div>
+
+    <div class="policy-section">
+        <h2>11. Changes to This Policy</h2>
+        <p>If this privacy policy is updated, the revised version will be posted at this URL with an updated date. Meaningful changes will be noted clearly. Given that Lokei's core principle is local-first privacy with no data collection, we do not anticipate significant changes to this policy.</p>
+    </div>
+
+    <div class="policy-section">
+        <h2>12. Contact</h2>
+        <p>Questions about this privacy policy or Lokei's privacy practices? We're happy to answer.</p>
     </div>
 
     <div class="contact-box">
@@ -194,10 +244,13 @@
 
 </div>
 
+<!-- FOOTER -->
 <footer>
     <div class="footer-bottom">
-        <p>© 2026 Lokei. All rights reserved.</p>
-        <p><a href="privacy.html">Privacy Policy</a> · <a href="faq.html">FAQ</a> · <a href="index.html">Home</a></p>
+        <p>&copy; 2026 Lokei. All rights reserved.</p>
+        <div>
+            <a href="privacy.html">Privacy Policy</a> · <a href="faq.html">FAQ</a> · <a href="index.html">Home</a>
+        </div>
     </div>
 </footer>
 

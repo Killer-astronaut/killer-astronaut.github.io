@@ -7,127 +7,158 @@
     <meta name="description" content="Lokei brings private AI to your Mac menu bar with Apple Intelligence on supported Macs, local Ollama models, and optional providers you configure. An iOS companion is in development.">
     <meta property="og:title" content="Lokei — Private AI for Mac">
     <meta property="og:description" content="Private AI in your Mac menu bar with on-device and local backend options. iOS companion in development.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://getlokei.com">
     <meta property="og:image" content="https://getlokei.com/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://getlokei.com">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://getlokei.com/og-image.png">
     <meta name="twitter:title" content="Lokei — Private AI for Mac">
     <meta name="twitter:description" content="Private AI in your Mac menu bar with Apple Intelligence, local Ollama models, optional configured providers, and an iOS companion in development.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300FFCC'/%3E%3Cstop offset='100%25' stop-color='%230066FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z' fill='url(%23g)'/%3E%3C/svg%3E">
+    <meta name="twitter:image" content="https://getlokei.com/og-image.png">
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --teal: #00FFCC; --blue: #00CCFF; --dark: #0d1117; --darker: #000000; }
         html { scroll-behavior: smooth; }
         body { background: var(--darker); color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif; line-height: 1.7; overflow-x: hidden; }
+
+        /* ── NAV ── */
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid #111; }
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo-text { font-size: 18px; font-weight: 200; letter-spacing: 8px; color: white; }
         .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-        .nav-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .nav-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .nav-links a:hover { color: white; }
-        .nav-download { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black !important; padding: 8px 20px; border-radius: 20px; font-weight: 600 !important; font-size: 13px !important; }
-        .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
-        .nav-hamburger span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s; }
-        .nav-mobile { display: none; position: fixed; top: 65px; left: 0; right: 0; background: rgba(0,0,0,0.97); backdrop-filter: blur(20px); border-bottom: 1px solid #222; padding: 20px 40px 28px; z-index: 99; flex-direction: column; gap: 20px; }
-        .nav-mobile.open { display: flex; }
-        .nav-mobile a { color: #888; text-decoration: none; font-size: 16px; transition: color 0.2s; }
-        .nav-mobile a:hover { color: white; }
-        .nav-mobile .nav-download { text-align: center; padding: 12px 20px; font-size: 15px !important; }
-        .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 40px 80px; position: relative; overflow: hidden; }
-        .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,204,255,0.08) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-        .hero-leaf { width: 100px; height: 100px; margin-bottom: 32px; filter: drop-shadow(0 0 30px rgba(0,204,255,0.4)); }
-        .hero h1 { font-size: clamp(48px, 8vw, 86px); font-weight: 100; letter-spacing: 16px; margin-bottom: 8px; background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-tagline { font-size: clamp(18px, 3vw, 24px); font-weight: 300; color: #666; letter-spacing: 3px; margin-bottom: 48px; }
-        .hero-tagline span { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-buttons { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; justify-content: center; margin-bottom: 48px; }
-        .btn-primary { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black; padding: 16px 36px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 16px; transition: opacity 0.2s, transform 0.2s; display: flex; align-items: center; gap: 10px; }
-        .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
-        .btn-secondary { color: #888; padding: 16px 36px; border-radius: 30px; text-decoration: none; font-size: 16px; border: 1px solid #222; transition: border-color 0.2s, color 0.2s; }
-        .btn-secondary:hover { border-color: #444; color: white; }
-        .price-tag { font-size: 13px; color: #555; letter-spacing: 1px; margin-bottom: 32px; }
-        .price-tag span { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600; }
-        .hero-meta { display: flex; gap: 32px; color: #444; font-size: 13px; letter-spacing: 1px; flex-wrap: wrap; justify-content: center; }
-        .hero-meta span { display: flex; align-items: center; gap: 6px; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); opacity: 0.6; }
-        .preview { padding: 80px 40px; display: flex; justify-content: center; }
-        .app-window { width: 100%; max-width: 420px; background: #0d1117; border-radius: 16px; border: 1px solid #1a1a1a; overflow: hidden; box-shadow: 0 40px 120px rgba(0,0,0,0.8), 0 0 60px rgba(0,204,255,0.06); }
-        .app-header { background: #111; padding: 12px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #1a1a1a; }
-        .app-header-title { font-size: 13px; font-weight: 600; color: white; }
-        .app-header-spacer { flex: 1; }
-        .app-preset { background: rgba(0,204,255,0.1); color: #00CCFF; border: 1px solid rgba(0,204,255,0.3); border-radius: 12px; padding: 3px 10px; font-size: 11px; }
-        .app-messages { padding: 16px; display: flex; flex-direction: column; gap: 12px; min-height: 280px; background: #050510; }
-        .msg-user { align-self: flex-end; background: rgba(0,255,204,0.12); border-radius: 12px; padding: 10px 14px; max-width: 80%; font-size: 13px; color: #cccccc; }
-        .msg-lokei { align-self: flex-start; max-width: 90%; }
-        .msg-lokei-label { font-size: 11px; color: #555; margin-bottom: 4px; }
-        .msg-lokei-bubble { background: rgba(22,27,34,0.9); border-radius: 12px; padding: 10px 14px; font-size: 13px; color: #cccccc; }
-        .code-block { background: #0a0a0f; border-radius: 8px; overflow: hidden; margin-top: 8px; border: 1px solid #222; }
-        .code-header { background: rgba(0,0,0,0.4); padding: 6px 12px; display: flex; justify-content: space-between; align-items: center; }
-        .code-lang { font-size: 10px; color: #555; font-family: monospace; }
-        .code-copy { font-size: 10px; color: #444; }
-        .code-content { padding: 12px; font-family: 'SF Mono', Menlo, monospace; font-size: 11px; line-height: 1.6; }
-        .kw { color: #c678dd; } .fn { color: #61afef; } .str { color: #e5c07b; } .cm { color: #5c6370; }
-        .app-input { padding: 12px 16px; border-top: 1px solid #1a1a1a; display: flex; gap: 8px; align-items: center; background: rgba(13,17,23,0.9); }
-        .app-input-field { flex: 1; background: #161b22; border-radius: 8px; padding: 8px 12px; font-size: 13px; color: #555; border: 1px solid #222; }
-        .features { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
-        .section-label { text-align: center; font-size: 12px; letter-spacing: 4px; color: var(--teal); margin-bottom: 16px; text-transform: uppercase; }
-        .section-title { text-align: center; font-size: clamp(28px, 4vw, 42px); font-weight: 200; letter-spacing: 2px; margin-bottom: 16px; color: white; }
-        .section-subtitle { text-align: center; color: #555; font-size: 16px; margin-bottom: 64px; max-width: 600px; margin-left: auto; margin-right: auto; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-        .feature-card { background: #0d1117; border: 1px solid #1a1a1a; border-radius: 16px; padding: 32px; transition: border-color 0.3s, transform 0.3s; }
-        .feature-card:hover { border-color: #2a2a2a; transform: translateY(-4px); }
-        .feature-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: linear-gradient(135deg, rgba(0,255,204,0.08), rgba(0,204,255,0.08)); border: 1px solid rgba(0,204,255,0.12); }
-        .feature-card h3 { font-size: 18px; font-weight: 500; margin-bottom: 10px; color: white; }
-        .feature-card p { color: #666; font-size: 14px; line-height: 1.7; }
-        .ios-companion { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
-        .ios-panel { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr); gap: 48px; align-items: center; background: linear-gradient(135deg, rgba(13,17,23,0.96), rgba(5,5,16,0.96)); border: 1px solid #1a1a2a; border-radius: 18px; padding: 48px; box-shadow: 0 40px 120px rgba(0,0,0,0.55), 0 0 70px rgba(0,204,255,0.05); }
-        .ios-copy .section-label, .ios-copy .section-title, .ios-copy .section-subtitle { text-align: left; margin-left: 0; margin-right: 0; }
-        .ios-copy .section-title { margin-bottom: 18px; }
-        .ios-copy .section-subtitle { margin-bottom: 28px; max-width: 520px; }
-        .status-pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(0,204,255,0.24); background: rgba(0,204,255,0.06); color: var(--blue); border-radius: 30px; padding: 8px 14px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
-        .status-pulse { width: 7px; height: 7px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--blue)); box-shadow: 0 0 16px rgba(0,204,255,0.7); }
-        .ios-pill-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 28px 0; }
-        .ios-pill { border: 1px solid #1d2430; background: rgba(0,0,0,0.18); border-radius: 14px; padding: 14px; }
-        .ios-pill strong { display: block; color: white; font-size: 13px; font-weight: 500; margin-bottom: 4px; }
-        .ios-pill span { color: #666; font-size: 12px; line-height: 1.6; }
-        .ios-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
-        .btn-muted { color: #777; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-size: 14px; border: 1px solid #222; background: rgba(255,255,255,0.02); cursor: default; }
-        .ios-note { color: #444; font-size: 12px; margin-top: 18px; letter-spacing: 0.4px; }
-        .ios-phone { justify-self: center; width: min(100%, 300px); aspect-ratio: 0.49; border: 1px solid rgba(0,204,255,0.22); border-radius: 34px; background: linear-gradient(180deg, #151923, #050510); padding: 12px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 30px 70px rgba(0,0,0,0.5), 0 0 46px rgba(0,204,255,0.08); }
-        .ios-screen { height: 100%; border-radius: 25px; overflow: hidden; background: radial-gradient(circle at top left, rgba(0,255,204,0.14), transparent 36%), #050510; border: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; }
-        .ios-topbar { display: flex; align-items: center; justify-content: space-between; padding: 18px 16px 10px; color: #7d8795; font-size: 11px; }
-        .ios-dynamic-island { width: 72px; height: 21px; border-radius: 18px; background: #000; border: 1px solid rgba(255,255,255,0.05); }
-        .ios-chat-head { padding: 10px 18px 16px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-        .ios-chat-head h3 { font-size: 20px; font-weight: 300; color: white; letter-spacing: 1px; }
-        .ios-chat-head p { font-size: 12px; color: #586170; }
-        .ios-bubbles { padding: 18px 14px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
-        .ios-bubble { border-radius: 16px; padding: 12px 13px; font-size: 12px; line-height: 1.5; }
-        .ios-bubble.user { align-self: flex-end; color: #061014; background: linear-gradient(135deg, var(--teal), var(--blue)); max-width: 82%; }
-        .ios-bubble.assistant { align-self: flex-start; color: #c5cbd5; background: rgba(22,27,34,0.92); border: 1px solid rgba(255,255,255,0.04); max-width: 86%; }
-        .ios-compose { margin: 0 14px 14px; border: 1px solid rgba(0,204,255,0.14); background: rgba(13,17,23,0.84); border-radius: 18px; padding: 11px 12px; color: #53606d; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
-        .how { padding: 100px 40px; background: #050508; }
-        .how-inner { max-width: 800px; margin: 0 auto; }
-        .steps { display: flex; flex-direction: column; margin-top: 64px; position: relative; }
-        .steps::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 1px; background: linear-gradient(180deg, var(--teal), var(--blue), transparent); opacity: 0.3; }
-        .step { display: flex; gap: 28px; align-items: flex-start; padding: 32px 0; }
-        .step-number { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--blue)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; color: black; flex-shrink: 0; position: relative; z-index: 1; }
-        .step-content h3 { font-size: 20px; font-weight: 500; margin-bottom: 8px; color: white; }
-        .step-content p { color: #666; font-size: 15px; }
-        .step-content code { background: #0d1117; border: 1px solid #222; border-radius: 6px; padding: 2px 8px; font-family: 'SF Mono', Menlo, monospace; font-size: 13px; color: var(--teal); }
-        .privacy-banner { padding: 100px 40px; max-width: 900px; margin: 0 auto; text-align: center; }
-        .privacy-icon { display: flex; justify-content: center; margin-bottom: 28px; }
-        .privacy-banner h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 200; letter-spacing: 2px; margin-bottom: 20px; background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .privacy-banner > p { font-size: 18px; color: #666; max-width: 600px; margin: 0 auto 48px; }
-        .privacy-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
-        .privacy-stat .number { font-size: 36px; font-weight: 200; background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 2px; }
-        .privacy-stat .label { font-size: 12px; color: #444; letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
-        .download { padding: 100px 40px; text-align: center; background: #050508; }
-        .download h2 { font-size: clamp(32px, 5vw, 52px); font-weight: 200; letter-spacing: 4px; margin-bottom: 16px; }
-        .download > p { color: #555; font-size: 16px; margin-bottom: 12px; }
-        .download-price { font-size: 28px; font-weight: 200; letter-spacing: 2px; margin-bottom: 40px; background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .download-meta { font-size: 13px; margin-top: 20px; display: inline-flex; align-items: center; gap: 10px; background: rgba(0,255,204,0.04); border: 1px solid rgba(0,204,255,0.15); border-radius: 30px; padding: 10px 20px; color: #555; }
+        .nav-cta { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black; padding: 8px 20px; border-radius: 20px; font-weight: 600; font-size: 13px; }
+        .nav-cta:hover { opacity: 0.9; }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
+        .hamburger span { width: 22px; height: 2px; background: white; transition: all 0.3s; }
+        .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.97); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
+        .mobile-menu.active { display: flex; }
+        .mobile-menu a { color: white; text-decoration: none; font-size: 24px; font-weight: 300; letter-spacing: 2px; }
+        .mobile-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: white; font-size: 32px; cursor: pointer; }
+
+        /* ── HERO ── */
+        .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 40px 80px; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(ellipse at center, rgba(0,255,204,0.03) 0%, transparent 60%); animation: pulse 8s ease-in-out infinite; }
+        @keyframes pulse { 0%,100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
+        .hero-leaf { width: 100px; height: 100px; margin-bottom: 32px; filter: drop-shadow(0 0 30px rgba(0,204,255,0.4)); position: relative; }
+        .hero h1 { font-size: clamp(48px, 8vw, 96px); font-weight: 200; letter-spacing: clamp(8px, 2vw, 20px); margin-bottom: 32px; position: relative; }
+        .hero-tagline { font-size: clamp(16px, 2.5vw, 22px); color: #888; max-width: 700px; font-weight: 300; line-height: 1.8; margin-bottom: 24px; position: relative; }
+        .hero-paragraph { font-size: 16px; color: #666; max-width: 640px; line-height: 1.9; margin-bottom: 48px; position: relative; }
+        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; position: relative; margin-bottom: 16px; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; background: linear-gradient(135deg, var(--teal), var(--blue)); color: black; text-decoration: none; border-radius: 30px; font-weight: 600; font-size: 15px; transition: transform 0.3s, box-shadow 0.3s; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,255,204,0.2); }
+        .btn-secondary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; border: 1px solid #333; color: white; text-decoration: none; border-radius: 30px; font-weight: 400; font-size: 15px; transition: border-color 0.3s; }
+        .btn-secondary:hover { border-color: #666; }
+        .hero-note { font-size: 13px; color: #555; margin-top: 16px; position: relative; }
+
+        /* ── TRUST STRIP ── */
+        .trust-strip { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 40px; position: relative; }
+        .trust-badge { display: flex; align-items: center; gap: 8px; padding: 10px 20px; border: 1px solid #1a1a2a; border-radius: 24px; font-size: 13px; color: #888; background: rgba(13,17,23,0.6); }
+        .trust-badge .icon { font-size: 16px; }
+        .badge-icon { width: 16px; height: 16px; flex-shrink: 0; }
+        .badge-dev { position: relative; }
+        .badge-dev::after { content: 'In development'; position: absolute; top: -8px; right: -8px; background: linear-gradient(135deg, var(--teal), var(--blue)); color: black; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 8px; letter-spacing: 0.5px; }
+
+        /* ── DEMO MOCKUP ── */
+        .demo-section { padding: 40px 40px 80px; display: flex; justify-content: center; }
+        .demo-mockup { background: #0d1117; border: 1px solid #1a1a2a; border-radius: 20px; padding: 28px; max-width: 480px; width: 100%; box-shadow: 0 20px 80px rgba(0,0,0,0.5); }
+        .demo-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #1a1a2a; }
+        .demo-dot { font-size: 20px; }
+        .demo-title { font-size: 15px; font-weight: 500; }
+        .demo-subtitle { font-size: 12px; color: #555; margin-left: auto; }
+        .demo-messages { display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px; }
+        .demo-msg { padding: 14px 18px; border-radius: 16px; font-size: 14px; line-height: 1.6; max-width: 90%; }
+        .demo-msg.user { background: #1a1a2e; align-self: flex-end; color: #ccc; }
+        .demo-msg.ai { background: #0a0a1a; border: 1px solid #1a1a2a; align-self: flex-start; color: #999; }
+        .demo-code { background: #060610; border: 1px solid #1a1a2a; border-radius: 12px; padding: 16px; margin-top: 10px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; color: var(--teal); line-height: 1.8; overflow-x: auto; }
+        .demo-input { display: flex; align-items: center; gap: 12px; background: #0a0a14; border: 1px solid #1a1a2a; border-radius: 14px; padding: 14px 18px; }
+        .demo-input span { color: #333; font-size: 14px; }
+
+        /* ── SECTIONS (shared) ── */
+        .section { padding: 100px 40px; }
+        .section-center { text-align: center; max-width: 800px; margin: 0 auto; }
+        .section-label { font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; display: inline-block; }
+        .section-label-badge { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; background: linear-gradient(135deg, var(--teal), var(--blue)); color: black; padding: 4px 12px; border-radius: 12px; font-weight: 700; display: inline-block; margin-bottom: 20px; }
+        .dev-badge-inline { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(135deg, var(--teal), var(--blue)); color: black; padding: 3px 10px; border-radius: 10px; font-weight: 700; margin-left: 10px; vertical-align: middle; }
+        .section h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 200; margin-bottom: 24px; line-height: 1.3; }
+        .section p.section-desc { color: #666; font-size: 16px; line-height: 1.9; max-width: 600px; margin: 0 auto 40px; }
+
+        /* ── VISION ── */
+        .vision-section { padding: 100px 40px; text-align: center; }
+        .vision-body { color: #777; font-size: 16px; line-height: 2; max-width: 640px; margin: 0 auto 20px; }
+        .vision-footnote { color: #444; font-size: 14px; font-style: italic; max-width: 560px; margin: 0 auto; }
+
+        /* ── ADAPTIVE RESPONSE ── */
+        .adaptive-section { padding: 100px 40px; }
+        .adaptive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+        .adaptive-card { background: #0d1117; border: 1px solid #1a1a2a; border-radius: 20px; padding: 36px 28px; transition: border-color 0.3s, transform 0.3s; }
+        .adaptive-card:hover { border-color: #2a2a3a; transform: translateY(-4px); }
+        .adaptive-card h3 { font-size: 18px; font-weight: 500; margin-bottom: 12px; }
+        .adaptive-card p { color: #666; font-size: 14px; line-height: 1.8; }
+        .adaptive-card .card-icon { width: 32px; height: 32px; margin-bottom: 16px; display: block; }
+
+        /* ── ADVISOR ── */
+        .advisor-section { padding: 100px 40px; text-align: center; }
+        .advisor-tagline { font-size: 18px; color: var(--teal); font-weight: 300; margin-top: 16px; letter-spacing: 1px; }
+
+        /* ── iOS ── */
+        .ios-section { padding: 100px 40px; }
+        .ios-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .ios-features { display: flex; flex-direction: column; gap: 28px; }
+        .ios-feature { padding-left: 20px; border-left: 2px solid #1a1a2a; }
+        .ios-feature h4 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+        .ios-feature p { color: #666; font-size: 14px; line-height: 1.8; }
+        .ios-cta { margin-top: 20px; }
+        .ios-cta a { color: var(--teal); text-decoration: none; font-size: 14px; font-weight: 500; }
+        .ios-cta a:hover { text-decoration: underline; }
+        .ios-disclaimer { margin-top: 24px; font-size: 12px; color: #444; font-style: italic; }
+
+        /* iOS phone mockup */
+        .phone-mockup { background: #0d1117; border: 1px solid #1a1a2a; border-radius: 36px; padding: 20px; max-width: 320px; margin: 0 auto; box-shadow: 0 20px 80px rgba(0,0,0,0.4); }
+        .phone-notch { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 12px; color: #555; padding: 0 4px; }
+        .phone-content { background: #080810; border-radius: 20px; padding: 20px; }
+        .phone-header { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .phone-status { font-size: 11px; color: var(--teal); margin-bottom: 20px; }
+        .phone-messages { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+        .phone-msg { padding: 12px 16px; border-radius: 16px; font-size: 13px; line-height: 1.6; max-width: 90%; }
+        .phone-msg.user { background: #1a1a2e; align-self: flex-end; color: #ccc; }
+        .phone-msg.ai { background: #0a0a1a; border: 1px solid #1a1a2a; align-self: flex-start; color: #999; }
+        .phone-input { display: flex; align-items: center; gap: 10px; background: #0a0a14; border: 1px solid #1a1a2a; border-radius: 14px; padding: 12px 16px; }
+        .phone-input span { color: #333; font-size: 13px; }
+
+        /* ── FEATURES GRID ── */
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+        .feature-card { background: #0d1117; border: 1px solid #1a1a2a; border-radius: 20px; padding: 36px 28px; transition: border-color 0.3s, transform 0.3s; }
+        .feature-card:hover { border-color: #2a2a3a; transform: translateY(-4px); }
+        .feature-card .feature-icon { width: 32px; height: 32px; margin-bottom: 16px; display: block; }
+        .feature-card h3 { font-size: 18px; font-weight: 500; margin-bottom: 12px; }
+        .feature-card p { color: #666; font-size: 14px; line-height: 1.8; }
+
+        /* ── HOW IT WORKS ── */
+        .steps-section { padding: 100px 40px; background: var(--dark); }
+        .steps { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px; }
+        .step { display: flex; gap: 24px; align-items: flex-start; }
+        .step-number { width: 48px; height: 48px; min-width: 48px; display: flex; align-items: center; justify-content: center; background: #0a0a14; border: 1px solid #1a1a2a; border-radius: 14px; font-size: 18px; font-weight: 600; background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .step h3 { font-size: 18px; font-weight: 500; margin-bottom: 8px; }
+        .step p { color: #666; font-size: 14px; line-height: 1.8; }
+        .step a { color: var(--teal); text-decoration: none; }
+        .step a:hover { text-decoration: underline; }
+
+        /* ── PRIVACY SECTION ── */
+        .privacy-section { padding: 100px 40px; text-align: center; }
+        .privacy-stats { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin: 48px 0; }
+        .privacy-stat { text-align: center; }
+        .privacy-stat .number { font-size: 48px; font-weight: 200; background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .privacy-stat .label { color: #555; font-size: 13px; margin-top: 8px; letter-spacing: 1px; }
+
+        /* ── DOWNLOAD ── */
+        .download-section { padding: 100px 40px; text-align: center; }
+        .download-section h2 { font-size: clamp(32px, 5vw, 52px); font-weight: 200; margin-bottom: 16px; }
+        .download-section .section-desc { margin-bottom: 16px; }
+        .download-meta { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 48px; font-size: 13px; border: 1px solid rgba(0,204,255,0.15); border-radius: 30px; padding: 10px 20px; color: #555; }
         .download-meta-highlight { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 600; }
         .pricing-banner { background: #0d1117; border: 1px solid #1a1a2a; border-radius: 16px; padding: 40px; max-width: 600px; margin: 0 auto 60px; text-align: center; }
         .pricing-banner h3 { font-size: 22px; font-weight: 300; margin-bottom: 16px; color: white; }
@@ -135,6 +166,12 @@
         .pricing-items { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 28px; }
         .pricing-item .check { font-size: 20px; margin-bottom: 6px; background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .pricing-item p { color: #666; font-size: 13px; }
+        .download-requirements { color: #444; font-size: 13px; margin-top: 32px; }
+        .download-faq-link { margin-top: 24px; }
+        .download-faq-link a { color: var(--teal); text-decoration: none; font-size: 14px; }
+        .download-faq-link a:hover { text-decoration: underline; }
+
+        /* ── FOOTER ── */
         footer { padding: 60px 40px 40px; border-top: 1px solid #111; }
         .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
         .footer-brand p { color: #444; font-size: 13px; margin-top: 12px; max-width: 240px; }
@@ -144,77 +181,37 @@
         .footer-links ul li a { color: #555; text-decoration: none; font-size: 14px; transition: color 0.2s; }
         .footer-links ul li a:hover { color: white; }
         .footer-bottom { max-width: 1100px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid #111; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .footer-bottom p { color: #333; font-size: 12px; }
-        .footer-bottom a { color: #333; text-decoration: none; }
-        .badge-apple { display: inline-flex; align-items: center; gap: 12px; background: #000; border: 1.5px solid #2a2a2a; border-radius: 12px; padding: 10px 20px; text-decoration: none; color: white; transition: opacity 0.2s, transform 0.2s; }
-        .badge-apple:hover { opacity: 0.85; transform: translateY(-2px); }
-        .badge-apple-text { display: flex; flex-direction: column; text-align: left; }
-        .badge-apple-text .badge-small { font-size: 10px; color: #aaa; letter-spacing: 0.5px; line-height: 1.3; }
-        .badge-apple-text .badge-large { font-size: 18px; font-weight: 600; letter-spacing: -0.2px; line-height: 1.3; }
-        .badge-apple-lg { padding: 14px 28px; border-radius: 14px; gap: 16px; }
-        .badge-apple-lg .badge-small { font-size: 12px; }
-        .badge-apple-lg .badge-large { font-size: 22px; }
-        .hero-headline { font-size: clamp(22px, 3.4vw, 32px); font-weight: 300; color: #e8eef5; letter-spacing: 0.5px; max-width: 880px; margin: 0 auto 18px; line-height: 1.35; }
-        .hero-subheadline { font-size: clamp(14px, 1.6vw, 16px); color: #888; max-width: 760px; margin: 0 auto 18px; line-height: 1.75; }
-        .hero-support { font-size: 14px; color: #666; letter-spacing: 1.5px; margin-bottom: 32px; }
-        .hero-support span { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-meta .soon { font-size: 9px; color: #555; letter-spacing: 1.2px; text-transform: uppercase; margin-left: 6px; padding: 2px 6px; border: 1px solid #222; border-radius: 10px; }
-        .vision { padding: 100px 40px; max-width: 900px; margin: 0 auto; text-align: center; }
-        .vision .copy { color: #888; font-size: 16px; line-height: 1.85; max-width: 760px; margin: 0 auto; }
-        .vision .core-line { margin-top: 40px; font-size: clamp(18px, 2.4vw, 24px); font-weight: 300; letter-spacing: 0.6px; color: white; line-height: 1.55; padding: 32px 36px; border: 1px solid rgba(0,204,255,0.18); border-radius: 18px; background: linear-gradient(135deg, rgba(0,255,204,0.04), rgba(0,204,255,0.04)); box-shadow: 0 0 50px rgba(0,204,255,0.04); }
-        .vision .core-line span { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 500; }
-        .adaptive { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
-        .adaptive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 16px; }
-        .adaptive-card { background: #0d1117; border: 1px solid #1a1a1a; border-radius: 16px; padding: 28px; transition: border-color 0.3s, transform 0.3s; }
-        .adaptive-card:hover { border-color: rgba(0,204,255,0.28); transform: translateY(-4px); }
-        .adaptive-card h3 { font-size: 17px; font-weight: 500; margin-bottom: 10px; color: white; letter-spacing: 0.3px; }
-        .adaptive-card p { color: #777; font-size: 14px; line-height: 1.7; }
-        .coming-soon-pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(0,204,255,0.24); background: rgba(0,204,255,0.06); color: var(--blue); border-radius: 30px; padding: 6px 14px; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
-        .coming-soon-pill .status-pulse { width: 7px; height: 7px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--blue)); box-shadow: 0 0 12px rgba(0,204,255,0.6); }
-        .advisor { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
-        .advisor-panel { background: linear-gradient(135deg, rgba(13,17,23,0.96), rgba(5,5,16,0.96)); border: 1px solid #1a1a2a; border-radius: 18px; padding: 56px 48px; text-align: center; box-shadow: 0 40px 120px rgba(0,0,0,0.45), 0 0 70px rgba(0,204,255,0.05); }
-        .advisor-panel .copy { color: #888; font-size: 16px; line-height: 1.85; max-width: 720px; margin: 0 auto; }
-        .advisor-tagline { display: inline-block; font-size: 15px; letter-spacing: 1.5px; padding-top: 22px; margin-top: 28px; border-top: 1px solid rgba(255,255,255,0.06); color: #aaa; }
-        .advisor-tagline span { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: 500; }
-        @media (max-width: 700px) {
+        .footer-bottom p { color: #333; font-size: 13px; }
+        .footer-bottom a { color: #444; text-decoration: none; font-size: 13px; }
+        .footer-bottom a:hover { color: white; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
             nav { padding: 16px 20px; }
             .nav-links { display: none; }
-            .nav-hamburger { display: flex; }
-            .hero { padding: 100px 20px 60px; }
-            .hero h1 { letter-spacing: 6px; }
-            .hero-meta { gap: 16px; font-size: 12px; }
-            .preview { padding: 40px 20px; }
-            .features { padding: 60px 20px; }
-            .ios-companion { padding: 40px 16px; }
-            .ios-panel { grid-template-columns: 1fr; padding: 24px 20px; gap: 28px; }
-            .ios-phone { display: none; }
-            .ios-copy .section-label { font-size: 11px; }
-            .ios-copy .section-title { font-size: 26px; margin-bottom: 14px; }
-            .ios-copy .section-subtitle { font-size: 14px; margin-bottom: 20px; }
-            .status-pill { font-size: 11px; padding: 6px 12px; }
-            .ios-pill-grid { grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-            .ios-pill { padding: 12px; }
-            .ios-pill strong { font-size: 12px; }
-            .ios-pill span { font-size: 11px; }
-            .ios-actions { flex-direction: column; align-items: stretch; }
-            .ios-note { font-size: 11px; margin-top: 14px; }
-            .vision { padding: 60px 20px; }
-            .vision .core-line { padding: 22px 18px; font-size: 17px; }
-            .adaptive { padding: 60px 20px; }
-            .adaptive-card { padding: 22px; }
-            .advisor { padding: 60px 20px; }
-            .advisor-panel { padding: 32px 22px; }
-            .how { padding: 60px 20px; }
-            .privacy-banner { padding: 60px 20px; }
-            .privacy-stats { gap: 28px; }
-            .download { padding: 60px 20px; }
-            .pricing-banner { padding: 28px 20px; }
-            footer { padding: 40px 20px 28px; }
+            .hamburger { display: flex; }
+            .hero { padding: 120px 24px 60px; }
+            .hero h1 { letter-spacing: 8px; }
+            .section { padding: 60px 24px; }
+            .vision-section, .adaptive-section, .advisor-section, .ios-section, .steps-section, .privacy-section, .download-section { padding: 60px 24px; }
+            .ios-inner { grid-template-columns: 1fr; gap: 40px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .adaptive-grid { grid-template-columns: 1fr; }
+            .privacy-stats { gap: 32px; }
+            .pricing-items { gap: 24px; }
+            footer { padding: 40px 24px 30px; }
+            .footer-inner { flex-direction: column; gap: 32px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .trust-strip { gap: 10px; }
+            .trust-badge { font-size: 11px; padding: 8px 14px; }
+            .demo-mockup { max-width: 100%; }
+            .phone-mockup { max-width: 280px; }
         }
     </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
     <a href="#" class="nav-logo">
         <svg width="28" height="28" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="nlg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z" fill="url(#nlg)"/><line x1="50" y1="12" x2="50" y2="88" stroke="white" stroke-width="2" opacity="0.2"/></svg>
@@ -226,308 +223,323 @@
         <li><a href="#how">How It Works</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="privacy.html">Privacy</a></li>
-        <li><a href="https://apps.apple.com/app/id6762427782" target="_blank" rel="noopener noreferrer" class="nav-download">Mac App Store</a></li>
+        <li><a href="https://apps.apple.com/app/id6762427782" class="nav-cta">Mac App Store</a></li>
     </ul>
-    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Open menu">
         <span></span><span></span><span></span>
     </button>
 </nav>
 
-<div class="nav-mobile" id="mobileMenu">
-    <a href="#features" onclick="closeMenu()">Features</a>
-    <a href="#ios" onclick="closeMenu()">iOS</a>
-    <a href="#how" onclick="closeMenu()">How It Works</a>
-    <a href="faq.html" onclick="closeMenu()">FAQ</a>
-    <a href="privacy.html" onclick="closeMenu()">Privacy</a>
-    <a href="https://apps.apple.com/app/id6762427782" target="_blank" rel="noopener noreferrer" class="nav-download" onclick="closeMenu()">Mac App Store</a>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="document.getElementById('mobileMenu').classList.remove('active')" aria-label="Close menu">&times;</button>
+    <a href="#features" onclick="document.getElementById('mobileMenu').classList.remove('active')">Features</a>
+    <a href="#ios" onclick="document.getElementById('mobileMenu').classList.remove('active')">iOS</a>
+    <a href="#how" onclick="document.getElementById('mobileMenu').classList.remove('active')">How It Works</a>
+    <a href="faq.html">FAQ</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="https://apps.apple.com/app/id6762427782">Mac App Store</a>
 </div>
 
-<script>
-    function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
-    function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
-</script>
-
+<!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero">
-    <div class="hero-glow"></div>
     <svg class="hero-leaf" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
         <defs><linearGradient id="hlg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs>
         <path d="M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z" fill="url(#hlg)"/>
         <line x1="50" y1="10" x2="50" y2="92" stroke="white" stroke-width="1.5" opacity="0.25"/>
     </svg>
     <h1>LOKEI</h1>
-    <p class="hero-headline">Your AI, one click away — private, local, and built around how you work.</p>
-    <p class="hero-subheadline">Lokei brings AI to your Mac menu bar today — with an iPhone companion in development — without turning your thoughts, files, or conversations into someone else's cloud data. Use Apple Intelligence on supported devices, local Ollama models, or providers you configure. Lokei gives you control over where your AI runs — and how it responds.</p>
-    <p class="hero-support">Private by default. <span>Fast when you need it. Deeper when it matters.</span></p>
+    <p class="hero-tagline">Your AI, one click away — private, local, and built around how you work.</p>
+    <p class="hero-paragraph">Lokei brings AI to your Mac menu bar today — with an iPhone companion in development — without turning your thoughts, files, or conversations into someone else's cloud data. Use Apple Intelligence on supported devices, local Ollama models, or providers you configure. Lokei gives you control over where your AI runs — and how it responds.</p>
+    <p class="hero-paragraph" style="color:#888; font-weight:300; font-size:17px; margin-bottom:48px;">Private by default. Fast when you need it. Deeper when it matters.</p>
     <div class="hero-buttons">
-        <a href="https://apps.apple.com/app/id6762427782" target="_blank" rel="noopener noreferrer" class="badge-apple">
-            <svg width="26" height="32" viewBox="0 0 25 30" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M22.1 16.4c-.1-3.5 2.8-5.2 2.9-5.3-1.6-2.3-4.1-2.6-5-2.7-2.1-.2-4.2 1.3-5.3 1.3-1.1 0-2.7-1.3-4.5-1.2-2.3.1-4.4 1.4-5.6 3.5-2.4 4.2-.6 10.3 1.7 13.7 1.1 1.6 2.5 3.4 4.2 3.3 1.7-.1 2.3-1.1 4.4-1.1 2.1 0 2.6 1.1 4.4 1 1.8 0 3-1.7 4.1-3.3 1.3-1.9 1.9-3.8 1.9-3.9 0 0-3.2-1.3-3.2-5.3zm-3.4-10.6c.9-1.1 1.5-2.7 1.4-4.2-1.3.1-2.9.9-3.9 2-.9 1-1.6 2.5-1.4 4 1.5.1 3-.7 3.9-1.8z"/></svg>
-            <div class="badge-apple-text">
-                <span class="badge-small">Download on the</span>
-                <span class="badge-large">Mac App Store</span>
-            </div>
+        <a href="https://apps.apple.com/app/id6762427782" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M14.94 10.81c-.02-2.17 1.77-3.21 1.85-3.26-1.01-1.47-2.58-1.67-3.14-1.7-1.33-.14-2.6.79-3.28.79-.68 0-1.72-.77-2.83-.75-1.45.02-2.79.85-3.54 2.15-1.51 2.62-.39 6.52 1.09 8.65.72 1.04 1.58 2.21 2.71 2.17 1.09-.04 1.5-.7 2.82-.7 1.31 0 1.68.7 2.82.68 1.17-.02 1.91-1.06 2.62-2.11.83-1.21 1.17-2.38 1.19-2.44-.03-.01-2.28-.87-2.31-3.48zM12.79 4.38c.6-.73 1-1.73.89-2.73-.86.03-1.9.57-2.52 1.3-.55.64-1.03 1.66-.9 2.64.96.07 1.93-.49 2.53-1.21z" fill="currentColor"/></svg>
+            Download on the Mac App Store
         </a>
         <a href="#how" class="btn-secondary">See how it works</a>
     </div>
-    <p class="price-tag"><span>Now available on the Mac App Store</span> · No subscription</p>
-    <div class="hero-meta">
-        <span><span class="dot"></span>No tracking</span>
-        <span><span class="dot"></span>No Lokei account</span>
-        <span><span class="dot"></span>Local model support</span>
-        <span><span class="dot"></span>Advisor Mode<span class="soon">In development</span></span>
-        <span><span class="dot"></span>Adaptive Response Mode<span class="soon">In development</span></span>
+    <p class="hero-note">Now available on the Mac App Store · No subscription</p>
+
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="trust-badge"><svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="url(#bi)" stroke-width="1.5"><defs><linearGradient id="bi" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFCC"/><stop offset="1" stop-color="#00CCFF"/></linearGradient></defs><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> No tracking</div>
+        <div class="trust-badge"><svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="url(#bi)" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg> No Lokei account</div>
+        <div class="trust-badge"><svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="url(#bi)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> Local model support</div>
+        <div class="trust-badge badge-dev"><svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="url(#bi)" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 3-2 5-3 7H8c-1-2-3-4-3-7a7 7 0 017-7z"/><path d="M9 22h6M10 18h4"/></svg> Advisor Mode</div>
+        <div class="trust-badge badge-dev"><svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="url(#bi)" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> Adaptive Response Mode</div>
+        <div class="trust-badge badge-dev"><svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="url(#bi)" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 18h.01"/></svg> iOS companion</div>
     </div>
 </section>
 
-<section class="preview">
-    <div class="app-window">
-        <div class="app-header">
+<!-- ═══════════════ DEMO MOCKUP ═══════════════ -->
+<section class="demo-section">
+    <div class="demo-mockup">
+        <div class="demo-header">
             <svg width="14" height="14" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="alg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z" fill="url(#alg)"/></svg>
-            <span class="app-header-title">Lokei</span>
-            <div class="app-header-spacer"></div>
-            <span class="app-preset">Code Helper</span>
+            <span class="demo-title">Lokei</span>
+            <span class="demo-subtitle">Code Helper</span>
         </div>
-        <div class="app-messages">
-            <div class="msg-user">Write a Swift function that checks if a string is a palindrome</div>
-            <div class="msg-lokei">
-                <div class="msg-lokei-label">Lokei</div>
-                <div class="msg-lokei-bubble">
-                    Here's a clean Swift palindrome checker:
-                    <div class="code-block">
-                        <div class="code-header"><span class="code-lang">swift</span><span class="code-copy">Copy</span></div>
-                        <div class="code-content">
-<span class="kw">func</span> <span class="fn">isPalindrome</span>(<span class="kw">_</span> string: String) -> Bool {<br>
-&nbsp;&nbsp;<span class="kw">let</span> cleaned = string<br>
-&nbsp;&nbsp;&nbsp;&nbsp;.lowercased()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;.filter { $0.isLetter }<br>
-&nbsp;&nbsp;<span class="kw">return</span> cleaned == String(cleaned.reversed())<br>
+        <div class="demo-messages">
+            <div class="demo-msg user">Write a Swift function that checks if a string is a palindrome</div>
+            <div class="demo-msg ai">
+                Here's a clean Swift palindrome checker:
+                <div class="demo-code">
+<span style="color:#ff7b72">func</span> <span style="color:#d2a8ff">isPalindrome</span>(<span style="color:#79c0ff">_</span> string: <span style="color:#ff7b72">String</span>) -> <span style="color:#ff7b72">Bool</span> {
+  <span style="color:#ff7b72">let</span> cleaned = string
+    .<span style="color:#d2a8ff">lowercased</span>()
+    .<span style="color:#d2a8ff">filter</span> { $0.<span style="color:#79c0ff">isLetter</span> }
+  <span style="color:#ff7b72">return</span> cleaned == <span style="color:#ff7b72">String</span>(cleaned.<span style="color:#d2a8ff">reversed</span>())
 }
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="app-input">
-            <div class="app-input-field">Ask Lokei...</div>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 12 8 16 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg>
-        </div>
+        <div class="demo-input"><span>Ask Lokei...</span></div>
     </div>
 </section>
 
-<section class="vision" id="vision">
-    <p class="section-label">The vision</p>
-    <h2 class="section-title">Not just answers. The right kind of help.</h2>
-    <p class="copy">Most AI waits for the perfect prompt. Lokei is being built around your working position: when you're stuck, it gets direct. When you're confused, it slows down. When you're building, it gives steps. When you're researching, it helps narrow the decision. When the work needs deeper reasoning, Advisor Mode can step in.</p>
-    <p class="core-line"><span>Predictive text guesses your words.</span> Lokei is being built to predict what kind of help you need.</p>
+<!-- ═══════════════ THE VISION ═══════════════ -->
+<section class="vision-section" id="vision">
+    <span class="section-label">The vision</span>
+    <h2>Not just answers. The right kind of help.</h2>
+    <p class="vision-body">Most AI waits for the perfect prompt. Lokei is being built around your working position: when you're stuck, it gets direct. When you're confused, it slows down. When you're building, it gives steps. When you're researching, it helps narrow the decision. When the work needs deeper reasoning, Advisor Mode can step in.</p>
+    <p class="vision-footnote">Predictive text guesses your words. Lokei is being built to predict what kind of help you need.</p>
 </section>
 
-<section class="adaptive" id="adaptive">
-    <div class="coming-soon-pill" style="display:block; width:fit-content; margin: 0 auto 20px;"><span class="status-pulse"></span>Adaptive Response Mode · in development</div>
-    <h2 class="section-title">Adaptive Response Mode</h2>
-    <p class="section-subtitle">Lokei can privately detect the kind of help you seem to need and adjust the response style — all on your device, with no profile built in the cloud.</p>
+<!-- ═══════════════ ADAPTIVE RESPONSE ═══════════════ -->
+<section class="adaptive-section" id="adaptive">
+    <div class="section-center">
+        <span class="section-label-badge">Adaptive Response Mode · in development</span>
+        <h2>Adaptive Response Mode</h2>
+        <p class="section-desc">Lokei can privately detect the kind of help you seem to need and adjust the response style — all on your device, with no profile built in the cloud.</p>
+    </div>
     <div class="adaptive-grid">
         <div class="adaptive-card">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="url(#ci)" stroke-width="1.5"><defs><linearGradient id="ci" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFCC"/><stop offset="1" stop-color="#00CCFF"/></linearGradient></defs><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             <h3>Quick Fix</h3>
             <p>For errors, bugs, and "just tell me what to do" moments.</p>
         </div>
         <div class="adaptive-card">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="url(#ci)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
             <h3>Calm Explain</h3>
             <p>For confusing topics that need simple, steady steps.</p>
         </div>
         <div class="adaptive-card">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="url(#ci)" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 3-2 5-3 7H8c-1-2-3-4-3-7a7 7 0 017-7z"/><path d="M9 22h6M10 18h4"/></svg>
             <h3>Deep Advisor</h3>
             <p>For bigger decisions, tradeoffs, architecture, and serious analysis.</p>
         </div>
         <div class="adaptive-card">
+            <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="url(#ci)" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
             <h3>Focus Mode</h3>
             <p>For rabbit holes, over-researching, and moments where one next step matters most.</p>
         </div>
     </div>
 </section>
 
-<section class="advisor" id="advisor">
-    <div class="advisor-panel">
-        <div class="coming-soon-pill"><span class="status-pulse"></span>Advisor Mode · in development</div>
-        <h2 class="section-title">A second brain, only when you need one.</h2>
-        <p class="copy">Some questions deserve a second brain. Advisor Mode lets Lokei use a stronger model only when needed — for deeper reasoning, confidence checks, complex coding decisions, or high-stakes tradeoffs. Use a fast model for everyday work. Escalate to a stronger model when the moment calls for it.</p>
-        <p class="advisor-tagline"><span>Fast by default.</span> Thoughtful by design.</p>
-    </div>
+<!-- ═══════════════ ADVISOR MODE ═══════════════ -->
+<section class="advisor-section" id="advisor">
+    <span class="section-label-badge">Advisor Mode · in development</span>
+    <h2>A second brain, only when you need one.</h2>
+    <p class="section-desc" style="max-width:620px; margin:0 auto 20px;">Some questions deserve a second brain. Advisor Mode lets Lokei use a stronger model only when needed — for deeper reasoning, confidence checks, complex coding decisions, or high-stakes tradeoffs. Use a fast model for everyday work. Escalate to a stronger model when the moment calls for it.</p>
+    <p class="advisor-tagline">Fast by default. Thoughtful by design.</p>
 </section>
 
-<section class="ios-companion" id="ios">
-    <div class="ios-panel">
-        <div class="ios-copy">
-            <div class="status-pill"><span class="status-pulse"></span>iOS app in development</div>
-            <p class="section-label">Lokei for iPhone</p>
-            <h2 class="section-title">The same private brain, built for your pocket.</h2>
-            <p class="section-subtitle">The same private-first workflow, built for your pocket. Use Apple Intelligence on supported iPhones when available, connect to your Mac as the local brain, or use the AI backend you choose.</p>
-            <div class="ios-pill-grid">
-                <div class="ios-pill">
-                    <strong>On-device path</strong>
-                    <span>Use Apple Intelligence on supported iPhones when it is available.</span>
+<!-- ═══════════════ iOS COMPANION ═══════════════ -->
+<section class="ios-section" id="ios">
+    <div class="ios-inner">
+        <div>
+            <span class="section-label-badge">iOS app in development</span>
+            <h2 style="text-align:left;">Lokei for iPhone</h2>
+            <p style="color:#888; font-size:18px; margin-bottom:8px; text-align:left;">The same private brain, built for your pocket.</p>
+            <p style="color:#666; font-size:15px; line-height:1.8; margin-bottom:32px; text-align:left;">The same private-first workflow, built for your pocket. Use Apple Intelligence on supported iPhones when available, connect to your Mac as the local brain, or use the AI backend you choose.</p>
+            <div class="ios-features">
+                <div class="ios-feature">
+                    <h4>On-device path</h4>
+                    <p>Use Apple Intelligence on supported iPhones when it is available.</p>
                 </div>
-                <div class="ios-pill">
-                    <strong>Mac as the brain</strong>
-                    <span>Connect to Ollama or LM Studio on your local network.</span>
+                <div class="ios-feature">
+                    <h4>Mac as the brain</h4>
+                    <p>Connect to Ollama or LM Studio on your local network.</p>
                 </div>
-                <div class="ios-pill">
-                    <strong>Mobile attachments</strong>
-                    <span>Send text, images, and documents to the AI source you choose.</span>
+                <div class="ios-feature">
+                    <h4>Mobile attachments</h4>
+                    <p>Send text, images, and documents to the AI source you choose.</p>
                 </div>
-                <div class="ios-pill">
-                    <strong>Same privacy posture</strong>
-                    <span>No Lokei account, no telemetry, no Lokei-operated chat servers.</span>
+                <div class="ios-feature">
+                    <h4>Same privacy posture</h4>
+                    <p>No Lokei account, no telemetry, no Lokei-operated chat servers.</p>
                 </div>
             </div>
-            <div class="ios-actions">
-                <span class="btn-muted">App Store release in development</span>
-                <a href="faq.html" class="btn-secondary">Read the FAQ</a>
+            <div class="ios-cta">
+                <a href="faq.html">Read the FAQ &rarr;</a>
             </div>
-            <p class="ios-note">Availability, features, and requirements may change before release.</p>
+            <p class="ios-disclaimer">Availability, features, and requirements may change before release.</p>
         </div>
-        <div class="ios-phone" aria-label="Preview of the Lokei iOS companion">
-            <div class="ios-screen">
-                <div class="ios-topbar">
+        <div>
+            <!-- Phone mockup -->
+            <div class="phone-mockup">
+                <div class="phone-notch">
                     <span>9:41</span>
-                    <span class="ios-dynamic-island"></span>
                     <span>Wi-Fi</span>
                 </div>
-                <div class="ios-chat-head">
-                    <h3>Lokei</h3>
-                    <p>Connected to local AI</p>
-                </div>
-                <div class="ios-bubbles">
-                    <div class="ios-bubble user">Summarize this PDF and keep it private.</div>
-                    <div class="ios-bubble assistant">Got it. I will use the AI source you selected and keep the workflow local-first.</div>
-                    <div class="ios-bubble user">Remember this project is for launch prep.</div>
-                    <div class="ios-bubble assistant">Saved locally for future chats.</div>
-                </div>
-                <div class="ios-compose">
-                    <span>Ask Lokei...</span>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 2 11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                <div class="phone-content">
+                    <div class="phone-header">Lokei</div>
+                    <div class="phone-status">Connected to local AI</div>
+                    <div class="phone-messages">
+                        <div class="phone-msg user">Summarize this PDF and keep it private.</div>
+                        <div class="phone-msg ai">Got it. I will use the AI source you selected and keep the workflow local-first.</div>
+                        <div class="phone-msg user">Remember this project is for launch prep.</div>
+                        <div class="phone-msg ai">Saved locally for future chats.</div>
+                    </div>
+                    <div class="phone-input"><span>Ask Lokei...</span></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section class="features" id="features">
-    <p class="section-label">Why Lokei</p>
-    <h2 class="section-title">Everything you need.</h2>
-    <p class="section-subtitle">Built for focus, speed, and local-first privacy. Lokei works quietly in the background so you can stay in flow.</p>
+<!-- ═══════════════ FEATURES GRID ═══════════════ -->
+<section class="section" id="features">
+    <div class="section-center">
+        <span class="section-label">Why Lokei</span>
+        <h2>Everything you need.</h2>
+        <p class="section-desc">Built for focus, speed, and local-first privacy. Lokei works quietly in the background so you can stay in flow.</p>
+    </div>
     <div class="features-grid">
         <div class="feature-card">
-            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><defs><linearGradient id="fi" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#00FFCC"/><stop offset="1" stop-color="#00CCFF"/></linearGradient></defs><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             <h3>Private By Design</h3>
             <p>Use Apple Intelligence on supported Macs or local Ollama models for private, on-device work. Lokei collects no conversations, files, analytics, or account data.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
             <h3>Always In Your Menu Bar</h3>
             <p>Get answers in seconds without breaking your workflow. Lokei lives in your menu bar, ready the instant you need it — no app switching, no loading screens.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
             <h3>Streaming Responses</h3>
             <p>Read answers as they're generated, not after a long wait. Responses stream word by word from the backend you choose.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>
             <h3>Syntax Highlighting</h3>
             <p>Copy-paste working code straight from the chat. Code renders with full syntax highlighting and one-click copy — Swift, Python, JavaScript and more.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
             <h3>Specialist Modes</h3>
             <p>Get better results for any task with purpose-built AI modes. Switch between Code Helper, Debug Mode, Writing Assistant, Brainstorm — or create your own.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
             <h3>Backend Choice</h3>
             <p>Choose Apple Intelligence, local Ollama models, or an OpenAI-compatible provider you configure. The AI &amp; Models settings make the active backend clear.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
             <h3>Model Library</h3>
             <p>Find the right Ollama model for your Mac in seconds. Browse, compare, and download models right inside Lokei — no Terminal needed. Every model is rated for your RAM.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><path d="M12 2a7 7 0 017 7c0 3-2 5-3 7H8c-1-2-3-4-3-7a7 7 0 017-7z"/><path d="M9 22h6M10 18h4"/></svg>
             <h3>Project Context</h3>
             <p>Stop repeating yourself every conversation. Tell Lokei about your project once and it remembers — every response is already tailored to your work.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
             <h3>Chat History</h3>
             <p>Pick up right where you left off. Every conversation is saved automatically with smart titles — browse, resume, or export anytime.</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></div>
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
             <h3>Expand to Full Window</h3>
             <p>Need more room? Pop Lokei into a full resizable window with a sidebar for deep work. Collapse back to the menu bar when you're done.</p>
         </div>
+        <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>
+            <h3>File Attachments</h3>
+            <p>Drag and drop files, images, or documents into the chat. Lokei supports code files, PDFs, images, and more — paste from your clipboard or use the attach button.</p>
+        </div>
+        <div class="feature-card">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="url(#fi)" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <h3>Export Conversations</h3>
+            <p>Save any conversation as Markdown, HTML, or JSON. Export from the menu bar popover or the full window — your data, your format.</p>
+        </div>
     </div>
 </section>
 
-<section class="how" id="how">
-    <div class="how-inner">
-        <p class="section-label">Setup</p>
-        <h2 class="section-title">Up and running in minutes.</h2>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Choose your backend</h3>
-                    <p>On supported Macs, start with Apple Intelligence for private on-device responses. Prefer open-source local models? Choose <a href="https://ollama.com" target="_blank" rel="noopener noreferrer" style="color:#00CCFF;">Ollama</a> instead.</p>
-                </div>
+<!-- ═══════════════ HOW IT WORKS ═══════════════ -->
+<section class="steps-section" id="how">
+    <div class="section-center">
+        <span class="section-label">Setup</span>
+        <h2>Up and running in minutes.</h2>
+    </div>
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <div>
+                <h3>Choose your backend</h3>
+                <p>On supported Macs, start with Apple Intelligence for private on-device responses. Prefer open-source local models? Choose <a href="https://ollama.com">Ollama</a> instead.</p>
             </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Install Lokei</h3>
-                    <p>Download Lokei from the <a href="https://apps.apple.com/app/id6762427782" target="_blank" rel="noopener noreferrer" style="color:#00CCFF;">Mac App Store</a>. Onboarding guides you through Apple Intelligence or Ollama setup based on what your Mac supports.</p>
-                </div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div>
+                <h3>Install Lokei</h3>
+                <p>Download Lokei from the <a href="https://apps.apple.com/app/id6762427782">Mac App Store</a>. Onboarding guides you through Apple Intelligence or Ollama setup based on what your Mac supports.</p>
             </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Pick a model if needed</h3>
-                    <p>Apple Intelligence needs no model download inside Lokei. For Ollama, open Settings &rarr; AI &amp; Models to browse and download local models rated for your Mac's RAM.</p>
-                </div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div>
+                <h3>Pick a model if needed</h3>
+                <p>Apple Intelligence needs no model download inside Lokei. For Ollama, open Settings → AI &amp; Models to browse and download local models rated for your Mac's RAM.</p>
             </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>Start asking</h3>
-                    <p>Click the Lokei leaf in your menu bar and start chatting. Local and on-device backends keep your work on your Mac; remote providers are only used if you configure one.</p>
-                </div>
+        </div>
+        <div class="step">
+            <div class="step-number">4</div>
+            <div>
+                <h3>Start asking</h3>
+                <p>Click the Lokei leaf in your menu bar and start chatting. Local and on-device backends keep your work on your Mac; remote providers are only used if you configure one.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section class="privacy-banner">
-    <div class="privacy-icon">
-        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    </div>
-    <h2>Zero data. Zero compromise.</h2>
-    <p>No Lokei-operated chat servers. No Lokei account. No conversation tracking. No analytics profile. Your work stays yours.</p>
+<!-- ═══════════════ PRIVACY ═══════════════ -->
+<section class="privacy-section" id="privacy">
+    <span class="section-label">Privacy</span>
+    <h2>Zero data. Clear control.</h2>
+    <p class="section-desc">No Lokei-operated chat servers. No Lokei account. No conversation tracking. No analytics profile. Your work stays yours.</p>
     <div class="privacy-stats">
-        <div class="privacy-stat"><div class="number">0</div><div class="label">Bytes collected</div></div>
-        <div class="privacy-stat"><div class="number">0</div><div class="label">Lokei servers</div></div>
-        <div class="privacy-stat"><div class="number">0</div><div class="label">Subscriptions</div></div>
-        <div class="privacy-stat"><div class="number">∞</div><div class="label">Your ownership</div></div>
+        <div class="privacy-stat">
+            <div class="number">0</div>
+            <div class="label">Bytes collected</div>
+        </div>
+        <div class="privacy-stat">
+            <div class="number">0</div>
+            <div class="label">Lokei servers</div>
+        </div>
+        <div class="privacy-stat">
+            <div class="number">0</div>
+            <div class="label">Subscriptions</div>
+        </div>
+        <div class="privacy-stat">
+            <div class="number">∞</div>
+            <div class="label">Your ownership</div>
+        </div>
     </div>
+    <a href="privacy.html" class="btn-secondary" style="display:inline-flex;">Read the Privacy Policy &rarr;</a>
 </section>
 
-<section class="download" id="download">
-    <svg width="72" height="72" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 28px; filter: drop-shadow(0 0 20px rgba(0,204,255,0.3));">
-        <defs><linearGradient id="dlg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs>
-        <path d="M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z" fill="url(#dlg)"/>
-        <line x1="50" y1="12" x2="50" y2="88" stroke="white" stroke-width="1.5" opacity="0.25"/>
-    </svg>
+<!-- ═══════════════ DOWNLOAD / CTA ═══════════════ -->
+<section class="download-section" id="download">
     <h2>Get Lokei</h2>
-    <p>Private AI for Mac. Local-first. Adaptive. Built for ownership.</p>
-    <div class="download-price">Now on the Mac App Store</div>
+    <p class="section-desc">Private AI for Mac. Local-first. Adaptive. Built for ownership.</p>
+    <div class="download-meta"><span class="download-meta-highlight">Now on the Mac App Store</span></div>
+
     <div class="pricing-banner">
         <h3>Planned as a one-time Mac app.</h3>
         <p>Lokei is designed around local ownership: no Lokei account, no tracking, and no subscription planned. Apple Intelligence and Ollama can run without per-message API fees; remote providers are optional and user-configured.</p>
@@ -538,27 +550,25 @@
             <div class="pricing-item"><div class="check">✓</div><p>Privacy controls</p></div>
         </div>
     </div>
-    <a href="https://apps.apple.com/app/id6762427782" target="_blank" rel="noopener noreferrer" class="badge-apple badge-apple-lg">
-        <svg width="32" height="40" viewBox="0 0 25 30" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M22.1 16.4c-.1-3.5 2.8-5.2 2.9-5.3-1.6-2.3-4.1-2.6-5-2.7-2.1-.2-4.2 1.3-5.3 1.3-1.1 0-2.7-1.3-4.5-1.2-2.3.1-4.4 1.4-5.6 3.5-2.4 4.2-.6 10.3 1.7 13.7 1.1 1.6 2.5 3.4 4.2 3.3 1.7-.1 2.3-1.1 4.4-1.1 2.1 0 2.6 1.1 4.4 1 1.8 0 3-1.7 4.1-3.3 1.3-1.9 1.9-3.8 1.9-3.9 0 0-3.2-1.3-3.2-5.3zm-3.4-10.6c.9-1.1 1.5-2.7 1.4-4.2-1.3.1-2.9.9-3.9 2-.9 1-1.6 2.5-1.4 4 1.5.1 3-.7 3.9-1.8z"/></svg>
-        <div class="badge-apple-text">
-            <span class="badge-small">Download on the</span>
-            <span class="badge-large">Mac App Store</span>
-        </div>
+
+    <a href="https://apps.apple.com/app/id6762427782" class="btn-primary" style="margin-bottom:20px;">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M14.94 10.81c-.02-2.17 1.77-3.21 1.85-3.26-1.01-1.47-2.58-1.67-3.14-1.7-1.33-.14-2.6.79-3.28.79-.68 0-1.72-.77-2.83-.75-1.45.02-2.79.85-3.54 2.15-1.51 2.62-.39 6.52 1.09 8.65.72 1.04 1.58 2.21 2.71 2.17 1.09-.04 1.5-.7 2.82-.7 1.31 0 1.68.7 2.82.68 1.17-.02 1.91-1.06 2.62-2.11.83-1.21 1.17-2.38 1.19-2.44-.03-.01-2.28-.87-2.31-3.48zM12.79 4.38c.6-.73 1-1.73.89-2.73-.86.03-1.9.57-2.52 1.3-.55.64-1.03 1.66-.9 2.64.96.07 1.93-.49 2.53-1.21z" fill="currentColor"/></svg>
+        Download on the Mac App Store
     </a>
-    <p class="download-meta" style="margin-top: 20px;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        Requires <span class="download-meta-highlight">macOS 13 Ventura</span> or later &nbsp;·&nbsp; Apple Intelligence support depends on Mac model and macOS &nbsp;·&nbsp; Ollama optional
-    </p>
-    <p style="margin-top: 16px;"><a href="faq.html" style="color: #555; font-size: 13px; text-decoration: none;">Have questions? Read the FAQ →</a></p>
+    <p class="download-requirements">Requires macOS 13 Ventura or later · Apple Intelligence support depends on Mac model and macOS · Ollama optional</p>
+    <div class="download-faq-link">
+        <a href="faq.html">Have questions? Read the FAQ &rarr;</a>
+    </div>
 </section>
 
+<!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
     <div class="footer-inner">
         <div class="footer-brand">
-            <a href="#" class="nav-logo">
-                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="flg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z" fill="url(#flg)"/></svg>
-                <span class="nav-logo-text" style="font-size: 15px;">LOKEI</span>
-            </a>
+            <div style="display:flex;align-items:center;gap:10px;">
+                <svg width="22" height="22" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="flg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 5 C60 9 88 25 88 55 C88 78 70 95 50 95 C30 95 12 78 12 55 C12 25 40 9 50 5 Z" fill="url(#flg)"/></svg>
+                <span class="nav-logo-text">LOKEI</span>
+            </div>
             <p>Private AI for Mac. On-device and local by default. No tracking.</p>
         </div>
         <div class="footer-links">
@@ -581,14 +591,16 @@
         <div class="footer-links">
             <h4>Connect</h4>
             <ul>
-                <li><a href="https://x.com/getlokei" target="_blank" rel="noopener noreferrer">X / Twitter</a></li>
+                <li><a href="https://x.com/getlokei">X / Twitter</a></li>
                 <li><a href="mailto:hello@getlokei.com">hello@getlokei.com</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>© 2026 Lokei. All rights reserved.</p>
-        <p><a href="privacy.html">Privacy Policy</a> · <a href="faq.html">FAQ</a></p>
+        <p>&copy; 2026 Lokei. All rights reserved.</p>
+        <div>
+            <a href="privacy.html">Privacy Policy</a> · <a href="faq.html">FAQ</a>
+        </div>
     </div>
 </footer>
 
