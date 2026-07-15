@@ -1,0 +1,183 @@
+From 864ebe13af1ff1314d77bdea9910e2de70300ba1 Mon Sep 17 00:00:00 2001
+From: Killer-astronaut <Killer-astronaut@users.noreply.github.com>
+Date: Sat, 2 May 2026 14:49:52 -0400
+Subject: [PATCH] Add iOS companion development section
+
+---
+ faq.html   |  2 +-
+ index.html | 96 +++++++++++++++++++++++++++++++++++++++++++++++++++---
+ 2 files changed, 93 insertions(+), 5 deletions(-)
+
+diff --git a/faq.html b/faq.html
+index 8a4056d..3057a0d 100644
+--- a/faq.html
++++ b/faq.html
+@@ -139,7 +139,7 @@
+                 <span class="faq-q-text">Does Lokei work with iPhone or iOS?</span>
+                 <div class="faq-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+             </button>
+-            <div class="faq-a">Lokei is Mac-first. The website is built to read well on iPhone, and the Mac app includes Remote Prompts settings for a future iPhone companion that can send prompts to your Mac. That iPhone companion is not on the App Store yet.</div>
++            <div class="faq-a">Lokei is Mac-first today, and an iOS companion is in development. The iPhone app is being built around the same privacy posture: Apple Intelligence on eligible devices, local-network AI when you use your Mac as the server, and no Lokei cloud in the middle. It is not on the App Store yet.</div>
+         </div>
+ 
+         <div class="faq-item">
+diff --git a/index.html b/index.html
+index 7d74735..05f042a 100644
+--- a/index.html
++++ b/index.html
+@@ -4,9 +4,9 @@
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Lokei — Private AI for Mac</title>
+-    <meta name="description" content="Lokei brings private AI to your Mac menu bar with Apple Intelligence on supported Macs, local Ollama models, and optional providers you configure.">
++    <meta name="description" content="Lokei brings private AI to your Mac menu bar with Apple Intelligence on supported Macs, local Ollama models, and optional providers you configure. An iOS companion is in development.">
+     <meta property="og:title" content="Lokei — Private AI for Mac">
+-    <meta property="og:description" content="Private AI in your Mac menu bar with on-device and local backend options.">
++    <meta property="og:description" content="Private AI in your Mac menu bar with on-device and local backend options. iOS companion in development.">
+     <meta property="og:type" content="website">
+     <meta property="og:url" content="https://getlokei.com">
+     <meta property="og:image" content="https://getlokei.com/og-image.png">
+@@ -15,7 +15,7 @@
+     <meta name="twitter:card" content="summary_large_image">
+     <meta name="twitter:image" content="https://getlokei.com/og-image.png">
+     <meta name="twitter:title" content="Lokei — Private AI for Mac">
+-    <meta name="twitter:description" content="Private AI in your Mac menu bar with Apple Intelligence, local Ollama models, and optional configured providers.">
++    <meta name="twitter:description" content="Private AI in your Mac menu bar with Apple Intelligence, local Ollama models, optional configured providers, and an iOS companion in development.">
+     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300FFCC'/%3E%3Cstop offset='100%25' stop-color='%230066FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z' fill='url(%23g)'/%3E%3C/svg%3E">
+     <style>
+         * { margin: 0; padding: 0; box-sizing: border-box; }
+@@ -39,7 +39,9 @@
+         @media (max-width: 700px) {
+             nav { padding: 16px 20px; } .nav-links { display: none; } .nav-hamburger { display: flex; }
+             .hero { padding: 100px 20px 60px; } .hero h1 { letter-spacing: 6px; }
+-            .features { padding: 60px 20px; } .how { padding: 60px 20px; }
++            .features { padding: 60px 20px; } .ios-companion { padding: 60px 20px; } .ios-panel { grid-template-columns: 1fr; padding: 28px; } .ios-phone { order: -1; }
++            .ios-actions { flex-direction: column; align-items: stretch; } .ios-pill-grid { grid-template-columns: 1fr; }
++            .how { padding: 60px 20px; }
+             .privacy-banner { padding: 60px 20px; } .download { padding: 60px 20px; }
+             .pricing-banner { padding: 28px 20px; } .preview { padding: 40px 20px; }
+             .hero-meta { gap: 16px; font-size: 12px; } .privacy-stats { gap: 28px; }
+@@ -90,6 +92,32 @@
+         .feature-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; background: linear-gradient(135deg, rgba(0,255,204,0.08), rgba(0,204,255,0.08)); border: 1px solid rgba(0,204,255,0.12); }
+         .feature-card h3 { font-size: 18px; font-weight: 500; margin-bottom: 10px; color: white; }
+         .feature-card p { color: #666; font-size: 14px; line-height: 1.7; }
++        .ios-companion { padding: 100px 40px; max-width: 1100px; margin: 0 auto; }
++        .ios-panel { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr); gap: 48px; align-items: center; background: linear-gradient(135deg, rgba(13,17,23,0.96), rgba(5,5,16,0.96)); border: 1px solid #1a1a2a; border-radius: 18px; padding: 48px; box-shadow: 0 40px 120px rgba(0,0,0,0.55), 0 0 70px rgba(0,204,255,0.05); }
++        .ios-copy .section-label, .ios-copy .section-title, .ios-copy .section-subtitle { text-align: left; margin-left: 0; margin-right: 0; }
++        .ios-copy .section-title { margin-bottom: 18px; }
++        .ios-copy .section-subtitle { margin-bottom: 28px; max-width: 520px; }
++        .status-pill { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(0,204,255,0.24); background: rgba(0,204,255,0.06); color: var(--blue); border-radius: 30px; padding: 8px 14px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; }
++        .status-pulse { width: 7px; height: 7px; border-radius: 50%; background: linear-gradient(135deg, var(--teal), var(--blue)); box-shadow: 0 0 16px rgba(0,204,255,0.7); }
++        .ios-pill-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 28px 0; }
++        .ios-pill { border: 1px solid #1d2430; background: rgba(0,0,0,0.18); border-radius: 14px; padding: 14px; }
++        .ios-pill strong { display: block; color: white; font-size: 13px; font-weight: 500; margin-bottom: 4px; }
++        .ios-pill span { color: #666; font-size: 12px; line-height: 1.6; }
++        .ios-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
++        .btn-muted { color: #777; padding: 14px 24px; border-radius: 30px; text-decoration: none; font-size: 14px; border: 1px solid #222; background: rgba(255,255,255,0.02); cursor: default; }
++        .ios-note { color: #444; font-size: 12px; margin-top: 18px; letter-spacing: 0.4px; }
++        .ios-phone { justify-self: center; width: min(100%, 300px); aspect-ratio: 0.49; border: 1px solid rgba(0,204,255,0.22); border-radius: 34px; background: linear-gradient(180deg, #151923, #050510); padding: 12px; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04), 0 30px 70px rgba(0,0,0,0.5), 0 0 46px rgba(0,204,255,0.08); }
++        .ios-screen { height: 100%; border-radius: 25px; overflow: hidden; background: radial-gradient(circle at top left, rgba(0,255,204,0.14), transparent 36%), #050510; border: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; }
++        .ios-topbar { display: flex; align-items: center; justify-content: space-between; padding: 18px 16px 10px; color: #7d8795; font-size: 11px; }
++        .ios-dynamic-island { width: 72px; height: 21px; border-radius: 18px; background: #000; border: 1px solid rgba(255,255,255,0.05); }
++        .ios-chat-head { padding: 10px 18px 16px; border-bottom: 1px solid rgba(255,255,255,0.06); }
++        .ios-chat-head h3 { font-size: 20px; font-weight: 300; color: white; letter-spacing: 1px; }
++        .ios-chat-head p { font-size: 12px; color: #586170; }
++        .ios-bubbles { padding: 18px 14px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
++        .ios-bubble { border-radius: 16px; padding: 12px 13px; font-size: 12px; line-height: 1.5; }
++        .ios-bubble.user { align-self: flex-end; color: #061014; background: linear-gradient(135deg, var(--teal), var(--blue)); max-width: 82%; }
++        .ios-bubble.assistant { align-self: flex-start; color: #c5cbd5; background: rgba(22,27,34,0.92); border: 1px solid rgba(255,255,255,0.04); max-width: 86%; }
++        .ios-compose { margin: 0 14px 14px; border: 1px solid rgba(0,204,255,0.14); background: rgba(13,17,23,0.84); border-radius: 18px; padding: 11px 12px; color: #53606d; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+         .how { padding: 100px 40px; background: #050508; }
+         .how-inner { max-width: 800px; margin: 0 auto; }
+         .steps { display: flex; flex-direction: column; margin-top: 64px; position: relative; }
+@@ -140,6 +168,7 @@
+     </a>
+     <ul class="nav-links">
+         <li><a href="#features">Features</a></li>
++        <li><a href="#ios">iOS</a></li>
+         <li><a href="#how">How It Works</a></li>
+         <li><a href="faq.html">FAQ</a></li>
+         <li><a href="privacy.html">Privacy</a></li>
+@@ -152,6 +181,7 @@
+ 
+ <div class="nav-mobile" id="mobileMenu">
+     <a href="#features" onclick="closeMenu()">Features</a>
++    <a href="#ios" onclick="closeMenu()">iOS</a>
+     <a href="#how" onclick="closeMenu()">How It Works</a>
+     <a href="faq.html" onclick="closeMenu()">FAQ</a>
+     <a href="privacy.html" onclick="closeMenu()">Privacy</a>
+@@ -229,6 +259,63 @@
+     </div>
+ </section>
+ 
++<section class="ios-companion" id="ios">
++    <div class="ios-panel">
++        <div class="ios-copy">
++            <div class="status-pill"><span class="status-pulse"></span>iOS app in development</div>
++            <p class="section-label">Lokei for iPhone</p>
++            <h2 class="section-title">The same private brain, built for your pocket.</h2>
++            <p class="section-subtitle">The iOS companion is being developed to bring Lokei's local-first workflow to iPhone: Apple Intelligence on eligible devices, local AI over Wi-Fi when you use your Mac as the server, and no Lokei cloud in the middle.</p>
++            <div class="ios-pill-grid">
++                <div class="ios-pill">
++                    <strong>On-device path</strong>
++                    <span>Use Apple Intelligence on supported iPhones when it is available.</span>
++                </div>
++                <div class="ios-pill">
++                    <strong>Mac as the brain</strong>
++                    <span>Connect to Ollama or LM Studio on your local network.</span>
++                </div>
++                <div class="ios-pill">
++                    <strong>Mobile attachments</strong>
++                    <span>Send text, images, and documents to the AI source you choose.</span>
++                </div>
++                <div class="ios-pill">
++                    <strong>Same privacy posture</strong>
++                    <span>No Lokei account, no telemetry, no Lokei-operated chat servers.</span>
++                </div>
++            </div>
++            <div class="ios-actions">
++                <span class="btn-muted">App Store release in development</span>
++                <a href="faq.html" class="btn-secondary">Read the FAQ</a>
++            </div>
++            <p class="ios-note">Availability, features, and requirements may change before release.</p>
++        </div>
++        <div class="ios-phone" aria-label="Preview of the Lokei iOS companion">
++            <div class="ios-screen">
++                <div class="ios-topbar">
++                    <span>9:41</span>
++                    <span class="ios-dynamic-island"></span>
++                    <span>Wi-Fi</span>
++                </div>
++                <div class="ios-chat-head">
++                    <h3>Lokei</h3>
++                    <p>Connected to local AI</p>
++                </div>
++                <div class="ios-bubbles">
++                    <div class="ios-bubble user">Summarize this PDF and keep it private.</div>
++                    <div class="ios-bubble assistant">Got it. I will use the AI source you selected and keep the workflow local-first.</div>
++                    <div class="ios-bubble user">Remember this project is for launch prep.</div>
++                    <div class="ios-bubble assistant">Saved locally for future chats.</div>
++                </div>
++                <div class="ios-compose">
++                    <span>Ask Lokei...</span>
++                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 2 11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
++                </div>
++            </div>
++        </div>
++    </div>
++</section>
++
+ <section class="features" id="features">
+     <p class="section-label">Why Lokei</p>
+     <h2 class="section-title">Everything you need.</h2>
+@@ -382,6 +469,7 @@
+             <h4>Product</h4>
+             <ul>
+                 <li><a href="#features">Features</a></li>
++                <li><a href="#ios">iOS Companion</a></li>
+                 <li><a href="#how">How It Works</a></li>
+                 <li><a href="#download">Availability</a></li>
+             </ul>
+-- 
+2.53.0
+

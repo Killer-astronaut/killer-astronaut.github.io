@@ -413,6 +413,7 @@ footer {
     .nav-links a:not(.nav-status) { display: none; }
     .hero { grid-template-columns: 1fr; }
     .hero-copy { font-size: 19px; }
+    .phone-wrap::before { inset-inline: 0; }
     .phone { width: min(86vw, 390px); transform: rotate(0); }
     .feature-grid { grid-template-columns: 1fr; }
     .feature-card { min-height: 0; }
