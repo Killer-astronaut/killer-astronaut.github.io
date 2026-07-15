@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lokei — Private AI for Mac</title>
-    <meta name="description" content="Lokei brings private AI to your Mac menu bar with Apple Intelligence on supported Macs, local Ollama models, and optional providers you configure.">
-    <meta property="og:title" content="Lokei — Private AI for Mac">
-    <meta property="og:description" content="Private AI in your Mac menu bar with on-device and local backend options.">
+    <title>Lokei — Private AI for Mac &amp; iPhone</title>
+    <meta name="description" content="Lokei is private AI for the people in the room: on-device models on Mac, iPhone, and iPad — plus Rooms, which shares one AI with everyone nearby over your own Wi-Fi. No cloud, no account, no subscription.">
+    <meta property="og:title" content="Lokei — Private AI for Mac &amp; iPhone">
+    <meta property="og:description" content="Private AI for the people in the room. Rooms shares one on-device AI with everyone nearby over Wi-Fi. No cloud. No account.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://getlokei.com">
     <meta property="og:image" content="https://getlokei.com/og-image.png">
@@ -14,9 +14,9 @@
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://getlokei.com/og-image.png">
-    <meta name="twitter:title" content="Lokei — Private AI for Mac">
-    <meta name="twitter:description" content="Private AI in your Mac menu bar with Apple Intelligence, local Ollama models, and optional configured providers.">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%2300FFCC'/%3E%3Cstop offset='100%25' stop-color='%230066FF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z' fill='url(%23g)'/%3E%3C/svg%3E">
+    <meta name="twitter:title" content="Lokei — Private AI for Mac &amp; iPhone">
+    <meta name="twitter:description" content="Private AI for the people in the room. Rooms shares one on-device AI with everyone nearby over Wi-Fi. No cloud. No account.">
+    <link rel="icon" type="image/png" href="lokei_app_icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --teal: #00FFCC; --blue: #00CCFF; --dark: #0d1117; --darker: #000000; }
@@ -25,6 +25,7 @@
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid #111; }
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo-text { font-size: 18px; font-weight: 200; letter-spacing: 8px; color: white; }
+        .lokei-leaf-mark { display: block; width: 28px; height: 28px; border-radius: 8px; object-fit: cover; filter: drop-shadow(0 0 10px rgba(0,204,255,0.25)); }
         .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
         .nav-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.2s; }
         .nav-links a:hover { color: white; }
@@ -47,7 +48,10 @@
         }
         .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 40px 80px; position: relative; overflow: hidden; }
         .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(0,204,255,0.08) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-        .hero-leaf { width: 100px; height: 100px; margin-bottom: 32px; filter: drop-shadow(0 0 30px rgba(0,204,255,0.4)); }
+        .hero-leaf { width: 112px; height: 112px; margin-bottom: 32px; border-radius: 28px; object-fit: cover; background: #02070a; filter: drop-shadow(0 0 30px rgba(0,204,255,0.4)); }
+        .app-header .lokei-leaf-mark { width: 14px; height: 14px; border-radius: 4px; }
+        .download .lokei-leaf-mark { width: 72px; height: 72px; border-radius: 18px; margin-bottom: 28px; filter: drop-shadow(0 0 20px rgba(0,204,255,0.3)); }
+        footer .lokei-leaf-mark { width: 24px; height: 24px; border-radius: 7px; }
         .hero h1 { font-size: clamp(48px, 8vw, 86px); font-weight: 100; letter-spacing: 16px; margin-bottom: 8px; background: linear-gradient(135deg, #ffffff 0%, #aaaaaa 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .hero-tagline { font-size: clamp(18px, 3vw, 24px); font-weight: 300; color: #666; letter-spacing: 3px; margin-bottom: 48px; }
         .hero-tagline span { background: linear-gradient(135deg, var(--teal), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -129,21 +133,41 @@
         .footer-bottom { max-width: 1100px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid #111; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
         .footer-bottom p { color: #333; font-size: 12px; }
         .footer-bottom a { color: #333; text-decoration: none; }
+
+        /* ── Rooms + coming-soon additions ─────────────────────────── */
+        .badge-soon { display: inline-flex; align-items: center; gap: 7px; padding: 6px 14px; border-radius: 20px; border: 1px dashed rgba(0,255,204,0.45); font-size: 12px; letter-spacing: 2px; font-weight: 600; color: #00FFCC; background: rgba(0,255,204,0.05); text-transform: uppercase; }
+        .badge-soon .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); animation: soonpulse 2s ease-in-out infinite; }
+        @keyframes soonpulse { 0%,100% { opacity: 1; transform: scale(1);} 50% { opacity: 0.35; transform: scale(0.75);} }
+        .rooms-hero-line { display: flex; align-items: center; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+        .room-chips { display: flex; gap: 8px; padding: 10px 16px; border-bottom: 1px solid #1a1a1a; background: #0a0e13; flex-wrap: wrap; }
+        .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: #9beadd; background: rgba(0,255,204,0.07); border: 1px solid rgba(0,255,204,0.18); padding: 3px 10px; border-radius: 12px; }
+        .chip .cdot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+        .chip.host { color: #a8e2ff; background: rgba(0,204,255,0.08); border-color: rgba(0,204,255,0.25); }
+        .chip.host .cdot { background: var(--blue); }
+        .round-banner { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #d8b7ff; background: rgba(168,85,247,0.10); border: 1px solid rgba(168,85,247,0.25); border-radius: 10px; padding: 8px 12px; }
+        .round-banner b { color: #eadcff; font-weight: 600; }
+        .msg-peer { align-self: flex-start; background: #10151c; border: 1px solid #1c232c; border-radius: 12px; padding: 10px 14px; max-width: 82%; font-size: 13px; color: #b9c2cc; }
+        .msg-peer .who { display: block; font-size: 10px; letter-spacing: 1.5px; color: #5a6672; margin-bottom: 3px; text-transform: uppercase; }
+        .msg-lock { align-self: flex-start; font-size: 11px; color: #5a6672; display: flex; align-items: center; gap: 6px; }
+        .rooms-caption { text-align: center; color: #555; font-size: 13px; margin-top: 18px; letter-spacing: 0.5px; }
+        .rooms-caption b { color: #9beadd; font-weight: 600; }
     </style>
 </head>
 <body>
 
 <nav>
     <a href="#" class="nav-logo">
-        <svg width="28" height="28" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="nlg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z" fill="url(#nlg)"/><line x1="50" y1="12" x2="50" y2="88" stroke="white" stroke-width="2" opacity="0.2"/></svg>
+        <img class="lokei-leaf-mark" src="lokei_leaf_ios.png" alt="" aria-hidden="true">
         <span class="nav-logo-text">LOKEI</span>
     </a>
     <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="#features">Mac</a></li>
+        <li><a href="#iphone">iPhone &amp; iPad</a></li>
         <li><a href="#how">How It Works</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="privacy.html">Privacy</a></li>
-        <li><a href="#download" class="nav-download">Launch Pending</a></li>
+        <li><a href="https://apps.apple.com/app/id6762427782" class="nav-download">Get Lokei for Mac</a></li>
     </ul>
     <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -151,11 +175,13 @@
 </nav>
 
 <div class="nav-mobile" id="mobileMenu">
-    <a href="#features" onclick="closeMenu()">Features</a>
+    <a href="#rooms" onclick="closeMenu()">Rooms</a>
+    <a href="#features" onclick="closeMenu()">Mac</a>
+    <a href="#iphone" onclick="closeMenu()">iPhone &amp; iPad</a>
     <a href="#how" onclick="closeMenu()">How It Works</a>
     <a href="faq.html" onclick="closeMenu()">FAQ</a>
     <a href="privacy.html" onclick="closeMenu()">Privacy</a>
-    <a href="#download" class="nav-download" onclick="closeMenu()">Launch Pending</a>
+    <a href="https://apps.apple.com/app/id6762427782" class="nav-download" onclick="closeMenu()">Get Lokei for Mac</a>
 </div>
 
 <script>
@@ -165,39 +191,32 @@
 
 <section class="hero">
     <div class="hero-glow"></div>
-    <svg class="hero-leaf" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <defs><linearGradient id="hlg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs>
-        <path d="M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z" fill="url(#hlg)"/>
-        <line x1="50" y1="12" x2="50" y2="88" stroke="white" stroke-width="1.5" opacity="0.25"/>
-        <line x1="50" y1="35" x2="36" y2="28" stroke="white" stroke-width="1" opacity="0.18"/>
-        <line x1="50" y1="35" x2="64" y2="28" stroke="white" stroke-width="1" opacity="0.18"/>
-        <line x1="50" y1="50" x2="32" y2="42" stroke="white" stroke-width="1" opacity="0.18"/>
-        <line x1="50" y1="50" x2="68" y2="42" stroke="white" stroke-width="1" opacity="0.18"/>
-        <line x1="50" y1="65" x2="36" y2="58" stroke="white" stroke-width="1" opacity="0.15"/>
-        <line x1="50" y1="65" x2="64" y2="58" stroke="white" stroke-width="1" opacity="0.15"/>
-    </svg>
+    <img class="hero-leaf" src="lokei_leaf_ios.png" alt="Lokei leaf">
     <h1>LOKEI</h1>
-    <p class="hero-tagline">Your AI. Your Mac. <span>Always Private.</span></p>
+    <p class="hero-tagline">Private AI for <span>the people in the room.</span></p>
     <div class="hero-buttons">
-        <a href="#download" class="btn-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
-            Launch Pending
+        <a href="https://apps.apple.com/app/id6762427782" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="8" y1="22" x2="16" y2="22"/><line x1="12" y1="18" x2="12" y2="22"/></svg>
+            Download for Mac
         </a>
-        <a href="#how" class="btn-secondary">See how it works</a>
+        <a href="#rooms" class="btn-secondary">Meet Rooms ↓</a>
     </div>
-    <p class="price-tag"><span>Mac App Store launch pending</span> · No subscription planned</p>
+    <div class="rooms-hero-line">
+        <span class="badge-soon"><span class="pulse"></span>Lokei AI for iPhone &amp; iPad — coming soon</span>
+    </div>
+    <p class="price-tag"><span>Lokei Studio for Mac — $14.99, one-time</span> · No subscription. Ever.</p>
     <div class="hero-meta">
         <span><span class="dot"></span>On-device by default</span>
         <span><span class="dot"></span>No tracking</span>
         <span><span class="dot"></span>No Lokei account</span>
-        <span><span class="dot"></span>Backend choice</span>
+        <span><span class="dot"></span>Rooms over your Wi-Fi</span>
     </div>
 </section>
 
 <section class="preview">
     <div class="app-window">
         <div class="app-header">
-            <svg width="14" height="14" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="alg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z" fill="url(#alg)"/></svg>
+            <img class="lokei-leaf-mark" src="lokei_leaf_ios.png" alt="" aria-hidden="true">
             <span class="app-header-title">Lokei</span>
             <div class="app-header-spacer"></div>
             <span class="app-preset">Code Helper</span>
@@ -229,8 +248,79 @@
     </div>
 </section>
 
-<section class="features" id="features">
-    <p class="section-label">Why Lokei</p>
+<section class="features" id="rooms" style="padding-bottom: 40px;">
+    <p class="section-label">New — Lokei Rooms</p>
+    <h2 class="section-title">One AI. Everyone in the room.</h2>
+    <p class="section-subtitle">Rooms turns a Mac, iPhone, or iPad into a private AI that everyone nearby can share — over your own Wi‑Fi. One person hosts, everyone joins in seconds with a code or QR. No account. No cloud. Nothing leaves the room.</p>
+
+    <div class="preview" style="padding: 20px 20px 0;">
+        <div class="app-window" style="max-width: 480px;">
+            <div class="app-header">
+                <img class="lokei-leaf-mark" src="lokei_leaf_ios.png" alt="" aria-hidden="true">
+                <span class="app-header-title">Trivia Night</span>
+                <div class="app-header-spacer"></div>
+                <span class="app-preset">Game Night</span>
+            </div>
+            <div class="room-chips">
+                <span class="chip host"><span class="cdot"></span>Maya · Host</span>
+                <span class="chip"><span class="cdot"></span>Leo</span>
+                <span class="chip"><span class="cdot"></span>Sam</span>
+                <span class="chip"><span class="cdot"></span>Priya</span>
+            </div>
+            <div class="app-messages">
+                <div class="round-banner">🎯 <span><b>Answer round:</b> Which planet spins backwards? — answers hidden until reveal · <b>3/3 in</b></span></div>
+                <div class="msg-lock">🔒 Everyone answered privately…</div>
+                <div class="msg-lokei">
+                    <div class="msg-lokei-label">Lokei</div>
+                    <div class="msg-lokei-bubble">Reveal! Leo said <b>Venus</b> ✓, Sam said <b>Venus</b> ✓, Priya said <b>Mars</b> ✗ — it's Venus, which rotates retrograde. Scoreboard: Leo 3 · Sam 2 · Priya 2. Next round?</div>
+                </div>
+                <div class="msg-peer"><span class="who">Priya</span>rematch. right now.</div>
+            </div>
+            <div class="app-input">
+                <div class="app-input-field">Message the room — @lokei to ask the AI…</div>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 12 8 16 12"/><line x1="12" y1="16" x2="12" y2="8"/></svg>
+            </div>
+        </div>
+    </div>
+    <p class="rooms-caption">Answered on the host's device · streamed live to every screen · <b>secured with TLS on your local network</b></p>
+
+    <div class="features-grid" style="margin-top: 56px;">
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+            <h3>Classrooms</h3>
+            <p>A patient tutor for the whole class, hosted on the teacher's device. It guides students toward answers instead of handing them over — and runs quiz rounds with hidden answers it checks and scores. No student data ever leaves the room.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="11" x2="10" y2="11"/><line x1="8" y1="9" x2="8" y2="13"/><line x1="15" y1="12" x2="15.01" y2="12"/><line x1="18" y1="10" x2="18.01" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.72-1.72A2 2 0 0 1 10.134 15h3.732a2 2 0 0 1 1.414.586L17 17.31c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></svg></div>
+            <h3>Game nights</h3>
+            <p>An AI game master that runs trivia, story adventures, and party games — keeping score by name and keeping everyone in. Hidden-answer rounds mean nobody can copy; the reveal lands for everyone at once.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+            <h3>Work sessions</h3>
+            <p>One private AI in the meeting — legal, medical, and engineering room modes with honest, professional framing. Capture decisions, tasks, and files into a shared workspace that never touches a server.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+            <h3>Join in seconds</h3>
+            <p>The host shows a QR code or a six-digit room code — classmates and friends are in within seconds. The host approves who gets in (or lets the code auto-admit a whole class at once).</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <h3>People-first chat</h3>
+            <p>Talk to each other like any group chat — the AI stays quiet unless you mention <span style="color:#00FFCC;">@lokei</span> or ask it directly. Hosts can switch on private messages between members, with everyone told when the rules change.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <h3>Local by law, not promise</h3>
+            <p>Rooms are discoverable only on your Wi‑Fi, every connection is TLS-encrypted with a key derived from the room code, and the AI answers on the host's own hardware. There is no server to trust — none exists.</p>
+        </div>
+    </div>
+    <p class="rooms-caption" style="margin-top: 40px;">Host from a Mac today · hosting from iPhone &amp; iPad arrives with <b>Lokei AI — coming soon</b></p>
+</section>
+
+<section class="features" id="features" style="padding-top: 60px;">
+    <p class="section-label">Lokei Studio for Mac — available now</p>
     <h2 class="section-title">Everything you need.</h2>
     <p class="section-subtitle">Built for focus, speed, and local-first privacy. Lokei works quietly in the background so you can stay in flow.</p>
     <div class="features-grid">
@@ -262,7 +352,7 @@
         <div class="feature-card">
             <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <h3>Backend Choice</h3>
-            <p>Choose Apple Intelligence, local Ollama models, or an OpenAI-compatible provider you configure. The AI &amp; Models settings make the active backend clear.</p>
+            <p>Pick Apple Intelligence on supported devices, local Ollama on your Mac, or — on iPhone — reach your Mac's open-source models over your own Wi-Fi. The active backend is always shown clearly.</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
@@ -287,6 +377,45 @@
     </div>
 </section>
 
+<section class="features" id="iphone" style="padding-top: 0;">
+    <p class="section-label">Lokei AI for iPhone &amp; iPad</p>
+    <h2 class="section-title">Pocket-sized. Same privacy.</h2>
+    <div style="display:flex; justify-content:center; margin: 6px 0 18px;"><span class="badge-soon"><span class="pulse"></span>Coming soon to the App Store</span></div>
+    <p class="section-subtitle">Lokei for iPhone is a full standalone chat app — not a remote control. On supported iPhones it runs Apple Intelligence on-device. Anywhere else, it streams from the world's most powerful open-source models running on your own Mac, over your own Wi-Fi. Your prompts never touch a Lokei server.</p>
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></div>
+            <h3>On-device with Apple Intelligence</h3>
+            <p>On iPhone 15 Pro, the iPhone 16 family, and the iPhone 17 family, Lokei taps Apple's on-device foundation model. Zero network. Instant cold-start. Nothing leaves your phone.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12" y2="20.01"/></svg></div>
+            <h3>Your Mac, as your server</h3>
+            <p>Point Lokei at the Ollama or LM Studio server on your Mac and your iPhone gets unlimited access to 70B-class open-source models — Llama, Qwen, Mistral, Gemma — without any cloud, subscription, or rate limit.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>Local-network only</h3>
+            <p>Lokei for iPhone refuses to connect to anything outside your private network. The address bar only accepts <code style="background:#0d1117;border:1px solid #222;border-radius:4px;padding:2px 6px;font-family:monospace;font-size:13px;color:#00CCFF;">localhost</code>, <code style="background:#0d1117;border:1px solid #222;border-radius:4px;padding:2px 6px;font-family:monospace;font-size:13px;color:#00CCFF;">.local</code>, and private Wi-Fi addresses. No public URLs, no relays, no exceptions.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <h3>Advisor mode</h3>
+            <p>Run a fast small model on your phone for everyday questions, and quietly consult a much larger model on your Mac when the answer warrants a second opinion. The trade-off between speed and depth, finally automatic.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M19 8a7 7 0 0 1-14 0"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+            <h3>On-device dictation</h3>
+            <p>Speak naturally — Lokei uses iOS speech recognition in on-device-only mode. Your audio is never uploaded, not even to Apple.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <h3>Attachments &amp; export</h3>
+            <p>Attach photos, screenshots, PDFs, or code. Export any conversation to PDF, share it through the system share sheet, or scrub it with one tap.</p>
+        </div>
+    </div>
+</section>
+
 <section class="how" id="how">
     <div class="how-inner">
         <p class="section-label">Setup</p>
@@ -303,7 +432,7 @@
                 <div class="step-number">2</div>
                 <div class="step-content">
                     <h3>Install Lokei</h3>
-                    <p>Lokei is being prepared for the Mac App Store. Once installed, onboarding guides you through Apple Intelligence or Ollama setup based on what your Mac supports.</p>
+                    <p>Download <a href="https://apps.apple.com/app/id6762427782" style="color:#00CCFF;">Lokei Studio from the Mac App Store</a>. Onboarding guides you through Apple Intelligence or Ollama setup based on what your Mac supports.</p>
                 </div>
             </div>
             <div class="step">
@@ -339,32 +468,34 @@
 </section>
 
 <section class="download" id="download">
-    <svg width="72" height="72" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 28px; filter: drop-shadow(0 0 20px rgba(0,204,255,0.3));">
-        <defs><linearGradient id="dlg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs>
-        <path d="M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z" fill="url(#dlg)"/>
-        <line x1="50" y1="12" x2="50" y2="88" stroke="white" stroke-width="1.5" opacity="0.25"/>
-    </svg>
+    <img class="lokei-leaf-mark lokei-leaf-large" src="lokei_leaf_ios.png" alt="Lokei leaf">
     <h2>Get Lokei</h2>
-    <p>Private AI for Mac. Mac App Store launch pending.</p>
-    <div class="download-price">Coming to the Mac App Store</div>
+    <p>Lokei Studio for Mac is available today. Lokei AI for iPhone &amp; iPad is coming soon — free.</p>
+    <div class="download-price">$14.99 one-time on Mac · iPhone &amp; iPad app will be free</div>
     <div class="pricing-banner">
-        <h3>Planned as a one-time Mac app.</h3>
-        <p>Lokei is designed around local ownership: no Lokei account, no tracking, and no subscription planned. Apple Intelligence and Ollama can run without per-message API fees; remote providers are optional and user-configured.</p>
+        <h3>One-time purchase. No subscription. Ever.</h3>
+        <p>Lokei is designed around local ownership: no Lokei account, no tracking, and no subscription. Apple Intelligence and Ollama run without per-message API fees, and Rooms keeps every connection on your own Wi-Fi — no relay, no cloud.</p>
         <div class="pricing-items">
             <div class="pricing-item"><div class="check">✓</div><p>No Lokei account</p></div>
             <div class="pricing-item"><div class="check">✓</div><p>On-device options</p></div>
-            <div class="pricing-item"><div class="check">✓</div><p>Local model support</p></div>
+            <div class="pricing-item"><div class="check">✓</div><p>Local-network only on iPhone</p></div>
             <div class="pricing-item"><div class="check">✓</div><p>Privacy controls</p></div>
         </div>
     </div>
-    <a href="#download" class="btn-primary" style="display: inline-flex; font-size: 18px; padding: 18px 48px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
-        Mac App Store Launch Pending
-    </a>
-    <p style="margin-top: 10px; color: #444; font-size: 12px; letter-spacing: 0.5px;">Not on the Mac App Store yet.</p>
+    <div style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center; align-items:center;">
+        <a href="https://apps.apple.com/app/id6762427782" class="btn-primary" style="display: inline-flex; font-size: 16px; padding: 16px 32px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="8" y1="22" x2="16" y2="22"/><line x1="12" y1="18" x2="12" y2="22"/></svg>
+            Download for Mac — $14.99
+        </a>
+        <span class="badge-soon" style="padding: 14px 28px; font-size: 13px;"><span class="pulse"></span>Lokei AI for iPhone &amp; iPad — coming soon</span>
+    </div>
     <p class="download-meta" style="margin-top: 20px;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        Requires <span class="download-meta-highlight">macOS 13 Ventura</span> or later &nbsp;·&nbsp; Apple Intelligence support depends on Mac model and macOS &nbsp;·&nbsp; Ollama optional
+        Mac: requires <span class="download-meta-highlight">macOS 13 Ventura</span> or later
+    </p>
+    <p class="download-meta" style="margin-top: 10px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00CCFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>
+        iPhone &amp; iPad: coming soon · Apple Intelligence on supported devices, or your Mac's models over your own Wi‑Fi
     </p>
     <p style="margin-top: 16px;"><a href="faq.html" style="color: #555; font-size: 13px; text-decoration: none;">Have questions? Read the FAQ →</a></p>
 </section>
@@ -373,14 +504,15 @@
     <div class="footer-inner">
         <div class="footer-brand">
             <a href="#" class="nav-logo">
-                <svg width="24" height="24" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="flg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#00FFCC"/><stop offset="100%" style="stop-color:#0066FF"/></linearGradient></defs><path d="M50 8 C62 8 80 18 86 34 C92 50 88 66 80 76 C72 86 62 90 50 91 C38 90 28 86 20 76 C12 66 8 50 14 34 C20 18 38 8 50 8 Z" fill="url(#flg)"/></svg>
+                <img class="lokei-leaf-mark" src="lokei_leaf_ios.png" alt="" aria-hidden="true">
                 <span class="nav-logo-text" style="font-size: 15px;">LOKEI</span>
             </a>
-            <p>Private AI for Mac. On-device and local by default. No tracking.</p>
+            <p>Private AI for Mac, iPhone, and iPad — and for everyone in the room. On-device and local-network by default. No tracking.</p>
         </div>
         <div class="footer-links">
             <h4>Product</h4>
             <ul>
+                <li><a href="#rooms">Lokei Rooms</a></li>
                 <li><a href="#features">Features</a></li>
                 <li><a href="#how">How It Works</a></li>
                 <li><a href="#download">Availability</a></li>
