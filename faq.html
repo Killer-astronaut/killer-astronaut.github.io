@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAQ — Lokei</title>
-    <meta name="description" content="Frequently asked questions about Lokei, private AI for Mac with Apple Intelligence, local Ollama models, and optional configured providers.">
+    <meta name="description" content="Frequently asked questions about Lokei, private AI for Mac, iPhone, and iPad with Apple Intelligence, local Ollama models, and optional configured providers.">
     <meta property="og:title" content="FAQ — Lokei">
-    <meta property="og:description" content="Frequently asked questions about Lokei, private AI for Mac with on-device and local backend options.">
+    <meta property="og:description" content="Frequently asked questions about Lokei, private AI for Mac, iPhone, and iPad with on-device and local backend options.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://getlokei.com/faq.html">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="FAQ — Lokei">
-    <meta name="twitter:description" content="Frequently asked questions about Lokei, private AI for Mac with on-device and local backend options.">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="twitter:description" content="Frequently asked questions about Lokei, private AI for Mac, iPhone, and iPad with on-device and local backend options.">
+    <link rel="icon" type="image/png" href="lokei_app_icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --teal: #00FFCC; --blue: #00CCFF; --dark: #0d1117; --darker: #000000; }
@@ -23,11 +23,11 @@
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid #111; }
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo-text { font-size: 18px; font-weight: 200; letter-spacing: 8px; color: white; }
-        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
         .nav-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .nav-links a:hover { color: white; }
         .nav-links a.active { color: white; }
-        .nav-cta { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black !important; padding: 8px 20px; border-radius: 20px; font-weight: 600; font-size: 13px; }
+        .nav-cta { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black !important; padding: 8px 18px; border-radius: 20px; font-weight: 600; font-size: 13px; white-space: nowrap; }
         .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
         .hamburger span { width: 22px; height: 2px; background: white; }
         .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.97); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
@@ -54,6 +54,7 @@
         .faq-answer p { color: #888; font-size: 15px; line-height: 1.9; }
         .faq-answer a { color: var(--teal); text-decoration: none; }
         .faq-answer a:hover { text-decoration: underline; }
+        .faq-answer code { background: #0d1117; border: 1px solid #222; border-radius: 4px; padding: 2px 6px; font-family: 'SF Mono', Menlo, monospace; font-size: 13px; color: #00CCFF; }
         .dev-tag { display: inline-block; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(135deg, var(--teal), var(--blue)); color: black; padding: 2px 8px; border-radius: 8px; font-weight: 700; margin-left: 8px; vertical-align: middle; }
 
         /* CONTACT */
@@ -70,10 +71,12 @@
         .footer-bottom a { color: #444; text-decoration: none; font-size: 13px; }
         .footer-bottom a:hover { color: white; }
 
-        @media (max-width: 768px) {
-            nav { padding: 16px 20px; }
+        @media (max-width: 960px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
             .faq-hero { padding: 120px 24px 60px; }
             .faq-content { padding: 0 24px 60px; }
             footer { padding: 40px 24px 30px; }
@@ -95,6 +98,7 @@
         <li><a href="faq.html" class="active">FAQ</a></li>
         <li><a href="privacy.html">Privacy</a></li>
         <li><a href="https://apps.apple.com/app/id6762427782" class="nav-cta">Mac App Store</a></li>
+        <li><a href="https://apps.apple.com/app/id6768466290" class="nav-cta">iOS App Store</a></li>
     </ul>
     <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
@@ -105,6 +109,7 @@
     <a href="faq.html">FAQ</a>
     <a href="privacy.html">Privacy</a>
     <a href="https://apps.apple.com/app/id6762427782">Mac App Store</a>
+    <a href="https://apps.apple.com/app/id6768466290">iOS App Store</a>
 </div>
 
 <!-- HERO -->
@@ -125,7 +130,7 @@
                 What is Lokei? <span class="arrow">+</span>
             </button>
             <div class="faq-answer">
-                <p>Lokei is a private AI assistant that lives in your Mac's menu bar. On supported Macs it can use Apple Intelligence for on-device responses, and it also supports local Ollama models plus optional OpenAI-compatible providers you configure.</p>
+                <p>Lokei is a private AI assistant. On Mac it lives in your menu bar; on iPhone and iPad it's a standalone chat app. On supported devices it can use Apple Intelligence for on-device responses, and it also supports local Ollama or LM Studio models plus optional OpenAI-compatible providers you configure.</p>
             </div>
         </div>
 
@@ -134,7 +139,7 @@
                 What do I need to use Lokei? <span class="arrow">+</span>
             </button>
             <div class="faq-answer">
-                <p>You need a Mac running macOS 13 Ventura or later. Apple Intelligence support depends on your Mac model, macOS version, and Apple Intelligence availability. If you choose the Ollama backend, you also need <a href="https://ollama.com">Ollama</a> installed and running.</p>
+                <p>For Lokei Studio you need a Mac running macOS 13 Ventura or later. Lokei for iPhone &amp; iPad runs on iPhone and iPad, and does not need a Mac. On either platform, Apple Intelligence support depends on your device model, OS version, and Apple Intelligence availability. If you choose the Ollama backend, you also need <a href="https://ollama.com">Ollama</a> installed and running on the machine hosting it.</p>
             </div>
         </div>
 
@@ -152,7 +157,7 @@
                 How do I get started? <span class="arrow">+</span>
             </button>
             <div class="faq-answer">
-                <p>Install Lokei from the <a href="https://apps.apple.com/app/id6762427782">Mac App Store</a> and follow onboarding. Supported Macs can start with Apple Intelligence. If you choose Ollama, Lokei shows the Ollama download link and model setup steps inline, then lets you manage models from Settings → AI &amp; Models.</p>
+                <p>Install Lokei from the <a href="https://apps.apple.com/app/id6762427782">Mac App Store</a>, or get <a href="https://apps.apple.com/app/id6768466290">Lokei for iPhone &amp; iPad</a> free from the App Store, then follow onboarding. Supported devices can start with Apple Intelligence. If you choose Ollama, Lokei shows the download link and model setup steps inline, then lets you manage models from Settings → AI &amp; Models.</p>
             </div>
         </div>
     </div>
@@ -245,10 +250,11 @@
 
         <div class="faq-item">
             <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                What is Advisor Mode? <span class="dev-tag">In development</span> <span class="arrow">+</span>
+                What is Advisor Mode? <span class="arrow">+</span>
             </button>
             <div class="faq-answer">
-                <p>Advisor Mode lets Lokei escalate from a fast model to a stronger model only when needed — for deeper reasoning, confidence checks, complex coding decisions, or high-stakes tradeoffs. Use a fast model for everyday work and escalate when the moment calls for it. This feature is in development.</p>
+                <p>Advisor Mode lets Lokei escalate from a fast model to a stronger model only when needed — for deeper reasoning, confidence checks, complex coding decisions, or high-stakes tradeoffs. Use a fast model for everyday work and escalate when the moment calls for it.</p>
+                <p>It ships in Lokei for iPhone &amp; iPad. Turn it on in Settings → Advisor mode; it needs a Mac on the same Wi-Fi running a larger model. When the on-device model sounds unsure, Lokei quietly asks your Mac for a second opinion and shows that answer instead.</p>
             </div>
         </div>
 
@@ -262,25 +268,54 @@
         </div>
     </div>
 
-    <!-- iOS COMPANION -->
+    <!-- iPHONE & iPAD -->
     <div class="faq-category">
-        <div class="faq-category-title">iOS Companion</div>
+        <div class="faq-category-title">iPhone &amp; iPad</div>
 
         <div class="faq-item">
             <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                Does Lokei work on iPhone? <span class="dev-tag">In development</span> <span class="arrow">+</span>
+                Does Lokei work on iPhone? <span class="arrow">+</span>
             </button>
             <div class="faq-answer">
-                <p>An iOS companion app is in development. It's being built around the same privacy posture: Apple Intelligence on eligible devices, local-network AI when you use your Mac as the server, and no Lokei cloud in the middle. It is not on the App Store yet. Availability, features, and requirements may change before release.</p>
+                <p>Yes. Lokei for iPhone &amp; iPad is <a href="https://apps.apple.com/app/id6768466290">on the App Store</a> now, free. It's a standalone app, not a remote control for the Mac — you do not need Lokei for Mac to use it. It carries the same privacy posture: Apple Intelligence on eligible devices, local-network AI when you point it at your own server, and no Lokei cloud in the middle.</p>
             </div>
         </div>
 
         <div class="faq-item">
             <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                How will iPhone connect to my Mac? <span class="dev-tag">In development</span> <span class="arrow">+</span>
+                Do I need a Mac to use it? <span class="arrow">+</span>
             </button>
             <div class="faq-answer">
-                <p>The planned approach is for your iPhone to connect to Ollama or LM Studio running on your Mac over your local Wi-Fi network. This keeps your AI processing on hardware you control without routing through external servers. Details may change before release.</p>
+                <p>No. On supported devices Lokei chats with Apple Intelligence directly on your iPhone or iPad, with no other hardware involved. Pairing with a Mac is optional — it's what you'd do to reach larger open-source models or Mac-hosted tools.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                How does iPhone connect to my Mac? <span class="arrow">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>Your iPhone connects to Ollama, LM Studio, Lokei for Mac, or another local OpenAI-compatible server over your Wi-Fi. Open Settings → Local Server, enter the address (for example <code>http://192.168.1.20:11434</code>), and test the connection. This keeps AI processing on hardware you control without routing through external servers.</p>
+                <p>Lokei rejects public cloud URLs for local server mode — the address field only accepts local and private network addresses.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                Can I host a Room from my iPhone or iPad? <span class="arrow">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>Yes. Rooms works both ways on iOS — you can join a Room someone else is hosting, or host one yourself so everyone nearby shares your device's AI over your own Wi-Fi. Mac, iPhone, and iPad can all act as the host.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+                What is Lokei Pro, and what does it cost? <span class="arrow">+</span>
+            </button>
+            <div class="faq-answer">
+                <p>Lokei for iPhone &amp; iPad is free and fully usable as-is. Lokei Pro is an optional <strong>one-time $4.99 unlock</strong> — not a subscription — that adds Shortcuts and Siri integration, an MCP client for connecting to Model Context Protocol servers on your local network, a saved prompt library for switching system prompts instantly, and advanced exports (Markdown with frontmatter, full JSON, and watermark-free PDF).</p>
+                <p>There's also an optional tip jar. Tips unlock nothing — they're just gratitude. Restore Purchases is in Settings.</p>
             </div>
         </div>
     </div>
@@ -294,7 +329,7 @@
                 Is Lokei a one-time purchase? <span class="arrow">+</span>
             </button>
             <div class="faq-answer">
-                <p>Lokei is planned around ownership, not subscriptions. Final pricing is shown on the App Store. There is no Lokei subscription planned.</p>
+                <p>Yes — Lokei is built around ownership, not subscriptions. Lokei Studio for Mac is $14.99, paid once. Lokei for iPhone &amp; iPad is free, with an optional one-time $4.99 Lokei Pro unlock. There is no Lokei subscription, on either platform. Current pricing is always shown on the App Store.</p>
             </div>
         </div>
 
@@ -309,10 +344,10 @@
 
         <div class="faq-item">
             <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-                Can I use Lokei on multiple Macs? <span class="arrow">+</span>
+                Can I use Lokei on multiple devices? <span class="arrow">+</span>
             </button>
             <div class="faq-answer">
-                <p>Apple's App Store policies determine use across Macs associated with your Apple ID, including any applicable Family Sharing support.</p>
+                <p>Apple's App Store policies determine use across Macs, iPhones, and iPads associated with your Apple ID, including any applicable Family Sharing support. The Mac and iOS apps are separate App Store listings, so each is purchased or downloaded on its own.</p>
             </div>
         </div>
     </div>

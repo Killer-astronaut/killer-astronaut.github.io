@@ -12,7 +12,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Privacy Policy — Lokei">
     <meta name="twitter:description" content="Plain privacy for a local-first AI app. Lokei does not collect conversations, analytics, or tracking data.">
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="lokei_app_icon.png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --teal: #00FFCC; --blue: #00CCFF; --dark: #0d1117; --darker: #000000; }
@@ -23,11 +23,11 @@
         nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid #111; }
         .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
         .nav-logo-text { font-size: 18px; font-weight: 200; letter-spacing: 8px; color: white; }
-        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
         .nav-links a { color: #888; text-decoration: none; font-size: 14px; transition: color 0.3s; }
         .nav-links a:hover { color: white; }
         .nav-links a.active { color: white; }
-        .nav-cta { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black !important; padding: 8px 20px; border-radius: 20px; font-weight: 600; font-size: 13px; }
+        .nav-cta { background: linear-gradient(135deg, var(--teal), var(--blue)); color: black !important; padding: 8px 18px; border-radius: 20px; font-weight: 600; font-size: 13px; white-space: nowrap; }
         .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 8px; }
         .hamburger span { width: 22px; height: 2px; background: white; }
         .mobile-menu { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.97); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 32px; }
@@ -73,10 +73,12 @@
         .footer-bottom a { color: #444; text-decoration: none; font-size: 13px; }
         .footer-bottom a:hover { color: white; }
 
-        @media (max-width: 768px) {
-            nav { padding: 16px 20px; }
+        @media (max-width: 960px) {
             .nav-links { display: none; }
             .hamburger { display: flex; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
             .policy-hero { padding: 120px 24px 60px; }
             .policy-hero .short-version { padding: 20px 24px; }
             .stats-strip { gap: 32px; padding: 24px; }
@@ -100,6 +102,7 @@
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="privacy.html" class="active">Privacy</a></li>
         <li><a href="https://apps.apple.com/app/id6762427782" class="nav-cta">Mac App Store</a></li>
+        <li><a href="https://apps.apple.com/app/id6768466290" class="nav-cta">iOS App Store</a></li>
     </ul>
     <button class="hamburger" onclick="document.getElementById('mobileMenu').classList.add('active')" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
@@ -110,12 +113,13 @@
     <a href="faq.html">FAQ</a>
     <a href="privacy.html">Privacy</a>
     <a href="https://apps.apple.com/app/id6762427782">Mac App Store</a>
+    <a href="https://apps.apple.com/app/id6768466290">iOS App Store</a>
 </div>
 
 <!-- HERO -->
 <section class="policy-hero">
     <h1>PRIVACY POLICY</h1>
-    <p class="last-updated">Last updated June 2026</p>
+    <p class="last-updated">Last updated August 2026</p>
     <p class="subtitle">Plain privacy for a local-first AI app.</p>
     <div class="short-version">
         <strong>The short version:</strong> Lokei does not collect conversations, files, prompts, attachments, analytics, advertising identifiers, or tracking data. Your chat history, settings, presets, project context, and memory are stored locally on your device. When you send a message, it goes only to the AI backend you have selected — Apple Intelligence on-device, a local model server you run, or a remote provider you configure. Lokei does not operate a relay server and does not receive a copy of your data.
@@ -135,7 +139,7 @@
 
     <div class="policy-section">
         <h2>1. Overview</h2>
-        <p>Lokei is a private AI assistant for Mac (with an iOS companion in development) that lives in the menu bar. It supports private, on-device, or local-first AI workflows through Apple Intelligence on supported devices, local model servers such as Ollama or LM Studio, and optional user-configured compatible providers. Lokei itself does not operate chat servers, does not require a Lokei account, does not sell data, does not run ads, and does not use tracking.</p>
+        <p>Lokei is a private AI assistant for Mac, iPhone, and iPad. On Mac it lives in the menu bar; on iPhone and iPad it is a standalone app that does not require the Mac app. This policy covers both. Lokei supports private, on-device, or local-first AI workflows through Apple Intelligence on supported devices, local model servers such as Ollama or LM Studio, and optional user-configured compatible providers. Lokei itself does not operate chat servers, does not require a Lokei account, does not sell data, does not run ads, and does not use tracking.</p>
     </div>
 
     <div class="policy-section">
@@ -187,7 +191,7 @@
 
     <div class="policy-section">
         <h2>6. Permissions</h2>
-        <p>Lokei may request the following system permissions on Mac or iPhone, only when a feature requires them:</p>
+        <p>Lokei may request the following system permissions on Mac, iPhone, or iPad, only when a feature requires them:</p>
         <ul>
             <li><strong>Local Network</strong> — to discover and connect to your Mac or a local AI server on your network</li>
             <li><strong>Files</strong> — to import documents and files you choose to share with the chat</li>
@@ -202,7 +206,7 @@
 
     <div class="policy-section">
         <h2>7. Purchases and App Store Distribution</h2>
-        <p>Lokei is distributed through the Apple App Store. Apple handles all download, purchase, and payment processing. Lokei does not receive your payment information, Apple ID, or billing details. Apple's privacy policy governs Apple's handling of your App Store account and purchase data.</p>
+        <p>Lokei is distributed through the Apple App Store. Apple handles all download, purchase, and payment processing, including the optional in-app purchases in Lokei for iPhone &amp; iPad (the one-time Lokei Pro unlock and the tip jar). Lokei does not receive your payment information, Apple ID, or billing details. Entitlement status is verified with Apple and stored only on your device. Apple's privacy policy governs Apple's handling of your App Store account and purchase data.</p>
     </div>
 
     <div class="policy-section">
