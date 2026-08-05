@@ -139,7 +139,8 @@
                 What do I need to use Lokei? <span class="arrow">+</span>
             </button>
             <div class="faq-answer">
-                <p>For Lokei Studio you need a Mac running macOS 13 Ventura or later. Lokei AI runs on iPhone and iPad, and does not need a Mac. On either platform, Apple Intelligence support depends on your device model, OS version, and Apple Intelligence availability. If you choose the Ollama backend, you also need <a href="https://ollama.com">Ollama</a> installed and running on the machine hosting it.</p>
+                <p>For Lokei Studio you need a Mac running macOS 13 Ventura or later. Lokei AI installs on any iPhone or iPad running iOS 17 or later, but it needs an AI source: either Apple Intelligence on a capable device (iPhone 15 Pro, the iPhone 16 and 17 families, or an M-series iPad), or a local server on your network for it to talk to. On an older device without a server, it has nothing to generate answers with.</p>
+                <p>If you choose the Ollama backend, you also need <a href="https://ollama.com">Ollama</a> installed and running on the machine hosting it.</p>
             </div>
         </div>
 
@@ -286,7 +287,8 @@
                 Do I need a Mac to use it? <span class="arrow">+</span>
             </button>
             <div class="faq-answer">
-                <p>No. On supported devices Lokei AI chats with Apple Intelligence directly on your iPhone or iPad, with no other hardware involved. Pairing with a Mac is optional — it's what you'd do to reach larger open-source models or Mac-hosted tools.</p>
+                <p>It depends on your device. On an Apple Intelligence–capable one — iPhone 15 Pro, the iPhone 16 and 17 families, or an M-series iPad — no. Lokei AI runs Apple's on-device model with no other hardware involved, and pairing with a Mac is purely optional, for reaching larger open-source models or Mac-hosted tools.</p>
+                <p>On an older iPhone or iPad, yes — you'll need something to point it at. Lokei AI works as a client for your own hardware: connect it to Ollama, LM Studio, or another local OpenAI-compatible server on your network, or join a Room someone nearby is hosting. What it can't do on a device without Apple Intelligence is generate answers by itself.</p>
             </div>
         </div>
 
