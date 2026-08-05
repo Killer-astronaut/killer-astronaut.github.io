@@ -296,7 +296,7 @@
             </button>
             <div class="faq-answer">
                 <p>Your iPhone connects to Ollama, LM Studio, Lokei Studio, or another local OpenAI-compatible server over your Wi-Fi. Open Settings → Local Server, enter the address (for example <code>http://192.168.1.20:11434</code>), and test the connection. This keeps AI processing on hardware you control without routing through external servers.</p>
-                <p>Lokei AI rejects public cloud URLs for local server mode — the address field only accepts local and private network addresses.</p>
+                <p>By default the address field accepts only local and private network addresses, and rejects public cloud URLs. If you deliberately want to reach a server outside your network, that takes an explicit opt-in — Lokei AI will not do it silently, and Settings → Privacy Audit always shows which mode you're in and where your prompts are going.</p>
             </div>
         </div>
 
